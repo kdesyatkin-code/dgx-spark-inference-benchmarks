@@ -1,0 +1,50 @@
+{
+  "case": "performance-prompt-4k-r1",
+  "configuration": "strata-v2",
+  "source_sha256": "bda0e60c2de0703899ac1bd5711d793b9b325c7f8ba6be6c967f22dd07d8dda8",
+  "wall_seconds": 29.320390774984844,
+  "exit_code": 0,
+  "engine_requests": [
+    {
+      "id": "c98c998aeb77",
+      "time": 1795538143.7103682,
+      "duration_s": 27.4,
+      "finish": "stop",
+      "prompt_tokens": 18506,
+      "reused": 0,
+      "output_tokens": 458,
+      "prompt_ms": 10773.3,
+      "decode_ms": 16597.4,
+      "first_engine_token_s": 10.782
+    }
+  ],
+  "parallel": 2,
+  "engine_seconds": 27.4,
+  "input_tokens": 18506,
+  "cached_tokens": 0,
+  "output_tokens": 458,
+  "prefill_tps": 1717.7652158577225,
+  "decode_tps": 27.594683504645303,
+  "first_engine_token_s": 10.782,
+  "memory": "               \u0432\u0441\u0435\u0433\u043e        \u0437\u0430\u043d\u044f\u0442        \u0441\u0432\u043e\u0431      \u043e\u0431\u0449\u0430\u044f  \u0431\u0443\u0444/\u0432\u0440\u0435\u043c.   \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u043e\n\u041f\u0430\u043c\u044f\u0442\u044c:        121Gi        70Gi        11Gi       403Mi        41Gi        51Gi\n\u041f\u043e\u0434\u043a\u0430\u0447\u043a\u0430:       15Gi       194Mi        15Gi\n",
+  "ram": {
+    "used": 75435233280,
+    "total": 130663202816
+  },
+  "gpu": [
+    {
+      "index": 0,
+      "name": "NVIDIA GB10",
+      "mem_used": null,
+      "mem_total": null,
+      "util": 96,
+      "temp": 59,
+      "power": 40.926,
+      "power_limit": null,
+      "pcie_gen": 1,
+      "pcie_gen_max": 1,
+      "pcie_width": 1,
+      "pcie_width_max": 16
+    }
+  ]
+}

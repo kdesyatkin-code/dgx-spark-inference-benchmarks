@@ -1,0 +1,41 @@
+{
+  "id": "chatcmpl-5cf00fc94cd145899582bba6",
+  "object": "chat.completion",
+  "created": 1795538972,
+  "model": "qwen3.6-35b-a3b-q8_0",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"ok\": true, \"count\": 3}",
+        "reasoning_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - **Instruction:** `[case instructions-i1] Return only a JSON object with ok set to true and count set to the integer 3. No other keys.`\n   - **Constraints:** \n     - Output must be ONLY a JSON object.\n     - Must contain exactly two keys: `ok` and `count`.\n     - `ok` must be `true` (boolean).\n     - `count` must be `3` (integer).\n     - No other keys allowed.\n     - No extra text, explanations, or formatting outside the JSON.\n\n2.  **Determine Output Format:**\n   - JSON object: `{\"ok\": true, \"count\": 3}`\n   - Check constraints: \n     - Only JSON? Yes.\n     - `ok` is true? Yes.\n     - `count` is 3? Yes.\n     - No other keys? Yes.\n     - Matches exactly? Yes.\n\n3.  **Generate Output:**\n   - `{\"ok\": true, \"count\": 3}`\n\n4.  **Final Verification:**\n   - Does it meet all instructions? Yes.\n   - Is it valid JSON? Yes.\n   - No extra text? Yes.\n   - Ready.\u2705\n"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 40,
+    "completion_tokens": 299,
+    "total_tokens": 339,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 286
+    }
+  },
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 40,
+    "prompt_ms": 175.7,
+    "prompt_per_token_ms": 4.393,
+    "prompt_per_second": 227.7,
+    "predicted_n": 299,
+    "predicted_ms": 3388.8,
+    "predicted_per_token_ms": 11.334,
+    "predicted_per_second": 88.2,
+    "draft_n": 208,
+    "draft_n_accepted": 195
+  }
+}

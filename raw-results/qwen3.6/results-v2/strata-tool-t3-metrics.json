@@ -1,0 +1,79 @@
+{
+  "case": "tool-t3",
+  "configuration": "strata-v2",
+  "source_sha256": "91bb3640aaa981c6517db0dcb61f8a737fd4c7085c97e0554b733fbe3d108a45",
+  "wall_seconds": 1.682375441014301,
+  "expected": {
+    "name": "convert_units",
+    "arguments": {
+      "value": 3,
+      "from_unit": "km",
+      "to_unit": "m"
+    }
+  },
+  "actual": {
+    "name": "convert_units",
+    "arguments": {
+      "from_unit": "km",
+      "to_unit": "m",
+      "value": 3
+    }
+  },
+  "result": "PASS",
+  "finish_reason": "tool_calls",
+  "thinking_present": true,
+  "usage": {
+    "prompt_tokens": 314,
+    "completion_tokens": 115,
+    "total_tokens": 429,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 62
+    }
+  },
+  "engine_requests": [
+    {
+      "id": "fa012d832ab8",
+      "time": 1795538924.5113418,
+      "duration_s": 1.7,
+      "finish": "stop",
+      "prompt_tokens": 314,
+      "reused": 0,
+      "output_tokens": 115,
+      "prompt_ms": 315.1,
+      "decode_ms": 1332.3,
+      "first_engine_token_s": 0.334
+    }
+  ],
+  "parallel": 2,
+  "engine_seconds": 1.7,
+  "input_tokens": 314,
+  "cached_tokens": 0,
+  "output_tokens": 115,
+  "prefill_tps": 996.509044747699,
+  "decode_tps": 86.31689559408542,
+  "first_engine_token_s": 0.334,
+  "memory": "               \u0432\u0441\u0435\u0433\u043e        \u0437\u0430\u043d\u044f\u0442        \u0441\u0432\u043e\u0431      \u043e\u0431\u0449\u0430\u044f  \u0431\u0443\u0444/\u0432\u0440\u0435\u043c.   \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u043e\n\u041f\u0430\u043c\u044f\u0442\u044c:        121Gi        70Gi        11Gi       214Mi        41Gi        51Gi\n\u041f\u043e\u0434\u043a\u0430\u0447\u043a\u0430:       15Gi       190Mi        15Gi\n",
+  "ram": {
+    "used": 75201605632,
+    "total": 130663202816
+  },
+  "gpu": [
+    {
+      "index": 0,
+      "name": "NVIDIA GB10",
+      "mem_used": null,
+      "mem_total": null,
+      "util": 96,
+      "temp": 56,
+      "power": 34.795,
+      "power_limit": null,
+      "pcie_gen": 1,
+      "pcie_gen_max": 1,
+      "pcie_width": 1,
+      "pcie_width_max": 16
+    }
+  ]
+}

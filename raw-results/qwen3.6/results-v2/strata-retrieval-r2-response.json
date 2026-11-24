@@ -1,0 +1,41 @@
+{
+  "id": "chatcmpl-5849a6552e70479187caa8b4",
+  "object": "chat.completion",
+  "created": 1795538787,
+  "model": "qwen3.6-35b-a3b-q8_0",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "CEDAR-284",
+        "reasoning_content": "The user wants to find the value of `storage_label` from the provided text.\nI will scan the text for `storage_label = ` and extract the value.\nLooking at the text:\n...\nrecord000105: alpha beta gamma delta epsilon zeta eta theta.\nstorage_label = CEDAR-284\nrecord000106: alpha beta gamma delta epsilon zeta eta theta.\n...\nThe value is `CEDAR-284`.\nThe instruction says: \"Reply only with its value.\"\nSo I will output `CEDAR-284`.\nCheck for any tricks: The prompt is straightforward.\nOutput matches exactly.\nDone. \nProceed. \nOutput: CEDAR-284\n"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 4047,
+    "completion_tokens": 170,
+    "total_tokens": 4217,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 162
+    }
+  },
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 4047,
+    "prompt_ms": 1817.3,
+    "prompt_per_token_ms": 0.449,
+    "prompt_per_second": 2226.9,
+    "predicted_n": 170,
+    "predicted_ms": 2253.9,
+    "predicted_per_token_ms": 13.258,
+    "predicted_per_second": 75.4,
+    "draft_n": 118,
+    "draft_n_accepted": 110
+  }
+}

@@ -1,0 +1,2 @@
+38 containers were running during the preliminary diagnostic launch.
+Container names removed for privacy. This was NOT the clean measured Strata V2 launch.

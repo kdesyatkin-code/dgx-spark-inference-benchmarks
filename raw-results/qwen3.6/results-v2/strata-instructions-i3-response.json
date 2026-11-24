@@ -1,0 +1,41 @@
+{
+  "id": "chatcmpl-7c954fe33ca64fb09e138965",
+  "object": "chat.completion",
+  "created": 1795539049,
+  "model": "qwen3.6-35b-a3b-q8_0",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"project\": \"Orion\", \"build\": 17}",
+        "reasoning_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - **Case Instructions:** `[case instructions-i3]`\n   - **Project:** `Orion`\n   - **Build:** `17`\n   - **Output Requirement:** `Return only a JSON object with keys project (string) and build (integer).`\n\n2.  **Identify Key Requirements:**\n   - Output must be strictly a JSON object.\n   - Keys: `project` (string), `build` (integer).\n   - Values: `project` = \"Orion\", `build` = 17.\n   - No extra text, explanations, or formatting outside the JSON.\n\n3.  **Construct JSON:**\n   ```json\n   {\n     \"project\": \"Orion\",\n     \"build\": 17\n   }\n   ```\n\n4.  **Validate against Requirements:**\n   - Is it a JSON object? Yes.\n   - Does it have key `project` as a string? Yes.\n   - Does it have key `build` as an integer? Yes.\n   - Are the values correct? Yes.\n   - Is there any extra text? No.\n\n5.  **Final Output Generation:** (Just the JSON string as requested)\n   `{\"project\": \"Orion\", \"build\": 17}` (formatted or compact, both are fine, but I'll keep it clean)\n\n   I will output exactly the JSON object.\u2705\n"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 43,
+    "completion_tokens": 339,
+    "total_tokens": 382,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 323
+    }
+  },
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 43,
+    "prompt_ms": 177.4,
+    "prompt_per_token_ms": 4.126,
+    "prompt_per_second": 242.4,
+    "predicted_n": 339,
+    "predicted_ms": 3939.8,
+    "predicted_per_token_ms": 11.622,
+    "predicted_per_second": 86.0,
+    "draft_n": 242,
+    "draft_n_accepted": 217
+  }
+}

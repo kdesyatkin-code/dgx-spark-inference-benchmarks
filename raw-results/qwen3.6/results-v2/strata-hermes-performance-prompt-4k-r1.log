@@ -1,0 +1,38 @@
+**Structure**
+
+Each record has two parts, separated by `: `:
+
+| Part | Format | Example |
+|------|--------|---------|
+| **ID** | `record` + 6-digit zero-padded number | `record000001` |
+| **Payload** | Fixed sequence of 8 Greek-letter tokens | `alpha beta gamma delta epsilon zeta eta theta.` |
+
+All 211 records share the **same payload**; only the ID changes.
+
+**How to look up a record by ID**
+
+The ID is a zero-padded, sequential key. To retrieve record *N*:
+
+1. Format *N* as a 6-digit zero-padded string.
+2. Prepend `record`.
+3. Match against the line prefix.
+
+Examples:
+
+| N | Lookup key |
+|---|------------|
+| 1 | `record000001` |
+| 42 | `record000042` |
+| 211 | `record000211` |
+
+In a programmatic lookup (e.g., Python):
+
+```python
+key = f"record{N:06d}"
+```
+
+Or with `grep`:
+
+```bash
+grep "^record000042:" data.txt
+```

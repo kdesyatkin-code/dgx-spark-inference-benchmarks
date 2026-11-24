@@ -1,0 +1,76 @@
+{
+  "case": "instructions-i2",
+  "configuration": "strata-v2",
+  "source_sha256": "517032071a46b5eb74b310564e3a48c410cb5ef218be915e8c06887b74f7defa",
+  "wall_seconds": 11.061150349007221,
+  "expected": [
+    -4,
+    1,
+    2,
+    9
+  ],
+  "actual": [
+    -4,
+    1,
+    2,
+    9
+  ],
+  "answer": "[-4, 1, 2, 9]",
+  "result": "PASS",
+  "finish_reason": "stop",
+  "thinking_present": true,
+  "usage": {
+    "prompt_tokens": 48,
+    "completion_tokens": 909,
+    "total_tokens": 957,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 895
+    }
+  },
+  "engine_requests": [
+    {
+      "id": "a9f59eb6d2b9",
+      "time": 1795539004.9764502,
+      "duration_s": 11.0,
+      "finish": "stop",
+      "prompt_tokens": 48,
+      "reused": 0,
+      "output_tokens": 909,
+      "prompt_ms": 183.2,
+      "decode_ms": 10840.9,
+      "first_engine_token_s": 0.204
+    }
+  ],
+  "parallel": 2,
+  "engine_seconds": 11.0,
+  "input_tokens": 48,
+  "cached_tokens": 0,
+  "output_tokens": 909,
+  "prefill_tps": 262.0087336244542,
+  "decode_tps": 83.84912691750685,
+  "first_engine_token_s": 0.204,
+  "memory": "               \u0432\u0441\u0435\u0433\u043e        \u0437\u0430\u043d\u044f\u0442        \u0441\u0432\u043e\u0431      \u043e\u0431\u0449\u0430\u044f  \u0431\u0443\u0444/\u0432\u0440\u0435\u043c.   \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u043e\n\u041f\u0430\u043c\u044f\u0442\u044c:        121Gi        70Gi        11Gi       214Mi        41Gi        51Gi\n\u041f\u043e\u0434\u043a\u0430\u0447\u043a\u0430:       15Gi       190Mi        15Gi\n",
+  "ram": {
+    "used": 75212787712,
+    "total": 130663202816
+  },
+  "gpu": [
+    {
+      "index": 0,
+      "name": "NVIDIA GB10",
+      "mem_used": null,
+      "mem_total": null,
+      "util": 96,
+      "temp": 58,
+      "power": 39.007,
+      "power_limit": null,
+      "pcie_gen": 1,
+      "pcie_gen_max": 1,
+      "pcie_width": 1,
+      "pcie_width_max": 16
+    }
+  ]
+}

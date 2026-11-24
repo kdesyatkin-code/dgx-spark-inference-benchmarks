@@ -1,0 +1,51 @@
+{
+  "id": "chatcmpl-af354722ef4b4b749cf787f8",
+  "object": "chat.completion",
+  "created": 1795538924,
+  "model": "qwen3.6-35b-a3b-q8_0",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": null,
+        "reasoning_content": "The user wants to convert 3 kilometers to meters.\nI need to use the `convert_units` tool.\nThe parameters are:\n- value: 3\n- from_unit: \"km\"\n- to_unit: \"m\"\n\nI will call the tool with these parameters.\n",
+        "tool_calls": [
+          {
+            "id": "call_c21227b2ccbc44869111d6d5",
+            "type": "function",
+            "function": {
+              "name": "convert_units",
+              "arguments": "{\"from_unit\":\"km\",\"to_unit\":\"m\",\"value\":3}"
+            }
+          }
+        ]
+      },
+      "finish_reason": "tool_calls"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 314,
+    "completion_tokens": 115,
+    "total_tokens": 429,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 62
+    }
+  },
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 314,
+    "prompt_ms": 315.1,
+    "prompt_per_token_ms": 1.004,
+    "prompt_per_second": 996.5,
+    "predicted_n": 115,
+    "predicted_ms": 1332.3,
+    "predicted_per_token_ms": 11.585,
+    "predicted_per_second": 86.3,
+    "draft_n": 80,
+    "draft_n_accepted": 76
+  }
+}

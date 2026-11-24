@@ -1,0 +1,51 @@
+{
+  "id": "chatcmpl-3607032fde4f49fb93eb9adf",
+  "object": "chat.completion",
+  "created": 1795538891,
+  "model": "qwen3.6-35b-a3b-q8_0",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": null,
+        "reasoning_content": "Thinking Process:\n1.  **Identify User Intent**: The user wants to get the weather for \"Zagreb\" in \"celsius\".\n2.  **Check Available Tools**: `get_weather(city: string, unit: string)`\n3.  **Map Parameters**:\n   - `city`: \"Zagreb\"\n   - `unit`: \"celsius\"\n4.  **Validate Parameters**: Both required parameters are provided and match the expected types.\n5.  **Construct Tool Call**: `get_weather(city=\"Zagreb\", unit=\"celsius\")`\n6.  **Execute**: Call the tool.\u2705\n",
+        "tool_calls": [
+          {
+            "id": "call_75e87759d309487f82886111",
+            "type": "function",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"Zagreb\",\"unit\":\"celsius\"}"
+            }
+          }
+        ]
+      },
+      "finish_reason": "tool_calls"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 297,
+    "completion_tokens": 179,
+    "total_tokens": 476,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 137
+    }
+  },
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 297,
+    "prompt_ms": 313.6,
+    "prompt_per_token_ms": 1.056,
+    "prompt_per_second": 947.1,
+    "predicted_n": 179,
+    "predicted_ms": 2138.2,
+    "predicted_per_token_ms": 11.945,
+    "predicted_per_second": 83.7,
+    "draft_n": 130,
+    "draft_n_accepted": 113
+  }
+}
