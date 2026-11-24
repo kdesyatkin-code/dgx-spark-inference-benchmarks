@@ -1,0 +1,62 @@
+{
+  "case": "dgx-32k-r1",
+  "source_sha256": "d3e27c460ce04c47d989c46e857b56d2d7f2a3eadcff079139fe8674fbfa73a3",
+  "wall_seconds": 174.3143617530004,
+  "finish_reason": "stop",
+  "thinking_present": true,
+  "usage": {
+    "prompt_tokens": 32646,
+    "completion_tokens": 1583,
+    "total_tokens": 34229,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1121
+    }
+  },
+  "engine_requests": [
+    {
+      "id": "7f2a2a9bf71e",
+      "time": 1795536631.2065663,
+      "duration_s": 174.3,
+      "finish": "stop",
+      "prompt_tokens": 32646,
+      "reused": 0,
+      "output_tokens": 1583,
+      "prompt_ms": 23258.9,
+      "decode_ms": 150951.3,
+      "first_engine_token_s": 23.328
+    }
+  ],
+  "engine_seconds": 174.3,
+  "input_tokens": 32646,
+  "cached_tokens": 0,
+  "output_tokens": 1583,
+  "prefill_seconds": 23.2589,
+  "decode_seconds": 150.95129999999997,
+  "prefill_tps": 1403.591743375654,
+  "decode_tps": 10.486825883579671,
+  "first_engine_token_s": 23.328,
+  "memory": "               \u0432\u0441\u0435\u0433\u043e        \u0437\u0430\u043d\u044f\u0442        \u0441\u0432\u043e\u0431      \u043e\u0431\u0449\u0430\u044f  \u0431\u0443\u0444/\u0432\u0440\u0435\u043c.   \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u043e\n\u041f\u0430\u043c\u044f\u0442\u044c:        121Gi        91Gi       2,4Gi       969Mi        30Gi        30Gi\n\u041f\u043e\u0434\u043a\u0430\u0447\u043a\u0430:       15Gi       1,2Gi        14Gi\n",
+  "ram": {
+    "used": 98006581248,
+    "total": 130663202816
+  },
+  "gpu": [
+    {
+      "index": 0,
+      "name": "NVIDIA GB10",
+      "mem_used": null,
+      "mem_total": null,
+      "util": 96,
+      "temp": 69,
+      "power": 37.828,
+      "power_limit": null,
+      "pcie_gen": 1,
+      "pcie_gen_max": 1,
+      "pcie_width": 1,
+      "pcie_width_max": 16
+    }
+  ]
+}

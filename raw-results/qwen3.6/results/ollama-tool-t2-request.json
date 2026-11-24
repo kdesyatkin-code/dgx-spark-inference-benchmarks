@@ -1,0 +1,40 @@
+{
+  "model": "qwen3.6:35b-a3b-q8_0",
+  "messages": [
+    {
+      "role": "user",
+      "content": "[case tool-t2]\nUse get_weather for Zagreb in celsius."
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "get_weather",
+        "description": "Synthetic benchmark lookup; no external action is performed.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "city": {
+              "type": "string"
+            },
+            "unit": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "city",
+            "unit"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "stream": false,
+  "think": true,
+  "keep_alive": -1,
+  "options": {
+    "num_ctx": 262144
+  }
+}

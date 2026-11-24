@@ -1,0 +1,41 @@
+{
+  "id": "chatcmpl-a8c145ff545b405abc5042a8",
+  "object": "chat.completion",
+  "created": 1795536887,
+  "model": "qwen3.6-35b-a3b-q8_0",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "ORBIT-731",
+        "reasoning_content": "The user wants to find the value of `access_code` from the provided text.\nI will scan the text for the string `access_code = `.\nFound: `access_code = ORBIT-731`\nThe value is `ORBIT-731`.\nI will reply only with its value as requested.\nCheck format: \"Reply only with its value.\"\nOutput: ORBIT-731\nDone. \nDouble check: The prompt says \"access_code = ORBIT-731\". So the value is ORBIT-731.\nReady. \nOutput matches requirement.\u2705\n"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 4047,
+    "completion_tokens": 139,
+    "total_tokens": 4186,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 131
+    }
+  },
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 4047,
+    "prompt_ms": 1796.8,
+    "prompt_per_token_ms": 0.444,
+    "prompt_per_second": 2252.3,
+    "predicted_n": 139,
+    "predicted_ms": 1975.8,
+    "predicted_per_token_ms": 14.214,
+    "predicted_per_second": 70.4,
+    "draft_n": 104,
+    "draft_n_accepted": 87
+  }
+}

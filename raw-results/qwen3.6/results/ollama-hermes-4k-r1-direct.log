@@ -1,0 +1,252 @@
+## Structure
+
+Each record follows a fixed schema:
+
+- **Record ID**: `record` + zero-padded 6-digit number (e.g., `record000001`, `record021100`) — sequential from 1 to 211.
+- **Value field**: the literal string `alpha beta gamma delta epsilon zeta eta theta` — eight Greek-letter tokens, space-separated and identical across every record shown.
+
+So far: all 211 records have identical content; only the ID changes.
+
+## Lookup
+
+To retrieve a specific record, match on its ID prefix + padded number. Examples:
+
+- Record **42** → `record000042`
+- Record **211** → `record000211`
+
+If these records are stored in a structured format (CSV, database, JSON lines), you'd query by that ID column with string-equality or zero-padded numeric match. If they exist as individual files, the filename likely maps directly to the ID: e.g., `record000042.json` or `record_000042.csv`.
+	Command being timed: "/home/benchmark/.local/bin/hermes -z [case performance-prompt-4k-r1]
+record000001: alpha beta gamma delta epsilon zeta eta theta.
+record000002: alpha beta gamma delta epsilon zeta eta theta.
+record000003: alpha beta gamma delta epsilon zeta eta theta.
+record000004: alpha beta gamma delta epsilon zeta eta theta.
+record000005: alpha beta gamma delta epsilon zeta eta theta.
+record000006: alpha beta gamma delta epsilon zeta eta theta.
+record000007: alpha beta gamma delta epsilon zeta eta theta.
+record000008: alpha beta gamma delta epsilon zeta eta theta.
+record000009: alpha beta gamma delta epsilon zeta eta theta.
+record000010: alpha beta gamma delta epsilon zeta eta theta.
+record000011: alpha beta gamma delta epsilon zeta eta theta.
+record000012: alpha beta gamma delta epsilon zeta eta theta.
+record000013: alpha beta gamma delta epsilon zeta eta theta.
+record000014: alpha beta gamma delta epsilon zeta eta theta.
+record000015: alpha beta gamma delta epsilon zeta eta theta.
+record000016: alpha beta gamma delta epsilon zeta eta theta.
+record000017: alpha beta gamma delta epsilon zeta eta theta.
+record000018: alpha beta gamma delta epsilon zeta eta theta.
+record000019: alpha beta gamma delta epsilon zeta eta theta.
+record000020: alpha beta gamma delta epsilon zeta eta theta.
+record000021: alpha beta gamma delta epsilon zeta eta theta.
+record000022: alpha beta gamma delta epsilon zeta eta theta.
+record000023: alpha beta gamma delta epsilon zeta eta theta.
+record000024: alpha beta gamma delta epsilon zeta eta theta.
+record000025: alpha beta gamma delta epsilon zeta eta theta.
+record000026: alpha beta gamma delta epsilon zeta eta theta.
+record000027: alpha beta gamma delta epsilon zeta eta theta.
+record000028: alpha beta gamma delta epsilon zeta eta theta.
+record000029: alpha beta gamma delta epsilon zeta eta theta.
+record000030: alpha beta gamma delta epsilon zeta eta theta.
+record000031: alpha beta gamma delta epsilon zeta eta theta.
+record000032: alpha beta gamma delta epsilon zeta eta theta.
+record000033: alpha beta gamma delta epsilon zeta eta theta.
+record000034: alpha beta gamma delta epsilon zeta eta theta.
+record000035: alpha beta gamma delta epsilon zeta eta theta.
+record000036: alpha beta gamma delta epsilon zeta eta theta.
+record000037: alpha beta gamma delta epsilon zeta eta theta.
+record000038: alpha beta gamma delta epsilon zeta eta theta.
+record000039: alpha beta gamma delta epsilon zeta eta theta.
+record000040: alpha beta gamma delta epsilon zeta eta theta.
+record000041: alpha beta gamma delta epsilon zeta eta theta.
+record000042: alpha beta gamma delta epsilon zeta eta theta.
+record000043: alpha beta gamma delta epsilon zeta eta theta.
+record000044: alpha beta gamma delta epsilon zeta eta theta.
+record000045: alpha beta gamma delta epsilon zeta eta theta.
+record000046: alpha beta gamma delta epsilon zeta eta theta.
+record000047: alpha beta gamma delta epsilon zeta eta theta.
+record000048: alpha beta gamma delta epsilon zeta eta theta.
+record000049: alpha beta gamma delta epsilon zeta eta theta.
+record000050: alpha beta gamma delta epsilon zeta eta theta.
+record000051: alpha beta gamma delta epsilon zeta eta theta.
+record000052: alpha beta gamma delta epsilon zeta eta theta.
+record000053: alpha beta gamma delta epsilon zeta eta theta.
+record000054: alpha beta gamma delta epsilon zeta eta theta.
+record000055: alpha beta gamma delta epsilon zeta eta theta.
+record000056: alpha beta gamma delta epsilon zeta eta theta.
+record000057: alpha beta gamma delta epsilon zeta eta theta.
+record000058: alpha beta gamma delta epsilon zeta eta theta.
+record000059: alpha beta gamma delta epsilon zeta eta theta.
+record000060: alpha beta gamma delta epsilon zeta eta theta.
+record000061: alpha beta gamma delta epsilon zeta eta theta.
+record000062: alpha beta gamma delta epsilon zeta eta theta.
+record000063: alpha beta gamma delta epsilon zeta eta theta.
+record000064: alpha beta gamma delta epsilon zeta eta theta.
+record000065: alpha beta gamma delta epsilon zeta eta theta.
+record000066: alpha beta gamma delta epsilon zeta eta theta.
+record000067: alpha beta gamma delta epsilon zeta eta theta.
+record000068: alpha beta gamma delta epsilon zeta eta theta.
+record000069: alpha beta gamma delta epsilon zeta eta theta.
+record000070: alpha beta gamma delta epsilon zeta eta theta.
+record000071: alpha beta gamma delta epsilon zeta eta theta.
+record000072: alpha beta gamma delta epsilon zeta eta theta.
+record000073: alpha beta gamma delta epsilon zeta eta theta.
+record000074: alpha beta gamma delta epsilon zeta eta theta.
+record000075: alpha beta gamma delta epsilon zeta eta theta.
+record000076: alpha beta gamma delta epsilon zeta eta theta.
+record000077: alpha beta gamma delta epsilon zeta eta theta.
+record000078: alpha beta gamma delta epsilon zeta eta theta.
+record000079: alpha beta gamma delta epsilon zeta eta theta.
+record000080: alpha beta gamma delta epsilon zeta eta theta.
+record000081: alpha beta gamma delta epsilon zeta eta theta.
+record000082: alpha beta gamma delta epsilon zeta eta theta.
+record000083: alpha beta gamma delta epsilon zeta eta theta.
+record000084: alpha beta gamma delta epsilon zeta eta theta.
+record000085: alpha beta gamma delta epsilon zeta eta theta.
+record000086: alpha beta gamma delta epsilon zeta eta theta.
+record000087: alpha beta gamma delta epsilon zeta eta theta.
+record000088: alpha beta gamma delta epsilon zeta eta theta.
+record000089: alpha beta gamma delta epsilon zeta eta theta.
+record000090: alpha beta gamma delta epsilon zeta eta theta.
+record000091: alpha beta gamma delta epsilon zeta eta theta.
+record000092: alpha beta gamma delta epsilon zeta eta theta.
+record000093: alpha beta gamma delta epsilon zeta eta theta.
+record000094: alpha beta gamma delta epsilon zeta eta theta.
+record000095: alpha beta gamma delta epsilon zeta eta theta.
+record000096: alpha beta gamma delta epsilon zeta eta theta.
+record000097: alpha beta gamma delta epsilon zeta eta theta.
+record000098: alpha beta gamma delta epsilon zeta eta theta.
+record000099: alpha beta gamma delta epsilon zeta eta theta.
+record000100: alpha beta gamma delta epsilon zeta eta theta.
+record000101: alpha beta gamma delta epsilon zeta eta theta.
+record000102: alpha beta gamma delta epsilon zeta eta theta.
+record000103: alpha beta gamma delta epsilon zeta eta theta.
+record000104: alpha beta gamma delta epsilon zeta eta theta.
+record000105: alpha beta gamma delta epsilon zeta eta theta.
+record000106: alpha beta gamma delta epsilon zeta eta theta.
+record000107: alpha beta gamma delta epsilon zeta eta theta.
+record000108: alpha beta gamma delta epsilon zeta eta theta.
+record000109: alpha beta gamma delta epsilon zeta eta theta.
+record000110: alpha beta gamma delta epsilon zeta eta theta.
+record000111: alpha beta gamma delta epsilon zeta eta theta.
+record000112: alpha beta gamma delta epsilon zeta eta theta.
+record000113: alpha beta gamma delta epsilon zeta eta theta.
+record000114: alpha beta gamma delta epsilon zeta eta theta.
+record000115: alpha beta gamma delta epsilon zeta eta theta.
+record000116: alpha beta gamma delta epsilon zeta eta theta.
+record000117: alpha beta gamma delta epsilon zeta eta theta.
+record000118: alpha beta gamma delta epsilon zeta eta theta.
+record000119: alpha beta gamma delta epsilon zeta eta theta.
+record000120: alpha beta gamma delta epsilon zeta eta theta.
+record000121: alpha beta gamma delta epsilon zeta eta theta.
+record000122: alpha beta gamma delta epsilon zeta eta theta.
+record000123: alpha beta gamma delta epsilon zeta eta theta.
+record000124: alpha beta gamma delta epsilon zeta eta theta.
+record000125: alpha beta gamma delta epsilon zeta eta theta.
+record000126: alpha beta gamma delta epsilon zeta eta theta.
+record000127: alpha beta gamma delta epsilon zeta eta theta.
+record000128: alpha beta gamma delta epsilon zeta eta theta.
+record000129: alpha beta gamma delta epsilon zeta eta theta.
+record000130: alpha beta gamma delta epsilon zeta eta theta.
+record000131: alpha beta gamma delta epsilon zeta eta theta.
+record000132: alpha beta gamma delta epsilon zeta eta theta.
+record000133: alpha beta gamma delta epsilon zeta eta theta.
+record000134: alpha beta gamma delta epsilon zeta eta theta.
+record000135: alpha beta gamma delta epsilon zeta eta theta.
+record000136: alpha beta gamma delta epsilon zeta eta theta.
+record000137: alpha beta gamma delta epsilon zeta eta theta.
+record000138: alpha beta gamma delta epsilon zeta eta theta.
+record000139: alpha beta gamma delta epsilon zeta eta theta.
+record000140: alpha beta gamma delta epsilon zeta eta theta.
+record000141: alpha beta gamma delta epsilon zeta eta theta.
+record000142: alpha beta gamma delta epsilon zeta eta theta.
+record000143: alpha beta gamma delta epsilon zeta eta theta.
+record000144: alpha beta gamma delta epsilon zeta eta theta.
+record000145: alpha beta gamma delta epsilon zeta eta theta.
+record000146: alpha beta gamma delta epsilon zeta eta theta.
+record000147: alpha beta gamma delta epsilon zeta eta theta.
+record000148: alpha beta gamma delta epsilon zeta eta theta.
+record000149: alpha beta gamma delta epsilon zeta eta theta.
+record000150: alpha beta gamma delta epsilon zeta eta theta.
+record000151: alpha beta gamma delta epsilon zeta eta theta.
+record000152: alpha beta gamma delta epsilon zeta eta theta.
+record000153: alpha beta gamma delta epsilon zeta eta theta.
+record000154: alpha beta gamma delta epsilon zeta eta theta.
+record000155: alpha beta gamma delta epsilon zeta eta theta.
+record000156: alpha beta gamma delta epsilon zeta eta theta.
+record000157: alpha beta gamma delta epsilon zeta eta theta.
+record000158: alpha beta gamma delta epsilon zeta eta theta.
+record000159: alpha beta gamma delta epsilon zeta eta theta.
+record000160: alpha beta gamma delta epsilon zeta eta theta.
+record000161: alpha beta gamma delta epsilon zeta eta theta.
+record000162: alpha beta gamma delta epsilon zeta eta theta.
+record000163: alpha beta gamma delta epsilon zeta eta theta.
+record000164: alpha beta gamma delta epsilon zeta eta theta.
+record000165: alpha beta gamma delta epsilon zeta eta theta.
+record000166: alpha beta gamma delta epsilon zeta eta theta.
+record000167: alpha beta gamma delta epsilon zeta eta theta.
+record000168: alpha beta gamma delta epsilon zeta eta theta.
+record000169: alpha beta gamma delta epsilon zeta eta theta.
+record000170: alpha beta gamma delta epsilon zeta eta theta.
+record000171: alpha beta gamma delta epsilon zeta eta theta.
+record000172: alpha beta gamma delta epsilon zeta eta theta.
+record000173: alpha beta gamma delta epsilon zeta eta theta.
+record000174: alpha beta gamma delta epsilon zeta eta theta.
+record000175: alpha beta gamma delta epsilon zeta eta theta.
+record000176: alpha beta gamma delta epsilon zeta eta theta.
+record000177: alpha beta gamma delta epsilon zeta eta theta.
+record000178: alpha beta gamma delta epsilon zeta eta theta.
+record000179: alpha beta gamma delta epsilon zeta eta theta.
+record000180: alpha beta gamma delta epsilon zeta eta theta.
+record000181: alpha beta gamma delta epsilon zeta eta theta.
+record000182: alpha beta gamma delta epsilon zeta eta theta.
+record000183: alpha beta gamma delta epsilon zeta eta theta.
+record000184: alpha beta gamma delta epsilon zeta eta theta.
+record000185: alpha beta gamma delta epsilon zeta eta theta.
+record000186: alpha beta gamma delta epsilon zeta eta theta.
+record000187: alpha beta gamma delta epsilon zeta eta theta.
+record000188: alpha beta gamma delta epsilon zeta eta theta.
+record000189: alpha beta gamma delta epsilon zeta eta theta.
+record000190: alpha beta gamma delta epsilon zeta eta theta.
+record000191: alpha beta gamma delta epsilon zeta eta theta.
+record000192: alpha beta gamma delta epsilon zeta eta theta.
+record000193: alpha beta gamma delta epsilon zeta eta theta.
+record000194: alpha beta gamma delta epsilon zeta eta theta.
+record000195: alpha beta gamma delta epsilon zeta eta theta.
+record000196: alpha beta gamma delta epsilon zeta eta theta.
+record000197: alpha beta gamma delta epsilon zeta eta theta.
+record000198: alpha beta gamma delta epsilon zeta eta theta.
+record000199: alpha beta gamma delta epsilon zeta eta theta.
+record000200: alpha beta gamma delta epsilon zeta eta theta.
+record000201: alpha beta gamma delta epsilon zeta eta theta.
+record000202: alpha beta gamma delta epsilon zeta eta theta.
+record000203: alpha beta gamma delta epsilon zeta eta theta.
+record000204: alpha beta gamma delta epsilon zeta eta theta.
+record000205: alpha beta gamma delta epsilon zeta eta theta.
+record000206: alpha beta gamma delta epsilon zeta eta theta.
+record000207: alpha beta gamma delta epsilon zeta eta theta.
+record000208: alpha beta gamma delta epsilon zeta eta theta.
+record000209: alpha beta gamma delta epsilon zeta eta theta.
+record000210: alpha beta gamma delta epsilon zeta eta theta.
+record000211: alpha beta gamma delta epsilon zeta eta theta.
+Summarize the structure of these records and explain how to look up a record by its ID."
+	User time (seconds): 0.44
+	System time (seconds): 0.07
+	Percent of CPU this job got: 3%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:15.36
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 67696
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 24335
+	Voluntary context switches: 278
+	Involuntary context switches: 23
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 32
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

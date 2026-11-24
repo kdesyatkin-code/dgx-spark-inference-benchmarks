@@ -1,0 +1,13 @@
+{
+  "model": "qwen3.6-35b-a3b-q8_0",
+  "messages": [
+    {
+      "role": "user",
+      "content": "[case instructions-i3]\nProject: Orion. Build: 17. Return only a JSON object with keys project (string) and build (integer)."
+    }
+  ],
+  "stream": false,
+  "chat_template_kwargs": {
+    "enable_thinking": true
+  }
+}

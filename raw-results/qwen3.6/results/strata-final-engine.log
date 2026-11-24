@@ -1,0 +1,78 @@
+strata-vision: own tower (qwen3vl_merger, 27 layers, width 1152) loaded in 0.5 s, on the GPU
+strata-vision: warmed up at 1024 image tokens in 1.1 s, 951 MiB of GPU memory
+[strata] 2026-11-24 16:58:48 engine started: /home/benchmark/.local/share/strata/components/engine/0.1.67-linux-aarch64-cuda-cuda13/strata --serve --native /home/benchmark/strata-models/Qwen3.6-35B-A3B-Q8_0.gguf --max-context 262144 --prefill auto --mtp 2 --vision --prompt-cache-spread --batch 4
+strata-q36: ignoring --prompt-cache-spread (not an option of this engine)
+strata-q36: blk.0.ffn_gate_inp_shexp.weight is [2048, 1], the Qwen3.6-35B-A3B layout wants [2048]
+strata-vision: own tower (qwen3vl_merger, 27 layers, width 1152) loaded in 0.4 s, on the GPU
+strata-vision: warmed up at 1024 image tokens in 0.8 s, 951 MiB of GPU memory
+[strata] 2026-11-24 17:02:34 engine started: /home/benchmark/.local/share/strata/components/engine/0.1.67-linux-aarch64-cuda-cuda13/strata --serve --native /home/benchmark/strata-models/Qwen3.6-35B-A3B-Q8_0.gguf --max-context 262144 --prefill auto --mtp 2 --vision --prompt-cache-spread --batch 4
+strata-q36: ignoring --prompt-cache-spread (not an option of this engine)
+strata-q36: blk.0.ffn_gate_inp_shexp.weight is [2048, 1], the Qwen3.6-35B-A3B layout wants [2048]
+strata-vision: own tower (qwen3vl_merger, 27 layers, width 1152) loaded in 0.4 s, on the GPU
+strata-vision: warmed up at 1024 image tokens in 0.8 s, 951 MiB of GPU memory
+[strata] 2026-11-24 17:02:55 engine started: /home/benchmark/.local/share/strata/components/engine/0.1.67-linux-aarch64-cuda-cuda13/strata --serve --native /home/benchmark/strata-models/Qwen3.6-35B-A3B-Q8_0.gguf --max-context 262144 --prefill auto --mtp 2 --vision --prompt-cache-spread --batch 4
+strata-q36: ignoring --prompt-cache-spread (not an option of this engine)
+strata-q36: blk.0.ffn_gate_inp_shexp.weight is [2048, 1], the Qwen3.6-35B-A3B layout wants [2048]
+strata-vision: own tower (qwen3vl_merger, 27 layers, width 1152) loaded in 0.4 s, on the GPU
+strata-vision: warmed up at 1024 image tokens in 1.1 s, 951 MiB of GPU memory
+[strata] 2026-11-24 18:01:05 engine started: /home/benchmark/.local/share/strata/components/engine/0.1.67-linux-aarch64-cuda-cuda13/strata --serve --native /home/benchmark/strata-native/models/qwen36-Q8_0/Qwen3.6-35B-A3B-Q8_0.gguf --max-context 262144 --prefill auto --mtp 2 --vision --prompt-cache-spread --batch 4
+strata-q36: ignoring --prompt-cache-spread (not an option of this engine)
+strata-q36: /home/benchmark/strata-native/models/qwen36-Q8_0/Qwen3.6-35B-A3B-Q8_0.gguf: 753 tensors (layout checked), 4.40 GiB on the GPU in 6.5 s (the routed experts are placed after the engine's buffers)
+strata-q36: prompt experts on the fused int8 kernels
+strata-q36: 4 sessions (--batch): 11.06 GiB of VRAM each at a context of 262144 (44.23 GiB in all), 38.82 GiB free before them
+strata-q36: not enough VRAM for 4 slots at a context of 262144 (11.06 GiB each, 38.82 GiB free): use fewer slots ("parallel" / --batch) or a shorter --max-context
+strata-vision: own tower (qwen3vl_merger, 27 layers, width 1152) loaded in 0.4 s, on the GPU
+strata-vision: warmed up at 1024 image tokens in 0.9 s, 951 MiB of GPU memory
+[strata] 2026-11-24 18:12:30 engine started: /home/benchmark/.local/share/strata/components/engine/0.1.67-linux-aarch64-cuda-cuda13/strata --serve --native /home/benchmark/strata-native/models/qwen36-Q8_0/Qwen3.6-35B-A3B-Q8_0.gguf --max-context 262144 --prefill auto --mtp 2 --vision --prompt-cache-spread --batch 4
+strata-q36: ignoring --prompt-cache-spread (not an option of this engine)
+strata-q36: /home/benchmark/strata-native/models/qwen36-Q8_0/Qwen3.6-35B-A3B-Q8_0.gguf: 753 tensors (layout checked), 4.40 GiB on the GPU in 6.4 s (the routed experts are placed after the engine's buffers)
+strata-q36: prompt experts on the fused int8 kernels
+strata-q36: 4 sessions (--batch): 11.06 GiB of VRAM each at a context of 262144 (44.23 GiB in all), 45.31 GiB free before them
+strata-q36: GDN checkpoints: 4 per session x 62.82 MiB pinned host (251.28 MiB in all for 4) every 4096 tokens; 30 GDN layers, conv 98304 B + S 2097152 B + hlast 8192 B each
+strata-q36: context 262144 cells, prompt chunk 512, MTP block loaded, K / V cache --kv fp32 (4.00 KiB per token, per attention layer), 3.75 GiB of VRAM free
+strata-q36: hybrid experts: 11 of 256 per layer in VRAM (1.40 GiB), all 32.67 GiB in pinned host memory, the rest of a batch of <= 128 rows on 19 CPU threads, bigger prompt chunks streamed (1.59 GiB staging); 109.7 s
+strata-q36: warmed up in 2.0 s (one prompt chunk, a decode step, a speculative step)
+strata batch: slot 0 takes a prompt of 11 tokens = 0 reused + 11 read in 251 ms (43.8 tok/s), done at once
+strata-q36: hybrid experts: 130 of 3608 batch entries on the GPU (3.6%), 3478 on the CPU pool in 76 ms, 432 slot replacements
+[strata] 2026-11-24 18:23:00 native ERR expected: GEN <max_new> [key=value ...] <id,id,...>
+strata-vision: own tower (qwen3vl_merger, 27 layers, width 1152) loaded in 0.6 s, on the GPU
+strata-vision: warmed up at 1024 image tokens in 1.0 s, 951 MiB of GPU memory
+[strata] 2026-11-24 18:30:16 engine started: /home/benchmark/.local/share/strata/components/engine/0.1.67-linux-aarch64-cuda-cuda13/strata --serve --native /home/benchmark/strata-native/models/qwen36-Q8_0/Qwen3.6-35B-A3B-Q8_0.gguf --max-context 262144 --prefill auto --mtp 2 --vision --prompt-cache-spread --batch 4
+strata-q36: ignoring --prompt-cache-spread (not an option of this engine)
+strata-q36: /home/benchmark/strata-native/models/qwen36-Q8_0/Qwen3.6-35B-A3B-Q8_0.gguf: 753 tensors (layout checked), 4.40 GiB on the GPU in 12.6 s (the routed experts are placed after the engine's buffers)
+strata-q36: prompt experts on the fused int8 kernels
+strata-q36: 4 sessions (--batch): 11.06 GiB of VRAM each at a context of 262144 (44.23 GiB in all), 88.83 GiB free before them
+strata-q36: GDN checkpoints: 4 per session x 62.82 MiB pinned host (251.28 MiB in all for 4) every 4096 tokens; 30 GDN layers, conv 98304 B + S 2097152 B + hlast 8192 B each
+strata-q36: context 262144 cells, prompt chunk 1024, MTP block loaded, K / V cache --kv fp32 (4.00 KiB per token, per attention layer), 43.99 GiB of VRAM free
+strata-q36: every routed expert in VRAM (32.67 GiB) in 51.6 s
+strata-q36: warmed up in 0.9 s (one prompt chunk, a decode step, a speculative step)
+strata batch: slot 0 takes a prompt of 11 tokens = 0 reused + 11 read in 114 ms (96.5 tok/s), done at once
+strata serve: session 1: prompt 18506 tokens = 0 reused + 18506 read in 11138 ms (1661.5 tok/s), 458 generated in 16768 ms (27.3 tok/s), drafts accepted 277 of 362 (stop), 4 ckpt
+[strata] 2026-11-24 18:36:19 native ERR expected: GEN <max_new> [key=value ...] <id,id,...>
+strata-vision: own tower (qwen3vl_merger, 27 layers, width 1152) loaded in 0.6 s, on the GPU
+strata-vision: warmed up at 1024 image tokens in 1.0 s, 951 MiB of GPU memory
+[strata] 2026-11-24 19:02:54 engine started: /home/benchmark/.local/share/strata/components/engine/0.1.67-linux-aarch64-cuda-cuda13/strata --serve --native /home/benchmark/strata-native/models/qwen36-Q8_0/Qwen3.6-35B-A3B-Q8_0.gguf --max-context 262144 --prefill auto --mtp 2 --vision --prompt-cache-spread --batch 4
+strata-q36: ignoring --prompt-cache-spread (not an option of this engine)
+strata-q36: /home/benchmark/strata-native/models/qwen36-Q8_0/Qwen3.6-35B-A3B-Q8_0.gguf: 753 tensors (layout checked), 4.40 GiB on the GPU in 8.1 s (the routed experts are placed after the engine's buffers)
+strata-q36: prompt experts on the fused int8 kernels
+strata-q36: 4 sessions (--batch): 11.06 GiB of VRAM each at a context of 262144 (44.23 GiB in all), 76.54 GiB free before them
+strata-q36: GDN checkpoints: 4 per session x 62.82 MiB pinned host (251.28 MiB in all for 4) every 4096 tokens; 30 GDN layers, conv 98304 B + S 2097152 B + hlast 8192 B each
+strata-q36: context 262144 cells, prompt chunk 1024, MTP block loaded, K / V cache --kv fp32 (4.00 KiB per token, per attention layer), 31.69 GiB of VRAM free
+strata-q36: the packed Q8_0 decode copies (1.78 GiB) given back so that every routed expert fits in VRAM (STRATA_Q36_KEEP_PACKED=1 keeps them and runs the hybrid mode)
+strata-q36: every routed expert in VRAM (32.67 GiB) in 39.9 s
+strata-q36: warmed up in 0.8 s (one prompt chunk, a decode step, a speculative step)
+strata batch: slot 0 takes a prompt of 11 tokens = 0 reused + 11 read in 129 ms (85.1 tok/s), done at once
+strata serve: session 1: prompt 30800 tokens = 0 reused + 30800 read in 21734 ms (1417.2 tok/s), 627 generated in 53450 ms (11.7 tok/s), drafts accepted 377 of 500 (stop), 4 ckpt
+strata serve: session 2: prompt 14490 tokens = 0 reused + 14490 read in 8077 ms (1794.0 tok/s), 523 generated in 14181 ms (36.9 tok/s), drafts accepted 298 of 452 (stop), 4 ckpt
+strata serve: session 3: prompt 4051 tokens = 0 reused + 4051 read in 1802 ms (2248.5 tok/s), 1640 generated in 23857 ms (68.7 tok/s), drafts accepted 1010 of 1258 (stop), 2 ckpt
+strata serve: session 0: prompt 16345 tokens = 0 reused + 16345 read in 8988 ms (1818.6 tok/s), 1301 generated in 40422 ms (32.2 tok/s), drafts accepted 785 of 1030 (stop), 4 ckpt
+strata serve: session 1: prompt 32646 tokens = 0 reused + 32646 read in 23259 ms (1403.6 tok/s), 1583 generated in 150951 ms (10.5 tok/s), drafts accepted 947 of 1270 (stop), 4 ckpt
+strata serve: session 2: prompt 4047 tokens = 0 reused + 4047 read in 1797 ms (2252.3 tok/s), 139 generated in 1976 ms (70.3 tok/s), drafts accepted 87 of 104 (stop), 2 ckpt
+strata serve: session 3: prompt 4047 tokens = 0 reused + 4047 read in 1793 ms (2256.5 tok/s), 170 generated in 2223 ms (76.5 tok/s), drafts accepted 110 of 118 (stop), 2 ckpt
+strata serve: session 0: prompt 16340 tokens = 0 reused + 16340 read in 8674 ms (1883.7 tok/s), 196 generated in 5512 ms (35.6 tok/s), drafts accepted 121 of 148 (stop), 4 ckpt
+strata serve: session 1: prompt 287 tokens = 0 reused + 287 read in 311 ms (923.4 tok/s), 133 generated in 1548 ms (85.9 tok/s), drafts accepted 86 of 96 (stop), 1 ckpt
+strata serve: session 2: prompt 297 tokens = 0 reused + 297 read in 315 ms (941.7 tok/s), 179 generated in 2107 ms (84.9 tok/s), drafts accepted 113 of 130 (stop), 1 ckpt
+strata serve: session 3: prompt 314 tokens = 0 reused + 314 read in 313 ms (1002.0 tok/s), 115 generated in 1315 ms (87.4 tok/s), drafts accepted 76 of 80 (stop), 1 ckpt
+strata serve: session 0: prompt 40 tokens = 0 reused + 40 read in 184 ms (217.3 tok/s), 299 generated in 3337 ms (89.6 tok/s), drafts accepted 195 of 208 (stop), 1 ckpt
+strata serve: session 1: prompt 48 tokens = 0 reused + 48 read in 181 ms (265.0 tok/s), 909 generated in 10679 ms (85.1 tok/s), drafts accepted 582 of 656 (stop), 1 ckpt
+strata serve: session 2: prompt 43 tokens = 0 reused + 43 read in 178 ms (242.0 tok/s), 339 generated in 3950 ms (85.8 tok/s), drafts accepted 217 of 242 (stop), 1 ckpt

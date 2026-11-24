@@ -1,0 +1,478 @@
+{
+  "schema_version": 1,
+  "ok": true,
+  "snapshot": {
+    "schema_version": 1,
+    "source": "server-v1",
+    "sampled_at": 1795536891.048883,
+    "instance": {
+      "id": "c9056a10b25a46449a4c9cb8e214bc85",
+      "boot_time": 1795536226,
+      "server": "strata",
+      "state": "ready"
+    },
+    "model": {
+      "id": "qwen3.6-35b-a3b-q8_0",
+      "loaded": true,
+      "context": 262144
+    },
+    "work": {
+      "slots_requested": 4,
+      "slots_effective": 4,
+      "active": 0,
+      "queued": 0,
+      "waiting": 0,
+      "outside_slots": 0,
+      "groups": null,
+      "requests_omitted": 0,
+      "max_queue": null,
+      "admission_limit": null,
+      "admission_reserved": 0,
+      "admission_rejected": 0,
+      "oldest_queue_s": 0,
+      "queue_timeout_s": null,
+      "queue_timeouts": 0,
+      "client_disconnect_cancels": 0,
+      "effective_rows_window": null,
+      "batch_active_rows_window": null,
+      "batch_sample_windows": null,
+      "batch_sample_rows": null,
+      "batch_sample_active_rows": null,
+      "batch_sample_span_s": null,
+      "batch_sample_age_s": null,
+      "stage_in_flight": [],
+      "stage_sample_span_s": null,
+      "stage_sample_age_s": null,
+      "occupied_slots": 0,
+      "replica_batches": [],
+      "replica_stage_samples": [],
+      "slots": [
+        {
+          "slot": 0,
+          "group": 0,
+          "replica": null,
+          "request_id": null,
+          "state": "idle",
+          "held_tokens": 0,
+          "prompt_tokens": null,
+          "prompt_read": null,
+          "generated": null,
+          "elapsed_s": null,
+          "tok_s": null
+        },
+        {
+          "slot": 1,
+          "group": 0,
+          "replica": null,
+          "request_id": null,
+          "state": "idle",
+          "held_tokens": 0,
+          "prompt_tokens": null,
+          "prompt_read": null,
+          "generated": null,
+          "elapsed_s": null,
+          "tok_s": null
+        },
+        {
+          "slot": 2,
+          "group": 0,
+          "replica": null,
+          "request_id": null,
+          "state": "idle",
+          "held_tokens": 0,
+          "prompt_tokens": null,
+          "prompt_read": null,
+          "generated": null,
+          "elapsed_s": null,
+          "tok_s": null
+        },
+        {
+          "slot": 3,
+          "group": 0,
+          "replica": null,
+          "request_id": null,
+          "state": "idle",
+          "held_tokens": 0,
+          "prompt_tokens": null,
+          "prompt_read": null,
+          "generated": null,
+          "elapsed_s": null,
+          "tok_s": null
+        }
+      ],
+      "requests": []
+    },
+    "rates": {
+      "answer_tok_s": null,
+      "answer_window_s": null,
+      "prefill_tok_s": null,
+      "output_tokens_server_counter": 5814
+    },
+    "topology": {
+      "mode": "single GPU or CPU",
+      "configured_split": null,
+      "selected_devices": [
+        0
+      ],
+      "replica_devices": [],
+      "replica_stages": [],
+      "resolved": false,
+      "stages": [],
+      "source": null
+    },
+    "devices": [
+      {
+        "index": 0,
+        "name": "NVIDIA GB10",
+        "mem_used": null,
+        "mem_total": null,
+        "util": 96,
+        "temp": 61,
+        "power": 44.337,
+        "power_limit": null,
+        "pcie_gen": 1,
+        "pcie_gen_max": 1,
+        "pcie_width": 1,
+        "pcie_width_max": 16
+      }
+    ],
+    "ram": {
+      "used": 97899606016,
+      "total": 130663202816
+    },
+    "recent": [
+      {
+        "id": "0cfe84b73546",
+        "time": 1795536887.1418355,
+        "duration_s": 3.8,
+        "finish": "stop",
+        "prompt_tokens": 4047,
+        "reused": 0,
+        "output_tokens": 139,
+        "prompt_ms": 1796.8,
+        "decode_ms": 1975.8,
+        "first_engine_token_s": 1.867
+      },
+      {
+        "id": "7f2a2a9bf71e",
+        "time": 1795536631.2065663,
+        "duration_s": 174.3,
+        "finish": "stop",
+        "prompt_tokens": 32646,
+        "reused": 0,
+        "output_tokens": 1583,
+        "prompt_ms": 23258.9,
+        "decode_ms": 150951.3,
+        "first_engine_token_s": 23.328
+      },
+      {
+        "id": "fabdd9fd2a09",
+        "time": 1795536538.278825,
+        "duration_s": 49.5,
+        "finish": "stop",
+        "prompt_tokens": 16345,
+        "reused": 0,
+        "output_tokens": 1301,
+        "prompt_ms": 8987.5,
+        "decode_ms": 40421.7,
+        "first_engine_token_s": 9.045
+      },
+      {
+        "id": "5c92477867fe",
+        "time": 1795536473.3804553,
+        "duration_s": 25.7,
+        "finish": "stop",
+        "prompt_tokens": 4051,
+        "reused": 0,
+        "output_tokens": 1640,
+        "prompt_ms": 1801.7,
+        "decode_ms": 23857.0,
+        "first_engine_token_s": 1.807
+      },
+      {
+        "id": "a74b13fb8b43",
+        "time": 1795536400.1874096,
+        "duration_s": 22.3,
+        "finish": "stop",
+        "prompt_tokens": 14490,
+        "reused": 0,
+        "output_tokens": 523,
+        "prompt_ms": 8077.1,
+        "decode_ms": 14180.6,
+        "first_engine_token_s": 8.084
+      },
+      {
+        "id": "5e06ca3a8a42",
+        "time": 1795536292.155401,
+        "duration_s": 75.2,
+        "finish": "stop",
+        "prompt_tokens": 30800,
+        "reused": 0,
+        "output_tokens": 627,
+        "prompt_ms": 21733.6,
+        "decode_ms": 53449.9,
+        "first_engine_token_s": 21.751
+      },
+      {
+        "id": "635dc66b8ad3",
+        "time": 1795536226.813534,
+        "duration_s": 0.1,
+        "finish": "length",
+        "prompt_tokens": 11,
+        "reused": 0,
+        "output_tokens": 1,
+        "prompt_ms": 129.3,
+        "decode_ms": 0,
+        "first_engine_token_s": 0.137
+      }
+    ],
+    "totals": {
+      "since": 1795536226.1799383,
+      "requests": 7,
+      "prompt_tokens": 102390,
+      "output_tokens": 5814
+    },
+    "activity": {
+      "available": true,
+      "last_seq": 35,
+      "events": [
+        {
+          "seq": 4,
+          "at": 1795536226.9503813,
+          "request_id": "635dc66b8ad3",
+          "event": "first_token",
+          "outcome": null
+        },
+        {
+          "seq": 5,
+          "at": 1795536226.9570775,
+          "request_id": "635dc66b8ad3",
+          "event": "finished",
+          "outcome": "length"
+        },
+        {
+          "seq": 6,
+          "at": 1795536292.1553845,
+          "request_id": "5e06ca3a8a42",
+          "event": "queued",
+          "outcome": null
+        },
+        {
+          "seq": 7,
+          "at": 1795536292.1554003,
+          "request_id": "5e06ca3a8a42",
+          "event": "admitted",
+          "outcome": null
+        },
+        {
+          "seq": 8,
+          "at": 1795536292.166648,
+          "request_id": "5e06ca3a8a42",
+          "event": "reading",
+          "outcome": null
+        },
+        {
+          "seq": 9,
+          "at": 1795536313.906108,
+          "request_id": "5e06ca3a8a42",
+          "event": "first_token",
+          "outcome": null
+        },
+        {
+          "seq": 10,
+          "at": 1795536367.3667672,
+          "request_id": "5e06ca3a8a42",
+          "event": "finished",
+          "outcome": "stop"
+        },
+        {
+          "seq": 11,
+          "at": 1795536400.1874027,
+          "request_id": "a74b13fb8b43",
+          "event": "queued",
+          "outcome": null
+        },
+        {
+          "seq": 12,
+          "at": 1795536400.1874094,
+          "request_id": "a74b13fb8b43",
+          "event": "admitted",
+          "outcome": null
+        },
+        {
+          "seq": 13,
+          "at": 1795536400.1887088,
+          "request_id": "a74b13fb8b43",
+          "event": "reading",
+          "outcome": null
+        },
+        {
+          "seq": 14,
+          "at": 1795536408.2713852,
+          "request_id": "a74b13fb8b43",
+          "event": "first_token",
+          "outcome": null
+        },
+        {
+          "seq": 15,
+          "at": 1795536422.4522812,
+          "request_id": "a74b13fb8b43",
+          "event": "finished",
+          "outcome": "stop"
+        },
+        {
+          "seq": 16,
+          "at": 1795536473.3804445,
+          "request_id": "5c92477867fe",
+          "event": "queued",
+          "outcome": null
+        },
+        {
+          "seq": 17,
+          "at": 1795536473.3804545,
+          "request_id": "5c92477867fe",
+          "event": "admitted",
+          "outcome": null
+        },
+        {
+          "seq": 18,
+          "at": 1795536473.381033,
+          "request_id": "5c92477867fe",
+          "event": "reading",
+          "outcome": null
+        },
+        {
+          "seq": 19,
+          "at": 1795536475.1871378,
+          "request_id": "5c92477867fe",
+          "event": "first_token",
+          "outcome": null
+        },
+        {
+          "seq": 20,
+          "at": 1795536499.0443459,
+          "request_id": "5c92477867fe",
+          "event": "finished",
+          "outcome": "stop"
+        },
+        {
+          "seq": 21,
+          "at": 1795536538.2788148,
+          "request_id": "fabdd9fd2a09",
+          "event": "queued",
+          "outcome": null
+        },
+        {
+          "seq": 22,
+          "at": 1795536538.2788248,
+          "request_id": "fabdd9fd2a09",
+          "event": "admitted",
+          "outcome": null
+        },
+        {
+          "seq": 23,
+          "at": 1795536538.2909079,
+          "request_id": "fabdd9fd2a09",
+          "event": "reading",
+          "outcome": null
+        },
+        {
+          "seq": 24,
+          "at": 1795536547.3235621,
+          "request_id": "fabdd9fd2a09",
+          "event": "first_token",
+          "outcome": null
+        },
+        {
+          "seq": 25,
+          "at": 1795536587.745482,
+          "request_id": "fabdd9fd2a09",
+          "event": "finished",
+          "outcome": "stop"
+        },
+        {
+          "seq": 26,
+          "at": 1795536631.2065537,
+          "request_id": "7f2a2a9bf71e",
+          "event": "queued",
+          "outcome": null
+        },
+        {
+          "seq": 27,
+          "at": 1795536631.2065656,
+          "request_id": "7f2a2a9bf71e",
+          "event": "admitted",
+          "outcome": null
+        },
+        {
+          "seq": 28,
+          "at": 1795536631.2178054,
+          "request_id": "7f2a2a9bf71e",
+          "event": "reading",
+          "outcome": null
+        },
+        {
+          "seq": 29,
+          "at": 1795536654.534087,
+          "request_id": "7f2a2a9bf71e",
+          "event": "first_token",
+          "outcome": null
+        },
+        {
+          "seq": 30,
+          "at": 1795536805.4859753,
+          "request_id": "7f2a2a9bf71e",
+          "event": "finished",
+          "outcome": "stop"
+        },
+        {
+          "seq": 31,
+          "at": 1795536887.1418233,
+          "request_id": "0cfe84b73546",
+          "event": "queued",
+          "outcome": null
+        },
+        {
+          "seq": 32,
+          "at": 1795536887.141835,
+          "request_id": "0cfe84b73546",
+          "event": "admitted",
+          "outcome": null
+        },
+        {
+          "seq": 33,
+          "at": 1795536887.142429,
+          "request_id": "0cfe84b73546",
+          "event": "reading",
+          "outcome": null
+        },
+        {
+          "seq": 34,
+          "at": 1795536889.0085216,
+          "request_id": "0cfe84b73546",
+          "event": "first_token",
+          "outcome": null
+        },
+        {
+          "seq": 35,
+          "at": 1795536890.9844003,
+          "request_id": "0cfe84b73546",
+          "event": "finished",
+          "outcome": "stop"
+        }
+      ]
+    },
+    "quality": {
+      "request_correlation": "reported",
+      "per_device": "measured",
+      "telemetry": "available",
+      "batch_window_rows": "unavailable",
+      "batch_window_source": null,
+      "stage_in_flight": "unavailable",
+      "stage_in_flight_source": null,
+      "replica_stage_in_flight": "unavailable",
+      "replica_stage_in_flight_source": null,
+      "placement": "unavailable"
+    }
+  }
+}

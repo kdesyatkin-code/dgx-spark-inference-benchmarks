@@ -1,0 +1,30 @@
+{
+  "model": "qwen3.6:35b-a3b-q8_0",
+  "created_at": "2026-11-24T15:59:27.360848886Z",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "thinking": "The user wants to get the weather for Zagreb in Celsius using the `get_weather` tool.\nThe parameters required are:\n- `city`: \"Zagreb\"\n- `unit`: \"celsius\"\n\nI need to call the function `get_weather` with these arguments.\nThen I will return the result to the user.\nI should make sure to format the function call correctly.\nNo other thinking steps are required.",
+    "tool_calls": [
+      {
+        "id": "call_iwax0oy4",
+        "function": {
+          "index": 0,
+          "name": "get_weather",
+          "arguments": {
+            "city": "Zagreb",
+            "unit": "celsius"
+          }
+        }
+      }
+    ]
+  },
+  "done": true,
+  "done_reason": "stop",
+  "total_duration": 2730283229,
+  "load_duration": 1222972,
+  "prompt_eval_count": 300,
+  "prompt_eval_duration": 270986000,
+  "eval_count": 135,
+  "eval_duration": 2414233000
+}

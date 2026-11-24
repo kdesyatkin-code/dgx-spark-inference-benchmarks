@@ -1,0 +1,61 @@
+{
+  "case": "tool-t2",
+  "source_sha256": "6ac56d7dc423d121cece4594b7035501a7f1eed861ced485a2ea9b22fc0f3eeb",
+  "expected": {
+    "name": "get_weather",
+    "arguments": {
+      "city": "Zagreb",
+      "unit": "celsius"
+    }
+  },
+  "actual_tool_calls": [
+    {
+      "id": "call_iwax0oy4",
+      "function": {
+        "index": 0,
+        "name": "get_weather",
+        "arguments": {
+          "city": "Zagreb",
+          "unit": "celsius"
+        }
+      }
+    }
+  ],
+  "answer": "",
+  "passed": true,
+  "wall_seconds": 2.746169989986811,
+  "engine_seconds": 2.730283229,
+  "load_seconds": 0.001222972,
+  "input_tokens": 300,
+  "output_tokens": 135,
+  "prefill_seconds": 0.270986,
+  "decode_seconds": 2.414233,
+  "prefill_tps": 1107.0682618290243,
+  "decode_tps": 55.91838070310529,
+  "thinking_present": true,
+  "done_reason": "stop",
+  "memory": "               \u0432\u0441\u0435\u0433\u043e        \u0437\u0430\u043d\u044f\u0442        \u0441\u0432\u043e\u0431      \u043e\u0431\u0449\u0430\u044f  \u0431\u0443\u0444/\u0432\u0440\u0435\u043c.   \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u043e\n\u041f\u0430\u043c\u044f\u0442\u044c:        121Gi        52Gi        39Gi       1,6Gi        32Gi        68Gi\n\u041f\u043e\u0434\u043a\u0430\u0447\u043a\u0430:       15Gi        48Mi        15Gi\n",
+  "loaded_models": {
+    "models": [
+      {
+        "name": "qwen3.6:35b-a3b-q8_0",
+        "model": "qwen3.6:35b-a3b-q8_0",
+        "size": 43405384087,
+        "digest": "0218f872e86baa9c7610509f27db36a7bc52eea7afee24688f81ca74ffcb6c77",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen35moe",
+          "families": [
+            "qwen35moe"
+          ],
+          "parameter_size": "36.0B",
+          "quantization_level": "Q8_0"
+        },
+        "expires_at": "2319-03-06T15:46:44.21582756Z",
+        "size_vram": 43405384087,
+        "context_length": 262144
+      }
+    ]
+  }
+}

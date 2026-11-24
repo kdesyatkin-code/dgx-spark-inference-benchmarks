@@ -1,0 +1,45 @@
+{
+  "case": "instructions-i3",
+  "source_sha256": "da813b7a51d049ceff52b445c171cbf0b6c246b80883d35f82457ee9b1dd01c3",
+  "expected": {
+    "project": "Orion",
+    "build": 17
+  },
+  "answer": "{\"project\": \"Orion\", \"build\": 17}",
+  "passed": true,
+  "wall_seconds": 11.696485619002488,
+  "engine_seconds": 11.680333816,
+  "load_seconds": 0.00159313,
+  "input_tokens": 43,
+  "output_tokens": 635,
+  "prefill_seconds": 0.138512,
+  "decode_seconds": 11.493629,
+  "prefill_tps": 310.4424165415271,
+  "decode_tps": 55.2479986956252,
+  "thinking_present": true,
+  "done_reason": "stop",
+  "memory": "               \u0432\u0441\u0435\u0433\u043e        \u0437\u0430\u043d\u044f\u0442        \u0441\u0432\u043e\u0431      \u043e\u0431\u0449\u0430\u044f  \u0431\u0443\u0444/\u0432\u0440\u0435\u043c.   \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u043e\n\u041f\u0430\u043c\u044f\u0442\u044c:        121Gi        53Gi        39Gi       1,6Gi        32Gi        68Gi\n\u041f\u043e\u0434\u043a\u0430\u0447\u043a\u0430:       15Gi        48Mi        15Gi\n",
+  "loaded_models": {
+    "models": [
+      {
+        "name": "qwen3.6:35b-a3b-q8_0",
+        "model": "qwen3.6:35b-a3b-q8_0",
+        "size": 43405384087,
+        "digest": "0218f872e86baa9c7610509f27db36a7bc52eea7afee24688f81ca74ffcb6c77",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen35moe",
+          "families": [
+            "qwen35moe"
+          ],
+          "parameter_size": "36.0B",
+          "quantization_level": "Q8_0"
+        },
+        "expires_at": "2319-03-06T15:49:31.705411042Z",
+        "size_vram": 43405384087,
+        "context_length": 262144
+      }
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+**Structure**
+
+Each record is a single line with three parts:
+
+| Part | Format | Example |
+|------|--------|---------|
+| Record ID | `record` + 6-digit zero-padded number | `record000042` |
+| Separator | `: ` (colon + space) | `: ` |
+| Content | Fixed string | `alpha beta gamma delta epsilon zeta eta theta.` |
+
+The content is identical across all 858 records — the only varying field is the ID.
+
+**How to look up a record by ID**
+
+1. Take the numeric suffix from the ID (e.g. `000042` from `record000042`).
+2. Search for the line that starts with `record000042:`.
+3. Everything after the `: ` on that line is the record's content.
+
+In practice, with a text file you'd use:
+
+```
+grep '^record000042:' data.txt
+```
+
+Or in Python:
+
+```python
+records = {line.split(':')[0]: line.split(':', 1)[1].strip()
+           for line in open('data.txt')}
+value = records['record000042']
+```
+
+Since all records share the same content, the lookup is purely an ID match — the value returned is always `alpha beta gamma delta epsilon zeta eta theta.`
