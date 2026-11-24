@@ -1,0 +1,44 @@
+How a hash table finds a value
+
+1. You call get("banana"). The table runs a hash function on the key, producing an integer, then reduces it to an array index: index = hash(key) mod num_buckets.
+2. It looks at that single slot. That is the whole point: no scan through the data, one arithmetic step plus one memory access.
+3. The slot stores an entry (key, value), or a pointer to a chain of entries.
+4. The table compares the stored key with your key. Keys are compared, not hashes — the hash only picks the neighborhood, it does not identify the key. Match means you return the value; mismatch or empty slot means "not present".
+
+Collisions
+
+Two different keys can hash to the same index. The table needs a policy for that:
+
+- Separate chaining: each bucket holds a small list (linked list, sometimes a tree). On a collision you append to the list; on lookup you walk the list and compare keys one by one.
+- Open addressing: all entries live in the array itself. If your slot is taken by a different key, you probe the next candidate slot (linear probing: +1; quadratic probing; double hashing) until you hit your key or an empty slot. Deletion needs a tombstone marker, because a truly empty slot would break the probe chain of entries that were displaced past it.
+
+Cost: a good hash function spreads keys uniformly, so chains stay short and lookup is O(1) on average. Worst case (everything collides) degenerates to O(n) — a linear search with extra steps. Load factor = entries / buckets controls this; when it crosses ~0.7–0.75 the table grows (typically doubles buckets) and rehashes everything, so the average cost stays bounded.
+
+Small example, 7 buckets, linear probing
+
+Hash function: a polynomial string hash mod 1,000,003, then mod 7. Computed indices:
+
+  apple  -> 0
+  banana -> 3
+  cherry -> 3      <-- collides with banana
+  date   -> 6
+
+Insert apple, banana, cherry, date in that order:
+
+  0: apple -> 12
+  1:
+  2:
+  3: banana -> 47      (took its home slot)
+  4: cherry -> 88      (home slot 3 occupied by banana -> probe 4)
+  5:
+  6: date   -> 5
+
+Now get("cherry"):
+  index = 3. Slot 3 holds "banana" — not our key, keep probing.
+  index = 4. Slot 4 holds "cherry" — keys match, return 88.
+  Two probes.
+
+get("grape"):
+  index = 3. "banana" — no. index = 4. "cherry" — no. index = 5. Empty slot — the probe chain for grape would have continued past any occupied slot, so an empty slot proves it was never inserted. Return "not found".
+
+The takeaway: hashing narrows the search to one spot, key comparison confirms identity, and the collision rule (chain or probe) is what makes correctness survive the fact that hash functions are not injective.

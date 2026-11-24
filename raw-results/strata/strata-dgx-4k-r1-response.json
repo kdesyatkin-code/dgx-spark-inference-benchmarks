@@ -1,0 +1,41 @@
+{
+  "id": "chatcmpl-2645fdb8dc9a42948b2914ee",
+  "object": "chat.completion",
+  "created": 1795545220,
+  "model": "qwen3.8-flash-next-unsloth-ud-q2_k_xl",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Each record has the same simple structure:\n\n```text\nrecordNNNNNN: alpha beta gamma delta epsilon zeta eta theta.\n```\n\nWhere:\n\n- `recordNNNNNN` is the record ID.\n- `NNNNNN` is a zero-padded six-digit number.\n- The part after the colon is a fixed sequence of words:\n  - alpha\n  - beta\n  - gamma\n  - delta\n  - epsilon\n  - zeta\n  - eta\n  - theta\n\nExamples:\n\n```text\nrecord000001: alpha beta gamma delta epsilon zeta eta theta.\nrecord000211: alpha beta gamma delta epsilon zeta eta theta.\n```\n\nTo look up a record by its ID, use the exact ID string, such as:\n\n```text\nrecord000123\n```\n\nor the full line:\n\n```text\nrecord000123: alpha beta gamma delta epsilon zeta eta theta.\n```\n\nIf records are stored in a list, table, or database, the ID field is the key. You can find the record by matching the ID field to the requested ID.\n\nExample lookup:\n\n```text\nRequested ID: record000123\nMatch:\nrecord000123: alpha beta gamma delta epsilon zeta eta theta.\n```",
+        "reasoning_content": "We need answer user's request. User provided many records all identical content except ID, asks: \"Summarize the structure of these records and explain how to look up a record by its ID.\" Need respond concise maybe mention format recordNNNNNN: alpha beta gamma delta epsilon zeta eta theta. Fixed sequence, zero-padded six-digit numeric ID. Lookup by exact ID string or parse integer. Need maybe examples. Ensure final answer only. Need likely in English.\n"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 4093,
+    "completion_tokens": 393,
+    "total_tokens": 4486,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 97
+    }
+  },
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 4093,
+    "prompt_ms": 2379.9,
+    "prompt_per_token_ms": 0.581,
+    "prompt_per_second": 1719.8,
+    "predicted_n": 393,
+    "predicted_ms": 6387.6,
+    "predicted_per_token_ms": 16.253,
+    "predicted_per_second": 61.5,
+    "draft_n": 423,
+    "draft_n_accepted": 262
+  }
+}

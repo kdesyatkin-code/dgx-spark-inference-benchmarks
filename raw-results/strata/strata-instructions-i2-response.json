@@ -1,0 +1,41 @@
+{
+  "id": "chatcmpl-73385928a40c4dbe9a936df9",
+  "object": "chat.completion",
+  "created": 1795545796,
+  "model": "qwen3.8-flash-next-unsloth-ud-q2_k_xl",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "[-4, 1, 2, 9]",
+        "reasoning_content": "We need answer user's request: sort integers ascending remove duplicates return only JSON array. Input: 9, 2, -4, 2, 1. Unique sorted: -4,1,2,9. Need final only JSON array. Ensure no extra.\n"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 90,
+    "completion_tokens": 72,
+    "total_tokens": 162,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 58
+    }
+  },
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 90,
+    "prompt_ms": 432.4,
+    "prompt_per_token_ms": 4.804,
+    "prompt_per_second": 208.1,
+    "predicted_n": 72,
+    "predicted_ms": 1029.4,
+    "predicted_per_token_ms": 14.297,
+    "predicted_per_second": 69.9,
+    "draft_n": 88,
+    "draft_n_accepted": 52
+  }
+}

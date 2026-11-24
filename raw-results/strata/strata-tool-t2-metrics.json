@@ -1,0 +1,71 @@
+{
+  "case": "tool-t2",
+  "model": "qwen3.8-flash-next-unsloth-ud-q2_k_xl",
+  "source_sha256": "6ac56d7dc423d121cece4594b7035501a7f1eed861ced485a2ea9b22fc0f3eeb",
+  "wall_seconds": 1.4455339179839939,
+  "finish_reason": "tool_calls",
+  "actual": {
+    "name": "get_weather",
+    "arguments": {
+      "city": "Zagreb",
+      "unit": "celsius"
+    }
+  },
+  "expected": {
+    "name": "get_weather",
+    "arguments": {
+      "city": "Zagreb",
+      "unit": "celsius"
+    }
+  },
+  "passed": true,
+  "usage": {
+    "prompt_tokens": 335,
+    "completion_tokens": 64,
+    "total_tokens": 399,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 22
+    }
+  },
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 335,
+    "prompt_ms": 615.1,
+    "prompt_per_token_ms": 1.836,
+    "prompt_per_second": 544.6,
+    "predicted_n": 64,
+    "predicted_ms": 810.6,
+    "predicted_per_token_ms": 12.666,
+    "predicted_per_second": 79.0,
+    "draft_n": 63,
+    "draft_n_accepted": 48
+  },
+  "prefill_tps": 544.6,
+  "decode_tps": 79.0,
+  "draft_acceptance_percent": 76.19047619047619,
+  "ram": {
+    "used": 96105066496,
+    "total": 130663202816
+  },
+  "gpu": [
+    {
+      "index": 0,
+      "name": "NVIDIA GB10",
+      "mem_used": null,
+      "mem_total": null,
+      "util": 92,
+      "temp": 57,
+      "power": 53.488,
+      "power_limit": null,
+      "pcie_gen": 1,
+      "pcie_gen_max": 1,
+      "pcie_width": 1,
+      "pcie_width_max": 16
+    }
+  ],
+  "parallel": 1,
+  "memory": "               \u0432\u0441\u0435\u0433\u043e        \u0437\u0430\u043d\u044f\u0442        \u0441\u0432\u043e\u0431      \u043e\u0431\u0449\u0430\u044f  \u0431\u0443\u0444/\u0432\u0440\u0435\u043c.   \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u043e\n\u041f\u0430\u043c\u044f\u0442\u044c:        121Gi        89Gi        10Gi       4,4Gi        52Gi        31Gi\n\u041f\u043e\u0434\u043a\u0430\u0447\u043a\u0430:       15Gi       2,4Gi        13Gi\n"
+}

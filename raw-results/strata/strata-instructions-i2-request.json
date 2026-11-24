@@ -1,0 +1,13 @@
+{
+  "model": "qwen3.8-flash-next-unsloth-ud-q2_k_xl",
+  "messages": [
+    {
+      "role": "user",
+      "content": "[case instructions-i2]\nSort these integers in ascending order and remove duplicates: 9, 2, -4, 2, 1. Return only a JSON array."
+    }
+  ],
+  "stream": false,
+  "chat_template_kwargs": {
+    "enable_thinking": true
+  }
+}

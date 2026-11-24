@@ -1,0 +1,51 @@
+{
+  "id": "chatcmpl-c612d209452546428b535594",
+  "object": "chat.completion",
+  "created": 1795545691,
+  "model": "qwen3.8-flash-next-unsloth-ud-q2_k_xl",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": null,
+        "reasoning_content": "The user wants me to call get_weather for Zagreb in celsius. Simple single tool call.\n",
+        "tool_calls": [
+          {
+            "id": "call_15a74602cfa743c39e8f966f",
+            "type": "function",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"city\":\"Zagreb\",\"unit\":\"celsius\"}"
+            }
+          }
+        ]
+      },
+      "finish_reason": "tool_calls"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 335,
+    "completion_tokens": 64,
+    "total_tokens": 399,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 22
+    }
+  },
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 335,
+    "prompt_ms": 615.1,
+    "prompt_per_token_ms": 1.836,
+    "prompt_per_second": 544.6,
+    "predicted_n": 64,
+    "predicted_ms": 810.6,
+    "predicted_per_token_ms": 12.666,
+    "predicted_per_second": 79.0,
+    "draft_n": 63,
+    "draft_n_accepted": 48
+  }
+}
