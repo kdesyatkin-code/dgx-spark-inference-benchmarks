@@ -1,0 +1,12 @@
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "[case instructions-i1]\nReturn only a JSON object with ok set to true and count set to the integer 3. No other keys."
+    }
+  ],
+  "expected": {
+    "ok": true,
+    "count": 3
+  }
+}

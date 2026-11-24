@@ -1,0 +1,12 @@
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "[case instructions-i3]\nProject: Orion. Build: 17. Return only a JSON object with keys project (string) and build (integer)."
+    }
+  ],
+  "expected": {
+    "project": "Orion",
+    "build": 17
+  }
+}

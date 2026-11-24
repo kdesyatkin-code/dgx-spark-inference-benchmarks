@@ -1,0 +1,40 @@
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "[case tool-t2]\nUse get_weather for Zagreb in celsius."
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "get_weather",
+        "description": "Synthetic benchmark lookup; no external action is performed.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "city": {
+              "type": "string"
+            },
+            "unit": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "city",
+            "unit"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "expected": {
+    "name": "get_weather",
+    "arguments": {
+      "city": "Zagreb",
+      "unit": "celsius"
+    }
+  }
+}
