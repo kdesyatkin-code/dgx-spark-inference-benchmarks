@@ -1,0 +1,18 @@
+{
+  "model": "qwen3.8-flash-next:ud-q2_k_xl",
+  "created_at": "2026-11-24T19:51:44.904059844Z",
+  "message": {
+    "role": "assistant",
+    "content": "[-4, 1, 2, 9]",
+    "thinking": "We need answer user's simple request. Need final only JSON array. Sort integers ascending remove duplicates: 9,2,-4,2,1 -> unique -4,1,2,9. Return JSON array only: [-4,1,2,9]. Ensure no extra text."
+  },
+  "done": true,
+  "done_reason": "stop",
+  "total_duration": 2835162139,
+  "load_duration": 1050435,
+  "prompt_eval_count": 90,
+  "prompt_eval_cached_count": 42,
+  "prompt_eval_duration": 244493000,
+  "eval_count": 76,
+  "eval_duration": 2556514000
+}

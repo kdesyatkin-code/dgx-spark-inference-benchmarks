@@ -1,0 +1,45 @@
+{
+  "test": "Tool Calling T3",
+  "engine": "Ollama 0.40.18",
+  "source_sha256": "91bb3640aaa981c6517db0dcb61f8a737fd4c7085c97e0554b733fbe3d108a45",
+  "wall_s": 3.321253476984566,
+  "load_s": 0.000665395,
+  "prompt_tokens": 361,
+  "cached_tokens": 0,
+  "output_tokens": 76,
+  "prefill_tps": 562.0269087897273,
+  "decode_tps": 29.416056444767676,
+  "expected": {
+    "name": "convert_units",
+    "arguments": {
+      "value": 3,
+      "from_unit": "km",
+      "to_unit": "m"
+    }
+  },
+  "actual": {
+    "name": "convert_units",
+    "arguments": {
+      "value": 3,
+      "from_unit": "km",
+      "to_unit": "m"
+    }
+  },
+  "tool_calls": [
+    {
+      "id": "xeMSxVZ2PeR8tElGgxtG7tWHyIfQ3nNA",
+      "function": {
+        "index": 0,
+        "name": "convert_units",
+        "arguments": {
+          "value": 3,
+          "from_unit": "km",
+          "to_unit": "m"
+        }
+      }
+    }
+  ],
+  "content": "",
+  "passed": true,
+  "done_reason": "stop"
+}

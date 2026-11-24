@@ -1,0 +1,39 @@
+{
+  "test": "Tool Calling T1",
+  "engine": "Ollama 0.40.18",
+  "source_sha256": "581bebe37342fdc2578392ce01c5782a4e414b1b06e1121c66f8c3f149759df2",
+  "wall_s": 3.203206504986156,
+  "load_s": 0.002902185,
+  "prompt_tokens": 334,
+  "cached_tokens": 0,
+  "output_tokens": 67,
+  "prefill_tps": 480.6121905699284,
+  "decode_tps": 29.282064953738708,
+  "expected": {
+    "name": "lookup_record",
+    "arguments": {
+      "id": "A-17"
+    }
+  },
+  "actual": {
+    "name": "lookup_record",
+    "arguments": {
+      "id": "A-17"
+    }
+  },
+  "tool_calls": [
+    {
+      "id": "J441IzRlaj5Vy6y36GgfEP5gK5tXMcUb",
+      "function": {
+        "index": 0,
+        "name": "lookup_record",
+        "arguments": {
+          "id": "A-17"
+        }
+      }
+    }
+  ],
+  "content": "",
+  "passed": true,
+  "done_reason": "stop"
+}

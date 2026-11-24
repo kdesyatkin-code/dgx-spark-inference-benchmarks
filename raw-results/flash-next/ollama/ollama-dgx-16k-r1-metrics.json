@@ -1,0 +1,13 @@
+{
+  "test": "DGX 16K",
+  "engine": "Ollama 0.40.18",
+  "source_sha256": "06776ef38485dc4bb7e18809534fe16a57d421d163f81d4d1532c4b08225968e",
+  "wall_s": 58.10988794598961,
+  "load_s": 0.001571366,
+  "prompt_tokens": 16387,
+  "cached_tokens": 42,
+  "output_tokens": 1247,
+  "prefill_tps": 945.3146602312397,
+  "decode_tps": 30.66305349178288,
+  "done_reason": "stop"
+}

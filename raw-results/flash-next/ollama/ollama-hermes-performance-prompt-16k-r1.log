@@ -1,0 +1,30 @@
+Structure
+
+Each line is one record, and every record has the same shape:
+
+    record000137: alpha beta gamma delta epsilon zeta eta theta.
+
+Three parts:
+
+1. Key — literal `record` + a fixed-width, zero-padded 6-digit number. The numbers increase by exactly 1 per line, from `000001` up to `000858` in the visible block; no gaps, duplicates, or out-of-order entries.
+2. Separator — a colon and a single space.
+3. Payload — a constant 8-token sequence in fixed order (`alpha` through `theta`), terminated by a period.
+
+So there are no fields, no nested structure, no timestamps or metadata, and nothing that varies between records except the ID. The payload is decorative filler; the ID is the entire content of the dataset. Effectively a dense integer-keyed store where every value happens to be identical.
+
+How to look up a record by ID
+
+Because the keys are dense, gap-free, and start at 1, lookup is direct addressing — no search needed. Take the digits of the ID as an integer N, then read line N (1-based), i.e. offset N-1. For `record000137`, that is line 137.
+
+By position:
+  sed -n '137p' file            # or: awk 'NR==137' file
+  python: lines[136]            # after readlines(), since lines are 1-indexed on screen
+
+By key (safer, and the form you want in real use):
+  grep -n '^record000137: ' file
+
+The anchor matters: `record` + a constant 6 digits means an ID is never a prefix of another ID, so an anchored prefix match returns exactly one line — it behaves like a hash lookup, not a substring scan.
+
+In code, either build `key = f"record{N:06d}"` and index a list at `N-1`, or parse the file once into `{key_before_colon: payload_after_colon}` and treat it as a dict.
+
+Two properties worth noting. The zero-padding makes string comparison order equal numeric order, so sorting by key string needs no numeric parsing. And positional addressing is only valid while the numbering stays gap-free — if an ID is ever deleted or the sequence stops starting at 1, position no longer equals ID, and you must fall back to the anchored key match or a dict.

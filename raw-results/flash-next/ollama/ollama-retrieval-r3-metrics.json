@@ -1,0 +1,16 @@
+{
+  "test": "Retrieval R3",
+  "engine": "Ollama 0.40.18",
+  "source_sha256": "3470844ab8f039570d2dcaa9b8a7ef175a036cdc44c0484ebd30507c454923e6",
+  "wall_s": 19.86597541201627,
+  "load_s": 0.001076644,
+  "prompt_tokens": 16382,
+  "cached_tokens": 42,
+  "output_tokens": 73,
+  "prefill_tps": 947.5226689289689,
+  "decode_tps": 29.45832595193773,
+  "expected": "DELTA-906",
+  "answer": "DELTA-906",
+  "passed": true,
+  "done_reason": "stop"
+}

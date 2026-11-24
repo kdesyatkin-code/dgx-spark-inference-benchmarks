@@ -1,0 +1,44 @@
+Structure
+
+Each line is one record, self-contained, two fields:
+
+- key: `record` + 6-digit zero-padded sequence number (`record000001` … `record000211`)
+- value: the fixed literal string `alpha beta gamma delta epsilon zeta eta theta.` — 8 space-separated tokens, trailing period
+
+Field separator is `: ` (colon + space). One record per line, no nesting, no nesting of sub-fields, no header row. IDs run sequentially from 000001 with no gaps.
+
+So the schema is effectively `map[str, str]` with a dense integer key space — a flat, constant-width, lexicographically sortable key-value dump. Every record has the same shape and byte-for-byte the same value, which is what the `performance-prompt-4k-r1` case marker implies: this is a filler/token-load fixture, not data. Any "lookup" only returns the constant.
+
+How to look up by ID
+
+Since the numeric suffix is fixed-width and zero-padded, lexical sort = numeric sort, and the suffix converts directly to an index. Three practical routes:
+
+Grep for an exact ID (fastest on a file):
+
+    grep '^record000137:' dump.txt
+
+Or anchored and strict, ignoring a possible BOM/trailing whitespace:
+
+    awk -F': ' '$1 == "record000137" { $1=""; sub(/^ /,""); print }' dump.txt
+
+Direct O(1) access if the padding is trusted — the key encodes its own position, so line N holds record N:
+
+    sed -n '137p' dump.txt
+
+Load into a real index if you'll query repeatedly:
+
+    idx = {line.split(': ', 1)[0]: line.split(': ', 1)[1]
+           for line in open('dump.txt') if ': ' in line}
+    idx['record000137']
+
+Or array-based, exploiting the dense key space:
+
+    records = [line.rstrip('\n').split(': ', 1)[1] for line in open('dump.txt')]
+    records[int('record000137'[6:])] - 1
+
+Two caveats worth checking against the real file rather than trusting the paste: that no ID is duplicated or missing (a dense key space makes `sed -n Np` silently wrong if the sequence isn't continuous), and that padding width never changes. Both are one command:
+
+    grep -oE 'record[0-9]{6}' dump.txt | sort | uniq -d      # duplicates
+    grep -c '^record' dump.txt                                # total vs. max ID
+
+I read the 211-record count and the uniformity of the values directly from the message you pasted; the commands above will confirm it against the actual file.

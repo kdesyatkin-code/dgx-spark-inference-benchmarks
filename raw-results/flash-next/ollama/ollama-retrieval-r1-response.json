@@ -1,0 +1,18 @@
+{
+  "model": "qwen3.8-flash-next:ud-q2_k_xl",
+  "created_at": "2026-11-24T19:43:05.600339238Z",
+  "message": {
+    "role": "assistant",
+    "content": "ORBIT-731",
+    "thinking": "We need answer user's question: \"[case retrieval-r1] ... access_code = ORBIT-731 ... What is access_code? Reply only with its value.\" Need final only value. Need ensure maybe retrieve ORBIT-731. Final ORBIT-731."
+  },
+  "done": true,
+  "done_reason": "stop",
+  "total_duration": 6676615032,
+  "load_duration": 993860,
+  "prompt_eval_count": 4089,
+  "prompt_eval_cached_count": 42,
+  "prompt_eval_duration": 4214069999,
+  "eval_count": 69,
+  "eval_duration": 2179609000
+}

@@ -1,0 +1,13 @@
+{
+  "test": "DGX 4K",
+  "engine": "Ollama 0.40.18",
+  "source_sha256": "bda0e60c2de0703899ac1bd5711d793b9b325c7f8ba6be6c967f22dd07d8dda8",
+  "wall_s": 26.237398503988516,
+  "load_s": 0.000620834,
+  "prompt_tokens": 4093,
+  "cached_tokens": 42,
+  "output_tokens": 581,
+  "prefill_tps": 890.0239324381537,
+  "decode_tps": 26.923624627952346,
+  "done_reason": "stop"
+}

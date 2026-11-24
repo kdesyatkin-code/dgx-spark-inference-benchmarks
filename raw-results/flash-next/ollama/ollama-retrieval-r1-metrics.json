@@ -1,0 +1,16 @@
+{
+  "test": "Retrieval R1",
+  "engine": "Ollama 0.40.18",
+  "source_sha256": "a7bb1a9e118146a3393ce0434bb746d737b63018a3931a0c3c13c00920ecf372",
+  "wall_s": 6.732049161015311,
+  "load_s": 0.00099386,
+  "prompt_tokens": 4089,
+  "cached_tokens": 42,
+  "output_tokens": 69,
+  "prefill_tps": 960.3542420890859,
+  "decode_tps": 31.657054086306307,
+  "expected": "ORBIT-731",
+  "answer": "ORBIT-731",
+  "passed": true,
+  "done_reason": "stop"
+}

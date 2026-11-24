@@ -1,0 +1,18 @@
+{
+  "model": "qwen3.8-flash-next:ud-q2_k_xl",
+  "created_at": "2026-11-24T19:51:09.779293574Z",
+  "message": {
+    "role": "assistant",
+    "content": "{\"ok\":true,\"count\":3}",
+    "thinking": "We need to respond to user: \"[case instructions-i1] Return only a JSON object with ok set to true and count set to the integer 3. No other keys.\" Need final only JSON object. Ensure no extra text."
+  },
+  "done": true,
+  "done_reason": "stop",
+  "total_duration": 2428683236,
+  "load_duration": 721090,
+  "prompt_eval_count": 82,
+  "prompt_eval_cached_count": 0,
+  "prompt_eval_duration": 355735000,
+  "eval_count": 60,
+  "eval_duration": 2033983000
+}

@@ -1,0 +1,27 @@
+{
+  "test": "Instructions I2",
+  "engine": "Ollama 0.40.18",
+  "source_sha256": "517032071a46b5eb74b310564e3a48c410cb5ef218be915e8c06887b74f7defa",
+  "wall_s": 2.8935121949762106,
+  "load_s": 0.001050435,
+  "prompt_tokens": 90,
+  "cached_tokens": 42,
+  "output_tokens": 76,
+  "prefill_tps": 196.32463915122315,
+  "decode_tps": 29.72798114933069,
+  "expected": [
+    -4,
+    1,
+    2,
+    9
+  ],
+  "answer": "[-4, 1, 2, 9]",
+  "actual": [
+    -4,
+    1,
+    2,
+    9
+  ],
+  "passed": true,
+  "done_reason": "stop"
+}

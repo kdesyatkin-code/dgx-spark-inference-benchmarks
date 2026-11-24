@@ -1,0 +1,15 @@
+{
+  "model": "qwen3.8-flash-next:ud-q2_k_xl",
+  "messages": [
+    {
+      "role": "user",
+      "content": "[case instructions-i3]\nProject: Orion. Build: 17. Return only a JSON object with keys project (string) and build (integer)."
+    }
+  ],
+  "stream": false,
+  "think": true,
+  "keep_alive": -1,
+  "options": {
+    "num_ctx": 262144
+  }
+}

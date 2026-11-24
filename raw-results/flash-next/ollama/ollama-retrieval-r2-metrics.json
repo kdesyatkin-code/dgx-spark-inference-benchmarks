@@ -1,0 +1,16 @@
+{
+  "test": "Retrieval R2",
+  "engine": "Ollama 0.40.18",
+  "source_sha256": "efa78487e5ab100099ec0de629506bd720cbdc9a385b7bb1f014deae1db05a43",
+  "wall_s": 6.21338161098538,
+  "load_s": 0.00075373,
+  "prompt_tokens": 4089,
+  "cached_tokens": 42,
+  "output_tokens": 60,
+  "prefill_tps": 962.2449052377793,
+  "decode_tps": 31.718274060689744,
+  "expected": "CEDAR-284",
+  "answer": "CEDAR-284",
+  "passed": true,
+  "done_reason": "stop"
+}

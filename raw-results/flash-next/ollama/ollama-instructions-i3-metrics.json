@@ -1,0 +1,23 @@
+{
+  "test": "Instructions I3",
+  "engine": "Ollama 0.40.18",
+  "source_sha256": "da813b7a51d049ceff52b445c171cbf0b6c246b80883d35f82457ee9b1dd01c3",
+  "wall_s": 3.2326593610050622,
+  "load_s": 0.000861203,
+  "prompt_tokens": 85,
+  "cached_tokens": 42,
+  "output_tokens": 90,
+  "prefill_tps": 180.65632864327097,
+  "decode_tps": 30.977761409281626,
+  "expected": {
+    "project": "Orion",
+    "build": 17
+  },
+  "answer": "{\n  \"project\": \"Orion\",\n  \"build\": 17\n}",
+  "actual": {
+    "project": "Orion",
+    "build": 17
+  },
+  "passed": true,
+  "done_reason": "stop"
+}

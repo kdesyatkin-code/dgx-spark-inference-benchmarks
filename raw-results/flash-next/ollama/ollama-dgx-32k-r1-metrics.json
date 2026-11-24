@@ -1,0 +1,13 @@
+{
+  "test": "DGX 32K",
+  "engine": "Ollama 0.40.18",
+  "source_sha256": "d3e27c460ce04c47d989c46e857b56d2d7f2a3eadcff079139fe8674fbfa73a3",
+  "wall_s": 88.32999024901073,
+  "load_s": 0.002150936,
+  "prompt_tokens": 32688,
+  "cached_tokens": 42,
+  "output_tokens": 1547,
+  "prefill_tps": 892.1058063829261,
+  "decode_tps": 30.044635024493466,
+  "done_reason": "stop"
+}

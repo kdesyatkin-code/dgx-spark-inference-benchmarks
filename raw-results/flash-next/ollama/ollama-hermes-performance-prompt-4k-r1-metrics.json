@@ -1,0 +1,8 @@
+{
+  "test": "Hermes Performance 4K",
+  "engine": "Ollama 0.40.18",
+  "model": "qwen3.8-flash-next:ud-q2_k_xl",
+  "source_sha256": "bda0e60c2de0703899ac1bd5711d793b9b325c7f8ba6be6c967f22dd07d8dda8",
+  "wall_s": 67.16245310698287,
+  "exit_code": 0
+}

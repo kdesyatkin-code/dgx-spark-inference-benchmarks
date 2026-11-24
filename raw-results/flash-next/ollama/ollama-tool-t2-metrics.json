@@ -1,0 +1,42 @@
+{
+  "test": "Tool Calling T2",
+  "engine": "Ollama 0.40.18",
+  "source_sha256": "6ac56d7dc423d121cece4594b7035501a7f1eed861ced485a2ea9b22fc0f3eeb",
+  "wall_s": 3.131753930996638,
+  "load_s": 0.000732146,
+  "prompt_tokens": 344,
+  "cached_tokens": 0,
+  "output_tokens": 69,
+  "prefill_tps": 549.7543684696692,
+  "decode_tps": 28.720609243207782,
+  "expected": {
+    "name": "get_weather",
+    "arguments": {
+      "city": "Zagreb",
+      "unit": "celsius"
+    }
+  },
+  "actual": {
+    "name": "get_weather",
+    "arguments": {
+      "city": "Zagreb",
+      "unit": "celsius"
+    }
+  },
+  "tool_calls": [
+    {
+      "id": "6Kc9bnFqkm1h8RNTzAGRmpdKIDxwZWq2",
+      "function": {
+        "index": 0,
+        "name": "get_weather",
+        "arguments": {
+          "city": "Zagreb",
+          "unit": "celsius"
+        }
+      }
+    }
+  ],
+  "content": "",
+  "passed": true,
+  "done_reason": "stop"
+}

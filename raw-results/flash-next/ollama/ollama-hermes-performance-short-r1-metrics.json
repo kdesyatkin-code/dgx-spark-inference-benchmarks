@@ -1,0 +1,8 @@
+{
+  "test": "Hermes Performance Short",
+  "engine": "Ollama 0.40.18",
+  "model": "qwen3.8-flash-next:ud-q2_k_xl",
+  "source_sha256": "483b4f18fcc64ca802fde3377c59bf7b114ec5a5c96fe781bd2be4665ef7b898",
+  "wall_s": 22.158230563014513,
+  "exit_code": 0
+}
