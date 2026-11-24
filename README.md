@@ -11,4 +11,4 @@ Key finding: faster direct decode does not necessarily yield faster agent task c
 
 [Russian overview](README_RU.md) · [Methodology](methodology/README.md) · [All 75 measurements](measurements.csv) · [Evidence status](EVIDENCE.md) · [Publication drafts](community/README.md)
 
-**Preliminary:** original Flash-Next Ollama export pending; remaining evidence and summaries included. No statistical significance claim. The planned IQ4 series is not included.
+**v1.0:** both Flash-Next exports included; all 15 Ollama wall measurements and fixture hashes verified against the original export. No statistical significance claim. The planned IQ4 series is not included.
