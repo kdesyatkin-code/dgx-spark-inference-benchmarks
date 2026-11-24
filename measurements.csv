@@ -1,0 +1,76 @@
+study,configuration,case,wall_s,prefill_tps,decode_tps,input_tokens,output_tokens,cached_tokens,functional_pass,ram_snapshot_GiB,source
+qwen3.6,ollama-v1,dgx-16k,33.95970897001098,2509.91604948888,50.45190703082839,16345,1378,,,,raw-results/qwen3.6/results/ollama-dgx-16k-r1-metrics.json
+qwen3.6,ollama-v1,dgx-32k,49.35911547701107,2356.2920598240944,45.58489083835204,32646,1609,,,,raw-results/qwen3.6/results/ollama-dgx-32k-r1-metrics.json
+qwen3.6,ollama-v1,dgx-4k,37.77285862897406,2524.291082977579,54.49398250198222,4051,1960,,,,raw-results/qwen3.6/results/ollama-dgx-4k-r1-metrics.json
+qwen3.6,ollama-v1,hermes-16k,22.168236092024017,,,,,,,,raw-results/qwen3.6/results/ollama-hermes-performance-prompt-16k-r1-metrics.json
+qwen3.6,ollama-v1,hermes-short,14.646232569008134,,,,,,,,raw-results/qwen3.6/results/ollama-hermes-performance-short-r1-metrics.json
+qwen3.6,ollama-v1,instructions-i1,6.153640335018281,299.9557565259124,55.02730646200088,40,328,,True,,raw-results/qwen3.6/results/ollama-instructions-i1-metrics.json
+qwen3.6,ollama-v1,instructions-i2,12.909969854983501,333.8155112940915,54.78083612084621,48,696,,True,,raw-results/qwen3.6/results/ollama-instructions-i2-metrics.json
+qwen3.6,ollama-v1,instructions-i3,11.696485619002488,310.4424165415271,55.2479986956252,43,635,,True,,raw-results/qwen3.6/results/ollama-instructions-i3-metrics.json
+qwen3.6,ollama-v1,retrieval-r1,6.104046644002665,2502.327962633881,53.910879641123785,4047,228,,True,,raw-results/qwen3.6/results/ollama-retrieval-r1-metrics.json
+qwen3.6,ollama-v1,retrieval-r2,5.469390593003482,2508.3378837115465,53.10002764403449,4047,199,,True,,raw-results/qwen3.6/results/ollama-retrieval-r2-metrics.json
+qwen3.6,ollama-v1,retrieval-r3,9.8145045840065,2505.4490450083836,49.57225772269469,16340,157,,True,,raw-results/qwen3.6/results/ollama-retrieval-r3-metrics.json
+qwen3.6,ollama-v1,tool-t1,3.7818044379819185,1046.2817311993997,55.84289292605651,290,186,,True,,raw-results/qwen3.6/results/ollama-tool-t1-metrics.json
+qwen3.6,ollama-v1,tool-t2,2.746169989986811,1107.0682618290243,55.91838070310529,300,135,,True,,raw-results/qwen3.6/results/ollama-tool-t2-metrics.json
+qwen3.6,ollama-v1,tool-t3,2.5396524030074943,1147.7356659763357,55.88033793520788,317,123,,True,,raw-results/qwen3.6/results/ollama-tool-t3-metrics.json
+qwen3.6,strata-v1,dgx-16k,49.48782860400388,1818.6369958275382,32.18568244284629,16345,1301,0,,,raw-results/qwen3.6/results/strata-dgx-16k-r1-metrics.json
+qwen3.6,strata-v1,dgx-32k,174.3143617530004,1403.591743375654,10.486825883579671,32646,1583,0,,,raw-results/qwen3.6/results/strata-dgx-32k-r1-metrics.json
+qwen3.6,strata-v1,dgx-4k,25.681590015010443,2248.432036410057,68.74292660435093,4051,1640,0,,,raw-results/qwen3.6/results/strata-dgx-4k-r1-metrics.json
+qwen3.6,strata-v1,hermes-16k,79.14819437300321,,,,,,,,raw-results/qwen3.6/results/strata-hermes-performance-prompt-16k-r1-metrics.json
+qwen3.6,strata-v1,hermes-short,23.197287201008294,,,,,,,,raw-results/qwen3.6/results/strata-hermes-performance-short-r1-metrics.json
+qwen3.6,strata-v1,instructions-i1,3.608197121997364,217.27322107550245,89.61218006353774,40,299,0,True,,raw-results/qwen3.6/results/strata-instructions-i1-metrics.json
+qwen3.6,strata-v1,instructions-i2,10.894717552990187,265.0469353948095,85.12272093045033,48,909,0,True,,raw-results/qwen3.6/results/strata-instructions-i2-metrics.json
+qwen3.6,strata-v1,instructions-i3,4.163083266001195,241.98086662915026,85.8336498290923,43,339,0,True,,raw-results/qwen3.6/results/strata-instructions-i3-metrics.json
+qwen3.6,strata-v1,retrieval-r1,3.860743854980683,2252.3374888691005,70.35125012653103,4047,139,0,True,,raw-results/qwen3.6/results/strata-retrieval-r1-metrics.json
+qwen3.6,strata-v1,retrieval-r2,4.083095924986992,2256.4817396152775,76.46979443119967,4047,170,0,True,,raw-results/qwen3.6/results/strata-retrieval-r2-metrics.json
+qwen3.6,strata-v1,retrieval-r3,14.280082123994362,1883.725487935626,35.55555555555556,16340,196,0,True,,raw-results/qwen3.6/results/strata-retrieval-r3-metrics.json
+qwen3.6,strata-v1,tool-t1,1.9338520120072644,923.4234234234234,85.90621366748482,287,133,0,True,,raw-results/qwen3.6/results/strata-tool-t1-metrics.json
+qwen3.6,strata-v1,tool-t2,2.48429478800972,941.6613823715917,84.94684889901292,297,179,0,True,,raw-results/qwen3.6/results/strata-tool-t2-metrics.json
+qwen3.6,strata-v1,tool-t3,1.679787821980426,1001.914486279515,87.44582161052392,314,115,0,True,,raw-results/qwen3.6/results/strata-tool-t3-metrics.json
+qwen3.6,strata-v2,dgx-16k,49.409203766990686,1870.1372997711671,32.053019290940895,16345,1301,0,,,raw-results/qwen3.6/results-v2/strata-dgx-16k-r1-metrics.json
+qwen3.6,strata-v2,dgx-32k,174.32839631001116,1402.5244236701237,10.48383251299386,32646,1583,0,,,raw-results/qwen3.6/results-v2/strata-dgx-32k-r1-metrics.json
+qwen3.6,strata-v2,dgx-4k,26.054902795003727,2237.132759001546,67.85018348509985,4051,1640,0,,,raw-results/qwen3.6/results-v2/strata-dgx-4k-r1-metrics.json
+qwen3.6,strata-v2,hermes-16k,69.62757014401723,1215.3600714299782,11.739044962227236,30800,627,12288,,,raw-results/qwen3.6/results-v2/strata-hermes-performance-prompt-16k-r1-metrics.json
+qwen3.6,strata-v2,hermes-4k,29.320390774984844,1717.7652158577225,27.594683504645303,18506,458,0,,,raw-results/qwen3.6/results-v2/strata-hermes-performance-prompt-4k-r1-metrics.json
+qwen3.6,strata-v2,hermes-short,23.19379479601048,1798.547756469931,36.906097621215004,14490,523,0,,,raw-results/qwen3.6/results-v2/strata-hermes-performance-short-r1-metrics.json
+qwen3.6,strata-v2,instructions-i1,3.6006949779985007,227.66078542970973,88.2318224740321,40,299,0,True,,raw-results/qwen3.6/results-v2/strata-instructions-i1-metrics.json
+qwen3.6,strata-v2,instructions-i2,11.061150349007221,262.0087336244542,83.84912691750685,48,909,0,True,,raw-results/qwen3.6/results-v2/strata-instructions-i2-metrics.json
+qwen3.6,strata-v2,instructions-i3,4.1534848190203775,242.3900789177001,86.04497690238082,43,339,0,True,,raw-results/qwen3.6/results-v2/strata-instructions-i3-metrics.json
+qwen3.6,strata-v2,retrieval-r1,3.881483057019068,2244.7168450829217,69.5486840788552,4047,139,0,True,,raw-results/qwen3.6/results-v2/strata-retrieval-r1-metrics.json
+qwen3.6,strata-v2,retrieval-r2,4.153107088000979,2226.9300610796236,75.42481920227162,4047,170,0,True,,raw-results/qwen3.6/results-v2/strata-retrieval-r2-metrics.json
+qwen3.6,strata-v2,retrieval-r3,14.283120464999229,1882.1632206415943,35.39631228215917,16340,196,0,True,,raw-results/qwen3.6/results-v2/strata-retrieval-r3-metrics.json
+qwen3.6,strata-v2,tool-t1,1.9295101430034265,944.078947368421,84.54643697158477,287,133,0,True,,raw-results/qwen3.6/results-v2/strata-tool-t1-metrics.json
+qwen3.6,strata-v2,tool-t2,2.5215905999939423,947.0663265306122,83.71527452997849,297,179,0,True,,raw-results/qwen3.6/results-v2/strata-tool-t2-metrics.json
+qwen3.6,strata-v2,tool-t3,1.682375441014301,996.509044747699,86.31689559408542,314,115,0,True,,raw-results/qwen3.6/results-v2/strata-tool-t3-metrics.json
+qwen3.6,ollama-v1,hermes-4k,15.36,2334.33,50.26,18548,322,,,,raw-results/qwen3.6/results/ollama-hermes-4k-r1-direct.log; engine rates previously reported
+qwen3.6,strata-v1,hermes-4k,37.17,1661.5,27.31,18506,458,0,,,raw-results/qwen3.6/results/strata-hermes-4k-r1.log; engine rates previously reported
+flash-next,strata-dflash2,dgx-16k,27.950661718001356,2014.2,53.4,16387,1056,0,,90.85,raw-results/flash-next/strata/strata-dgx-16k-r1-metrics.json
+flash-next,strata-dflash2,dgx-32k,31.662204735010164,2085.5,51.9,32688,827,0,,90.32,raw-results/flash-next/strata/strata-dgx-32k-r1-metrics.json
+flash-next,strata-dflash2,dgx-4k,8.78941263500019,1719.8,61.5,4093,393,0,,90.95,raw-results/flash-next/strata/strata-dgx-4k-r1-metrics.json
+flash-next,strata-dflash2,hermes-16k,52.13392513600411,1963.62282103341,51.545050981480195,30839,1189,14494,,90.59,raw-results/flash-next/strata/strata-hermes-performance-prompt-16k-r1-metrics.json
+flash-next,strata-dflash2,hermes-4k,85.50359166198177,1888.3582636675592,49.976560407179214,18545,1194,0,,90.18,raw-results/flash-next/strata/strata-hermes-performance-prompt-4k-r1-metrics.json
+flash-next,strata-dflash2,hermes-short,28.941645139013417,83.77213977979895,50.75234642697522,14529,511,14494,,90.96,raw-results/flash-next/strata/strata-hermes-performance-short-r1-metrics.json
+flash-next,strata-dflash2,instructions-i1,1.1253087040095124,194.7,77.0,82,52,0,True,89.53,raw-results/flash-next/strata/strata-instructions-i1-metrics.json
+flash-next,strata-dflash2,instructions-i2,1.481121732009342,208.1,69.9,90,72,0,True,89.52,raw-results/flash-next/strata/strata-instructions-i2-metrics.json
+flash-next,strata-dflash2,instructions-i3,1.537134654005058,192.0,71.7,85,77,0,True,89.3,raw-results/flash-next/strata/strata-instructions-i3-metrics.json
+flash-next,strata-dflash2,retrieval-r1,3.552411109994864,1651.7,55.0,4089,58,0,True,90.01,raw-results/flash-next/strata/strata-retrieval-r1-metrics.json
+flash-next,strata-dflash2,retrieval-r2,3.681972708000103,1667.3,54.6,4089,66,0,True,89.71,raw-results/flash-next/strata/strata-retrieval-r2-metrics.json
+flash-next,strata-dflash2,retrieval-r3,9.173858382011531,2011.1,68.8,16382,69,0,True,89.64,raw-results/flash-next/strata/strata-retrieval-r3-metrics.json
+flash-next,strata-dflash2,tool-t1,1.3429019239847548,527.9,80.5,325,57,0,True,89.5,raw-results/flash-next/strata/strata-tool-t1-metrics.json
+flash-next,strata-dflash2,tool-t2,1.4455339179839939,544.6,79.0,335,64,0,True,89.5,raw-results/flash-next/strata/strata-tool-t2-metrics.json
+flash-next,strata-dflash2,tool-t3,2.133613405021606,556.3,77.7,352,115,0,True,89.51,raw-results/flash-next/strata/strata-tool-t3-metrics.json
+flash-next,ollama-0.40.18,dgx-4k,26.237398503988516,890.0239324381537,26.923624627952346,4093,581,42,,89,"user console metrics, transcribed; raw export pending"
+flash-next,ollama-0.40.18,dgx-16k,58.10988794598961,945.3146602312397,30.66305349178288,16387,1247,42,,90,"user console metrics, transcribed; raw export pending"
+flash-next,ollama-0.40.18,dgx-32k,88.32999024901073,892.1058063829261,30.044635024493466,32688,1547,42,,91,"user console metrics, transcribed; raw export pending"
+flash-next,ollama-0.40.18,retrieval-r1,6.732049161015311,960.3542420890859,31.657054086306307,4089,69,42,True,92,"user console metrics, transcribed; raw export pending"
+flash-next,ollama-0.40.18,retrieval-r2,6.21338161098538,962.2449052377793,31.718274060689744,4089,60,42,True,93,"user console metrics, transcribed; raw export pending"
+flash-next,ollama-0.40.18,retrieval-r3,19.86597541201627,947.5226689289689,29.45832595193773,16382,73,42,True,93,"user console metrics, transcribed; raw export pending"
+flash-next,ollama-0.40.18,tool-t1,3.203206504986156,480.6121905699284,29.282064953738708,334,67,0,True,94,"user console metrics, transcribed; raw export pending"
+flash-next,ollama-0.40.18,tool-t2,3.131753930996638,549.7543684696692,28.720609243207782,344,69,0,True,94,"user console metrics, transcribed; raw export pending"
+flash-next,ollama-0.40.18,tool-t3,3.321253476984566,562.0269087897273,29.416056444767676,361,76,0,True,95,"user console metrics, transcribed; raw export pending"
+flash-next,ollama-0.40.18,instructions-i1,2.4917739170196,230.50866515805305,29.498771621985043,82,60,0,True,95,"user console metrics, transcribed; raw export pending"
+flash-next,ollama-0.40.18,instructions-i2,2.8935121949762106,196.32463915122315,29.72798114933069,90,76,42,True,96,"user console metrics, transcribed; raw export pending"
+flash-next,ollama-0.40.18,instructions-i3,3.2326593610050622,180.65632864327097,30.977761409281626,85,90,42,True,96,"user console metrics, transcribed; raw export pending"
+flash-next,ollama-0.40.18,hermes-4k,67.16245310698287,877.55,30.52,18662,1366,0,,96,evidence/flash-next-ollama/hermes-4k.txt
+flash-next,ollama-0.40.18,hermes-16k,68.00238915500813,872.62,29.94,30956,1446,14611,,96,evidence/flash-next-ollama/hermes-16k.txt
+flash-next,ollama-0.40.18,hermes-short,22.158230563014513,146.94,30.98,14646,637,14611,,96,evidence/flash-next-ollama/hermes-short.txt
