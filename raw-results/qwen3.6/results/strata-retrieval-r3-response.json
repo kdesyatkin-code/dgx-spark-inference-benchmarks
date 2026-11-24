@@ -1,0 +1,41 @@
+{
+  "id": "chatcmpl-22dcbd7440f24bdfb197a5db",
+  "object": "chat.completion",
+  "created": 1795536960,
+  "model": "qwen3.6-35b-a3b-q8_0",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "DELTA-906",
+        "reasoning_content": "The user wants to find the value of `archive_code` from the provided text.\nI will scan the text for the string `archive_code = ` and extract the value following it.\nLooking through the text:\n...\nrecord000772: alpha beta gamma delta epsilon zeta eta theta.\narchive_code = DELTA-906\nrecord000773: alpha beta gamma delta epsilon zeta eta theta.\n...\nThe value is `DELTA-906`.\nI will reply only with its value as requested.\nCheck format: \"Reply only with its value.\"\nSo the output should be `DELTA-906`.\nDone. \nDouble check: The prompt says \"What is archive_code? Reply only with its value.\"\nValue found: DELTA-906.\nReady. \nOutput matches requirement.\u2705\n"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 16340,
+    "completion_tokens": 196,
+    "total_tokens": 16536,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 188
+    }
+  },
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 16340,
+    "prompt_ms": 8674.3,
+    "prompt_per_token_ms": 0.531,
+    "prompt_per_second": 1883.7,
+    "predicted_n": 196,
+    "predicted_ms": 5512.5,
+    "predicted_per_token_ms": 28.125,
+    "predicted_per_second": 35.6,
+    "draft_n": 148,
+    "draft_n_accepted": 121
+  }
+}
