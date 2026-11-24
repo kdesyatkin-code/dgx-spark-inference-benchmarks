@@ -1,0 +1,117 @@
+WALL SECONDS:", time.monotonic() - start)
+>> print(json.dumps(result, indent=2))
+>>
+>> if result.get("eval_duration"):
+>>     print("DECODE TPS:", result["eval_count"] * 1e9 / result["eval_duration"])
+>>
+>> subprocess.run(["docker", "exec", "open-webui", "ollama", "ps"], check=True)
+>> subprocess.run(["free", "-h"], check=True)
+>> subprocess.run(["docker", "logs", "--tail", "80", "open-webui"])
+>> '@ | ssh -o ConnectTimeout=10 -o ServerAliveInterval=15 -o ServerAliveCountMax=3 benchmark@[private-ip] 'python3 -u -'
+LOADING MODEL AND GENERATING...
+WALL SECONDS: 88.14618120598607
+{
+  "model": "qwen3.8-flash-next:ud-q2_k_xl",
+  "created_at": "2026-11-24T19:35:49.39965268Z",
+  "message": {
+    "role": "assistant",
+    "content": "A **hash table** is a data structure that stores data as **key\u2013value pairs** and lets you find a value quickly by its key.\n\nExample:\n\n```text\n\"alice\"   -> 42\n\"bob\"     -> 17\n\"carol\"   -> 5\n```\n\nThe goal is to store data so that, given a key like `\"alice\"`, you can find its value fast, usually in average **O(1)** time.\n\n---\n\n## 1. The basic idea: use a hash function\n\nA hash table usually contains a large array, and a **hash function** converts a key into an array index.\n\nFor example, suppose the array has 10 slots:\n\n```text\nIndex: 0  1  2  3  4  5  6  7  8  9\n```\n\nGiven a key like `\"apple\"`, the hash function might return:\n\n```text\nhash(\"apple\") = 5\n```\n\nSo `\"apple\"` and its value are stored at index `5`.\n\nSimilarly:\n\n```text\nhash(\"banana\") = 2\nhash(\"cherry\") = 2\n```\n\nThat means `\"banana\"` and `\"cherry\"` would both try to go to index `2`.\n\n---\n\n## 2. Inserting data\n\nTo insert a key\u2013value pair:\n\n1. Compute the hash of the key.\n2. Use that hash to find the array index.\n3. Store the key and value at that index.\n\nExample:\n\n```text\ninsert(\"apple\", 100)\n```\n\nSuppose:\n\n```text\nhash(\"apple\") = 5\n```\n\nThen we store:\n\n```text\nIndex 5: \"apple\" -> 100\n```\n\nNow to look up:\n\n```text\nget(\"apple\")\n```\n\nWe do the same:\n\n```text\nhash(\"apple\") = 5\n```\n\nThen inspect index `5` and find the value `100`.\n\n---\n\n## 3. Collision handling\n\nA **collision** happens when two different keys produce the same array index.\n\nFor example:\n\n```text\nhash(\"banana\") = 2\nhash(\"cherry\") = 2\n```\n\nBoth keys want to use index `2`.\n\nHash tables need a way to handle this.\n\n---\n\n## Common collision handling methods\n\n### Method 1: Chaining\n\nWith **chaining**, each array slot stores a linked list or similar container.\n\nThe array might look like this:\n\n```text\nIndex 0: \nIndex 1: \nIndex 2: \"banana\" -> \"cherry\"\nIndex 3: \nIndex 4: \nIndex 5: \"apple\"\n```\n\nWhen inserting `\"cherry\"`, we compute:\n\n```text\nhash(\"cherry\") = 2\n```\n\nIndex `2` already contains `\"banana\"`, so we add `\"cherry\"` to the list at index `2`.\n\nTo look up `\"cherry\"`:\n\n1. Compute:\n   ```text\n   hash(\"cherry\") = 2\n   ```\n2. Go to index `2`.\n3. Scan the list at that index.\n4. Compare keys:\n   ```text\n   compare \"banana\"\n   compare \"cherry\"  \u2705 found\n   ```\n\nChaining is simple and handles many collisions reasonably well.\n\n---\n\n### Method 2: Open addressing\n\nWith **open addressing**, if the desired slot is taken, the hash table tries nearby slots until it finds an empty one.\n\nFor example:\n\n```text\ninsert(\"banana\")\nhash(\"banana\") = 2\n```\n\nIndex 2 is empty, so store:\n\n```text\nIndex 2: \"banana\"\n```\n\nNow:\n\n```text\ninsert(\"cherry\")\nhash(\"cherry\") = 2\n```\n\nIndex 2 is occupied, so the hash table might check index 3:\n\n```text\nIndex 3: \"cherry\"\n```\n\nTo look up `\"cherry\"`:\n\n1. Compute:\n   ```text\n   hash(\"cherry\") = 2\n   ```\n2. Check index 2. It contains `\"banana\"`, not `\"cherry\"`.\n3. Probe the next slot, index 3.\n4. Found `\"cherry\"`.\n\nCommon probing strategies include:\n\n```text\nlinear probing:\n    try 2, then 3, then 4, ...\n\nquadratic probing:\n    try 2, then 4, then 7, ...\n\ndouble hashing:\n    use a second hash function to choose the next slot\n```\n\n---\n\n## 4. Practical example: phonebook hash table\n\nSuppose we want to store names and phone numbers:\n\n```text\n\"alice\" -> \"555-0101\"\n\"bob\"   -> \"555-0102\"\n\"carol\" -> \"555-0103\"\n```\n\nWe create an array with 5 slots:\n\n```text\nIndex: 0  1  2  3  4\n```\n\nAssume a simple hash function:\n\n```text\nhash(name) = first letter position modulo 5\n```\n\nSo:\n\n```text\nhash(\"alice\") = 1 % 5 = 1\nhash(\"bob\")   = 2 % 5 = 2\nhash(\"carol\") = 3 % 5 = 3\n```\n\nAfter insertion:\n\n```text\nIndex 0: \nIndex 1: \"alice\" -> \"555-0101\"\nIndex 2: \"bob\"   -> \"555-0102\"\nIndex 3: \"carol\" -> \"555-0103\"\nIndex 4: \n```\n\nTo look up `\"bob\"`:\n\n```text\nhash(\"bob\") = 2\ngo to index 2\nfind \"bob\" -> \"555-0102\"\n```\n\nNow suppose we add `\"david\"`:\n\n```text\nhash(\"david\") = 4 % 5 = 4\n```\n\nIt goes into index 4:\n\n```text\nIndex 4: \"david\" -> \"555-0104\"\n```\n\nNow add `\"eve\"`. If:\n\n```text\nhash(\"eve\") = 5 % 5 = 0\n```\n\nThen:\n\n```text\nIndex 0: \"eve\" -> \"555-0105\"\n```\n\nNow add `\"anna\"`. If:\n\n```text\nhash(\"anna\") = 1 % 5 = 1\n```\n\nIndex 1 already contains `\"alice\"`. That is a collision.\n\nUsing chaining:\n\n```text\nIndex 1: \"alice\" -> \"555-0101\"\n         \"anna\"  -> \"555-0106\"\n```\n\nTo find `\"anna\"`, we compute hash 1, inspect index 1, compare `\"alice\"`, then compare `\"anna\"`.\n\n---\n\n## 5. Deleting from a hash table\n\nDeletion depends on collision handling.\n\n### With chaining\n\nDeleting is simple:\n\n1. Compute the hash.\n2. Go to the bucket.\n3. Remove the key\u2013value pair from the list.\n\nExample:\n\n```text\ndelete(\"anna\")\n```\n\nCompute:\n\n```text\nhash(\"anna\") = 1\n```\n\nGo to index 1 and remove `\"anna\"` from the chain.\n\n---\n\n### With open addressing\n\nDeletion is trickier. You cannot simply remove a slot and make it empty, because future lookups may have been probing through that slot to find another key.\n\nSo open addressing often uses a special marker called `tombstone`:\n\n```text\nDELETED\n```\n\nThis tells the lookup logic:\n\n- Keep going, because another key might be farther along the probe path.\n- But you can reuse this slot for future insertion.\n\n---\n\n## 6. Load factor and resizing\n\nA hash table works best when it is not too full.\n\nThe **load factor** is:\n\n```text\nload factor = number of stored items / number of array slots\n```\n\nFor example:\n\n```text\nitems = 8\nslots = 10\nload factor = 0.8\n```\n\nIf the hash table gets too full, collisions increase.\n\nTo fix this, the hash table may **resize**:\n\n1. Create a bigger array.\n2. Rehash all existing keys into the new array.\n\nExample:\n\n```text\nold array size = 10\nnew array size = 20\n```\n\nA key that hashed to index 5 may now hash somewhere else in the larger array.\n\nResizing costs more than a single operation, but it keeps future operations fast.\n\n---\n\n## 7. Time complexity\n\nFor a well-designed hash table:\n\n```text\nInsert: average O(1)\nLookup: average O(1)\nDelete: average O(1)\n```\n\nBut in the worst case, if many keys hash to the same slot, performance can degrade.\n\nFor example, with chaining, if all keys hash to one bucket, operations become:\n\n```text\nO(n)\n```\n\nbecause the table ends up scanning a long linked list.\n\nThat is why good hash functions and resizing are important.\n\n---\n\n## 8. Good hash function requirements\n\nA good hash function should:\n\n1. Distribute keys evenly across array indices.\n2. Be deterministic: the same key always produces the same hash.\n3. Be fast to compute.\n4. Minimize collisions.\n\nFor example, this is a poor hash function for strings:\n\n```text\nhash(name) = length of name\n```\n\nBecause many names have the same length:\n\n```text\n\"alice\", \"bob\", \"carol\", \"david\"\n```\n\nAll of these may collide depending on the table size.\n\nA better string hash might combine character codes, for example:\n\n```text\nhash = 0\nfor each character c in string:\n    hash = hash * 31 + c\n```\n\nMany real hash functions are more complex, but the idea is similar.\n\n---\n\n## 9. Full mini example with chaining\n\nSuppose we have a hash table with size 7 using chaining.\n\nInsert:\n\n```text\n\"apple\"\n\"banana\"\n\"grape\"\n\"cherry\"\n```\n\nAssume the hash values are:\n\n```text\nhash(\"apple\")  = 0\nhash(\"banana\") = 0\nhash(\"grape\")  = 0\nhash(\"cherry\") = 1\n```\n\nAfter inserting:\n\n```text\nIndex 0: \"apple\" -> \"banana\" -> \"grape\"\nIndex 1: \"cherry\"\nIndex 2:\nIndex 3:\nIndex 4:\nIndex 5:\nIndex 6:\n```\n\nLookup `\"grape\"`:\n\n1. Compute:\n   ```text\n   hash(\"grape\") = 0\n   ```\n2. Go to index 0.\n3. Check chain:\n   ```text\n   \"apple\" -> no\n   \"banana\" -> no\n   \"grape\" -> yes\n   ```\n\nSo the hash table finds `\"grape\"` by checking three items.\n\nIf there were thousands of items all hashed to index 0, lookup would be slow. A better hash function or resizing would help.\n\n---\n\n## 10. Summary\n\nA hash table works by:\n\n1. Taking a key.\n2. Using a hash function to compute an index.\n3. Storing the value at that index.\n4. Using the same hash function to retrieve the value later.\n\nWhen two keys produce the same index, that is a **collision**.\n\nCommon collision handling methods:\n\n```text\nChaining:\n    store multiple entries in each bucket, usually as a linked list\n\nOpen addressing:\n    store only one entry per slot, and search nearby slots if occupied\n```\n\nWith a good hash function and a controlled load factor, hash tables provide very fast average-case lookup, insertion, and deletion.",
+    "thinking": "We need answer user's request: explain hash table works including collision handling with practical example. We did. Now produce final. Need clear, maybe cover hashing, array buckets, insert/lookup/delete, collisions chaining/open addressing, example maybe phonebook or employee IDs. Include rehashing/load factor, complexity. Keep accessible. Ensure not overly long but thorough."
+  },
+  "done": true,
+  "done_reason": "stop",
+  "total_duration": 88087175891,
+  "load_duration": 562449,
+  "prompt_eval_count": 69,
+  "prompt_eval_cached_count": 65,
+  "prompt_eval_duration": 85681000,
+  "eval_count": 2741,
+  "eval_duration": 87948517000
+}
+DECODE TPS: 31.165960422050095
+NAME                             ID              SIZE     PROCESSOR    CONTEXT    RUNNER      UNTIL
+qwen3.8-flash-next:ud-q2_k_xl    93574c8a7fa1    52 GB    100% GPU     262144     llamacpp    Forever
+               всего        занят        своб      общая  буф/врем.   доступно
+Память:        121Gi        89Gi       1,3Gi       462Mi        32Gi        32Gi
+Подкачка:       15Gi       187Mi        15Gi
+[GIN] 2026/11/24 - 19:33:04 | 200 |    3m10s |       127.0.0.1 | POST     "/api/chat"
+[GIN] 2026/11/24 - 19:33:04 | 200 | 16.704µs |       127.0.0.1 | HEAD     "/"
+[GIN] 2026/11/24 - 19:33:04 | 200 | 80.448µs |       127.0.0.1 | GET      "/api/ps"
+slot print_timing: id  0 | task 0 | n_gen =   1994, tg =  29.23 t/s, tg_3s =  31.00 t/s
+slot print_timing: id  0 | task 0 | n_gen =   2088, tg =  29.31 t/s, tg_3s =  31.19 t/s
+slot print_timing: id  0 | task 0 | n_gen =   2182, tg =  29.39 t/s, tg_3s =  31.20 t/s
+slot print_timing: id  0 | task 0 | n_gen =   2275, tg =  29.45 t/s, tg_3s =  30.98 t/s
+slot print_timing: id  0 | task 0 | n_gen =   2369, tg =  29.51 t/s, tg_3s =  31.15 t/s
+slot print_timing: id  0 | task 0 | n_gen =   2463, tg =  29.58 t/s, tg_3s =  31.24 t/s
+slot print_timing: id  0 | task 0 | prompt eval time =   54400.39 ms /    69 tokens (  788.41 ms per token,     1.27 tokens per second)
+slot print_timing: id  0 | task 0 |        eval time =   85818.47 ms /  2543 tokens (   33.76 ms per token,    29.62 tokens per second)
+slot print_timing: id  0 | task 0 |       total time =  140218.86 ms /  2612 tokens
+slot print_timing: id  0 | task 0 |    graphs reused =       2522
+slot print_timing: id  0 | task 0 |   graph reallocs =          0    /     0        (same size) / (changed size)
+slot      release: id  0 | task 0 | stop processing: n_tokens = 2611, truncated = 0
+srv  update_slots: all slots are idle
+srv  server_strea: conv_id= (empty=1)
+slot       select: id  0 | task -1 |  - checking sim = 1.000 (69/69) > 0.100
+[GIN] 2026/11/24 - 19:35:49 | 200 |    1m20s |       127.0.0.1 | POST     "/api/chat"
+[GIN] 2026/11/24 - 19:35:49 | 200 | 18.576µs |       127.0.0.1 | HEAD     "/"
+[GIN] 2026/11/24 - 19:35:49 | 200 | 16.912µs |       127.0.0.1 | GET      "/api/ps"
+slot       select: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 1.000 (> 0.100 thold), f_keep = 0.026
+srv  update_promp: updating prompt cache
+srv   prompt_save:  - saving prompt with length 2611, total state size = 189.185 MiB (draft: 0.000 MiB)
+slot  prompt_save: id  0 | task -1 | prompt cache save took 50.05 ms
+srv          load:  - looking for better prompt, base f_keep = 0.026, f_sim = 1.000
+srv          load:    - prompt with length    2611, lcp =      69, f_keep = 0.026, f_sim = 1.000
+srv        update:  - cache state: 1 prompts, 414.328 MiB (limits: 8192.000 MiB, 262144 tokens, 262144 est)
+srv        update:    - prompt 0x5812af90:    2611 tokens, checkpoints:  2,   414.328 MiB
+srv  update_promp: prompt cache update took 50.06 ms
+slot launch_slot_: id  0 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> ?min-p -> ?xtc -> ?temp-ext -> dist
+slot launch_slot_: id  0 | task -1 | sampler params:
+        repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
+        dry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = 64
+        top_k = 20, top_p = 0.950, min_p = 0.000, xtc_probability = 0.000, xtc_threshold = 0.100, typical_p = 1.000, top_n_sigma = -1.000, temp = 1.000
+        mirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000, adaptive_target = -1.000, adaptive_decay = 0.900
+slot launch_slot_: id  0 | task 2546 | processing task, is_child = 0
+slot   operator(): id  0 | task 2546 | new prompt, n_ctx_slot = 262144, n_keep = 4, task.n_tokens = 69
+srv    operator(): checking checkpoint with [64, 64] against 68...
+slot   operator(): id  0 | task 2546 | restored context checkpoint (pos_min = 64, pos_max = 64, n_tokens = 65, n_past = 65, size = 112.571 MiB)
+slot   operator(): id  0 | task 2546 | cached n_tokens = 65, memory_seq_rm [65, end)
+slot init_sampler: id  0 | task 2546 | init sampler, took 0.01 ms, tokens: text = 69, total = 69
+slot create_check: id  0 | task 2546 | superseding context checkpoint at n_tokens = 65
+slot create_check: id  0 | task 2546 | created context checkpoint 2 of 32 (pos_min = 64, pos_max = 64, n_tokens = 65, size = 112.571 MiB)
+slot print_timing: id  0 | task 2546 | n_gen =    100, tg =  28.85 t/s, tg_3s =  29.14 t/s
+slot print_timing: id  0 | task 2546 | n_gen =    196, tg =  30.23 t/s, tg_3s =  31.79 t/s
+slot print_timing: id  0 | task 2546 | n_gen =    292, tg =  30.71 t/s, tg_3s =  31.75 t/s
+slot print_timing: id  0 | task 2546 | n_gen =    388, tg =  30.95 t/s, tg_3s =  31.69 t/s
+slot print_timing: id  0 | task 2546 | n_gen =    483, tg =  31.08 t/s, tg_3s =  31.63 t/s
+slot print_timing: id  0 | task 2546 | n_gen =    578, tg =  31.16 t/s, tg_3s =  31.57 t/s
+slot print_timing: id  0 | task 2546 | n_gen =    673, tg =  31.22 t/s, tg_3s =  31.56 t/s
+slot print_timing: id  0 | task 2546 | n_gen =    767, tg =  31.22 t/s, tg_3s =  31.23 t/s
+slot print_timing: id  0 | task 2546 | n_gen =    862, tg =  31.25 t/s, tg_3s =  31.51 t/s
+slot print_timing: id  0 | task 2546 | n_gen =    957, tg =  31.26 t/s, tg_3s =  31.34 t/s
+slot print_timing: id  0 | task 2546 | n_gen =   1051, tg =  31.26 t/s, tg_3s =  31.25 t/s
+slot print_timing: id  0 | task 2546 | n_gen =   1143, tg =  31.21 t/s, tg_3s =  30.63 t/s
+slot print_timing: id  0 | task 2546 | n_gen =   1237, tg =  31.21 t/s, tg_3s =  31.30 t/s
+slot print_timing: id  0 | task 2546 | n_gen =   1331, tg =  31.21 t/s, tg_3s =  31.21 t/s
+slot print_timing: id  0 | task 2546 | n_gen =   1425, tg =  31.22 t/s, tg_3s =  31.26 t/s
+slot print_timing: id  0 | task 2546 | n_gen =   1519, tg =  31.21 t/s, tg_3s =  31.14 t/s
+slot print_timing: id  0 | task 2546 | n_gen =   1613, tg =  31.21 t/s, tg_3s =  31.23 t/s
+slot print_timing: id  0 | task 2546 | n_gen =   1707, tg =  31.22 t/s, tg_3s =  31.26 t/s
+slot print_timing: id  0 | task 2546 | n_gen =   1801, tg =  31.21 t/s, tg_3s =  31.15 t/s
+slot print_timing: id  0 | task 2546 | n_gen =   1895, tg =  31.21 t/s, tg_3s =  31.21 t/s
+slot print_timing: id  0 | task 2546 | n_gen =   1990, tg =  31.22 t/s, tg_3s =  31.33 t/s
+slot print_timing: id  0 | task 2546 | n_gen =   2084, tg =  31.22 t/s, tg_3s =  31.21 t/s
+slot print_timing: id  0 | task 2546 | n_gen =   2174, tg =  31.16 t/s, tg_3s =  29.85 t/s
+slot print_timing: id  0 | task 2546 | n_gen =   2268, tg =  31.15 t/s, tg_3s =  31.06 t/s
+slot print_timing: id  0 | task 2546 | n_gen =   2362, tg =  31.16 t/s, tg_3s =  31.22 t/s
+slot print_timing: id  0 | task 2546 | n_gen =   2457, tg =  31.17 t/s, tg_3s =  31.38 t/s
+slot print_timing: id  0 | task 2546 | n_gen =   2551, tg =  31.17 t/s, tg_3s =  31.29 t/s
+slot print_timing: id  0 | task 2546 | n_gen =   2645, tg =  31.17 t/s, tg_3s =  31.25 t/s
+slot print_timing: id  0 | task 2546 | n_gen =   2737, tg =  31.16 t/s, tg_3s =  30.65 t/s
+slot print_timing: id  0 | task 2546 | prompt eval time =      85.68 ms /     4 tokens (   21.42 ms per token,    46.68 tokens per second)
+slot print_timing: id  0 | task 2546 |        eval time =   87948.52 ms /  2741 tokens (   32.10 ms per token,    31.15 tokens per second)
+slot print_timing: id  0 | task 2546 |       total time =   88034.20 ms /  2745 tokens
+slot print_timing: id  0 | task 2546 |    graphs reused =       5241
+slot print_timing: id  0 | task 2546 |   graph reallocs =          0    /     0        (same size) / (changed size)
+slot      release: id  0 | task 2546 | stop processing: n_tokens = 2809, truncated = 0
+srv  update_slots: all slots are idle
+PS C:\Users\benchmark-user>

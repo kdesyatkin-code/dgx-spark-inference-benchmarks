@@ -1,0 +1,206 @@
+TEST: HERMES PERFORMANCE 16K", flush=True)
+>> start = time.monotonic()
+>>
+>> with (out / (name + ".log")).open("w", encoding="utf-8") as log:
+>>     process = subprocess.Popen(
+>>         [hermes, "-z", prompt],
+>>         stdout=subprocess.PIPE,
+>>         stderr=subprocess.STDOUT,
+>>         text=True,
+>>         env=env
+>>     )
+>>     for line in process.stdout:
+>>         print(line, end="", flush=True)
+>>         log.write(line)
+>>         log.flush()
+>>     code = process.wait()
+>>
+>> wall = time.monotonic() - start
+>>
+>> metrics = {
+>>     "test": "Hermes Performance 16K",
+>>     "engine": "Ollama 0.40.18",
+>>     "model": "qwen3.8-flash-next:ud-q2_k_xl",
+>>     "source_sha256": digest,
+>>     "wall_s": wall,
+>>     "exit_code": code
+>> }
+>>
+>> (out / (name + "-metrics.json")).write_text(
+>>     json.dumps(metrics, indent=2), encoding="utf-8"
+>> )
+>>
+>> logs = subprocess.check_output([
+>>     "docker", "logs", "--since", since, "open-webui"
+>> ], stderr=subprocess.STDOUT, text=True)
+>>
+>> ps = subprocess.check_output([
+>>     "docker", "exec", "open-webui", "curl", "-fsS",
+>>     "http://127.0.0.1:11434/api/ps"
+>> ], text=True)
+>>
+>> (out / (name + "-server.json")).write_text(
+>>     json.dumps({
+>>         "models": json.loads(ps),
+>>         "memory": subprocess.check_output(["free", "-h"], text=True),
+>>         "logs": logs
+>>     }, indent=2, ensure_ascii=False), encoding="utf-8"
+>> )
+>>
+>> print(json.dumps(metrics, indent=2))
+>> print(logs)
+>> subprocess.run(["free", "-h"], check=True)
+>> print("RESULTS SAVED:", out)
+>> '@ | ssh -o ConnectTimeout=10 -o ServerAliveInterval=15 -o ServerAliveCountMax=3 benchmark@[private-ip] 'python3 -u -'
+TEST: HERMES PERFORMANCE 16K
+Structure
+
+Each line is one record, and every record has the same shape:
+
+    record000137: alpha beta gamma delta epsilon zeta eta theta.
+
+Three parts:
+
+1. Key — literal `record` + a fixed-width, zero-padded 6-digit number. The numbers increase by exactly 1 per line, from `000001` up to `000858` in the visible block; no gaps, duplicates, or out-of-order entries.
+2. Separator — a colon and a single space.
+3. Payload — a constant 8-token sequence in fixed order (`alpha` through `theta`), terminated by a period.
+
+So there are no fields, no nested structure, no timestamps or metadata, and nothing that varies between records except the ID. The payload is decorative filler; the ID is the entire content of the dataset. Effectively a dense integer-keyed store where every value happens to be identical.
+
+How to look up a record by ID
+
+Because the keys are dense, gap-free, and start at 1, lookup is direct addressing — no search needed. Take the digits of the ID as an integer N, then read line N (1-based), i.e. offset N-1. For `record000137`, that is line 137.
+
+By position:
+  sed -n '137p' file            # or: awk 'NR==137' file
+  python: lines[136]            # after readlines(), since lines are 1-indexed on screen
+
+By key (safer, and the form you want in real use):
+  grep -n '^record000137: ' file
+
+The anchor matters: `record` + a constant 6 digits means an ID is never a prefix of another ID, so an anchored prefix match returns exactly one line — it behaves like a hash lookup, not a substring scan.
+
+In code, either build `key = f"record{N:06d}"` and index a list at `N-1`, or parse the file once into `{key_before_colon: payload_after_colon}` and treat it as a dict.
+
+Two properties worth noting. The zero-padding makes string comparison order equal numeric order, so sorting by key string needs no numeric parsing. And positional addressing is only valid while the numbering stays gap-free — if an ID is ever deleted or the sequence stops starting at 1, position no longer equals ID, and you must fall back to the anchored key match or a dict.
+{
+  "test": "Hermes Performance 16K",
+  "engine": "Ollama 0.40.18",
+  "model": "qwen3.8-flash-next:ud-q2_k_xl",
+  "source_sha256": "06776ef38485dc4bb7e18809534fe16a57d421d163f81d4d1532c4b08225968e",
+  "wall_s": 68.00238915500813,
+  "exit_code": 0
+}
+[GIN] 2026/11/24 - 19:56:19 | 404 | 17.152µs |      [private-ip] | GET      "/api/v1/models"
+[GIN] 2026/11/24 - 19:56:19 | 404 | 18.368µs |      [private-ip] | GET      "/api/v1/models"
+srv  server_strea: conv_id= (empty=1)
+slot       select: id  0 | task -1 |  - checking sim = 0.472 (14620/30956) > 0.100
+slot       select: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.472 (> 0.100 thold), f_keep = 0.730
+slot launch_slot_: id  0 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> ?min-p -> ?xtc -> ?temp-ext -> dist
+slot launch_slot_: id  0 | task -1 | sampler params:
+        repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
+        dry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = 64
+        top_k = 20, top_p = 0.950, min_p = 0.000, xtc_probability = 0.000, xtc_threshold = 0.100, typical_p = 1.000, top_n_sigma = -1.000, temp = 1.000
+        mirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000, adaptive_target = -1.000, adaptive_decay = 0.900
+slot launch_slot_: id  0 | task 10881 | processing task, is_child = 0
+slot   operator(): id  0 | task 10881 | new prompt, n_ctx_slot = 262144, n_keep = 4, task.n_tokens = 30956
+srv    operator(): checking checkpoint with [18657, 18657] against 14620...
+srv    operator(): checking checkpoint with [18149, 18149] against 14620...
+srv    operator(): checking checkpoint with [14610, 14610] against 14620...
+slot   operator(): id  0 | task 10881 | restored context checkpoint (pos_min = 14610, pos_max = 14610, n_tokens = 14611, n_past = 14611, size = 112.571 MiB)
+slot   operator(): id  0 | task 10881 | erased invalidated context checkpoint (pos_min = 18149, pos_max = 18149, n_tokens = 18150, n_swa = 0, pos_next = 14611, size = 112.571 MiB)
+slot   operator(): id  0 | task 10881 | erased invalidated context checkpoint (pos_min = 18657, pos_max = 18657, n_tokens = 18658, n_swa = 0, pos_next = 14611, size = 112.571 MiB)
+slot   operator(): id  0 | task 10881 | cached n_tokens = 14611, memory_seq_rm [14611, end)
+slot create_check: id  0 | task 10881 | superseding context checkpoint at n_tokens = 14611
+slot create_check: id  0 | task 10881 | created context checkpoint 1 of 32 (pos_min = 14610, pos_max = 14610, n_tokens = 14611, size = 112.571 MiB)
+slot   operator(): id  0 | task 10881 | cached n_tokens = 15123, memory_seq_rm [15123, end)
+slot   operator(): id  0 | task 10881 | cached n_tokens = 15635, memory_seq_rm [15635, end)
+slot   operator(): id  0 | task 10881 | cached n_tokens = 16147, memory_seq_rm [16147, end)
+slot   operator(): id  0 | task 10881 | cached n_tokens = 16659, memory_seq_rm [16659, end)
+slot   operator(): id  0 | task 10881 | cached n_tokens = 17171, memory_seq_rm [17171, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =   3072, progress = 0.57, t =   3.25 s / 944.96 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 17683, memory_seq_rm [17683, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =   3584, progress = 0.59, t =   3.81 s / 940.78 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 18195, memory_seq_rm [18195, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =   4096, progress = 0.60, t =   4.38 s / 935.11 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 18707, memory_seq_rm [18707, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =   4608, progress = 0.62, t =   4.94 s / 933.22 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 19219, memory_seq_rm [19219, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =   5120, progress = 0.64, t =   5.50 s / 930.38 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 19731, memory_seq_rm [19731, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =   5632, progress = 0.65, t =   6.07 s / 928.16 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 20243, memory_seq_rm [20243, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =   6144, progress = 0.67, t =   6.65 s / 924.56 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 20755, memory_seq_rm [20755, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =   6656, progress = 0.69, t =   7.21 s / 922.72 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 21267, memory_seq_rm [21267, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =   7168, progress = 0.70, t =   7.79 s / 920.44 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 21779, memory_seq_rm [21779, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =   7680, progress = 0.72, t =   8.37 s / 917.33 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 22291, memory_seq_rm [22291, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =   8192, progress = 0.74, t =   8.95 s / 915.52 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 22803, memory_seq_rm [22803, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =   8704, progress = 0.75, t =   9.53 s / 913.50 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 23315, memory_seq_rm [23315, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =   9216, progress = 0.77, t =  10.11 s / 911.87 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 23827, memory_seq_rm [23827, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =   9728, progress = 0.79, t =  10.70 s / 909.18 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 24339, memory_seq_rm [24339, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =  10240, progress = 0.80, t =  11.28 s / 907.51 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 24851, memory_seq_rm [24851, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =  10752, progress = 0.82, t =  11.87 s / 905.62 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 25363, memory_seq_rm [25363, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =  11264, progress = 0.84, t =  12.46 s / 904.22 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 25875, memory_seq_rm [25875, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =  11776, progress = 0.85, t =  13.06 s / 901.93 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 26387, memory_seq_rm [26387, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =  12288, progress = 0.87, t =  13.65 s / 900.39 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 26899, memory_seq_rm [26899, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =  12800, progress = 0.89, t =  14.24 s / 898.92 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 27411, memory_seq_rm [27411, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =  13312, progress = 0.90, t =  14.84 s / 897.32 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 27923, memory_seq_rm [27923, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =  13824, progress = 0.92, t =  15.44 s / 895.35 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 28435, memory_seq_rm [28435, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =  14336, progress = 0.94, t =  16.04 s / 893.73 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 28947, memory_seq_rm [28947, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =  14848, progress = 0.95, t =  16.64 s / 892.15 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 29459, memory_seq_rm [29459, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =  15360, progress = 0.97, t =  17.26 s / 889.80 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 29971, memory_seq_rm [29971, end)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =  15833, progress = 0.98, t =  17.85 s / 887.21 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 30444, memory_seq_rm [30444, end)
+slot create_check: id  0 | task 10881 | created context checkpoint 2 of 32 (pos_min = 30443, pos_max = 30443, n_tokens = 30444, size = 112.571 MiB)
+slot print_timing: id  0 | task 10881 | prompt processing, n_tokens =  16341, progress = 1.00, t =  18.50 s / 883.42 tokens per second
+slot   operator(): id  0 | task 10881 | cached n_tokens = 30952, memory_seq_rm [30952, end)
+slot init_sampler: id  0 | task 10881 | init sampler, took 3.36 ms, tokens: text = 30956, total = 30956
+slot create_check: id  0 | task 10881 | created context checkpoint 3 of 32 (pos_min = 30951, pos_max = 30951, n_tokens = 30952, size = 112.571 MiB)
+slot print_timing: id  0 | task 10881 | n_gen =    100, tg =  29.67 t/s, tg_3s =  29.97 t/s
+slot print_timing: id  0 | task 10881 | n_gen =    189, tg =  29.65 t/s, tg_3s =  29.62 t/s
+slot print_timing: id  0 | task 10881 | n_gen =    279, tg =  29.67 t/s, tg_3s =  29.73 t/s
+slot print_timing: id  0 | task 10881 | n_gen =    369, tg =  29.70 t/s, tg_3s =  29.79 t/s
+slot print_timing: id  0 | task 10881 | n_gen =    459, tg =  29.76 t/s, tg_3s =  29.98 t/s
+slot print_timing: id  0 | task 10881 | n_gen =    549, tg =  29.80 t/s, tg_3s =  29.99 t/s
+slot print_timing: id  0 | task 10881 | n_gen =    640, tg =  29.84 t/s, tg_3s =  30.09 t/s
+slot print_timing: id  0 | task 10881 | n_gen =    730, tg =  29.85 t/s, tg_3s =  29.94 t/s
+slot print_timing: id  0 | task 10881 | n_gen =    820, tg =  29.87 t/s, tg_3s =  29.99 t/s
+slot print_timing: id  0 | task 10881 | n_gen =    910, tg =  29.88 t/s, tg_3s =  29.98 t/s
+slot print_timing: id  0 | task 10881 | n_gen =   1000, tg =  29.89 t/s, tg_3s =  29.97 t/s
+slot print_timing: id  0 | task 10881 | n_gen =   1090, tg =  29.89 t/s, tg_3s =  29.89 t/s
+slot print_timing: id  0 | task 10881 | n_gen =   1180, tg =  29.87 t/s, tg_3s =  29.71 t/s
+slot print_timing: id  0 | task 10881 | n_gen =   1271, tg =  29.88 t/s, tg_3s =  30.03 t/s
+slot print_timing: id  0 | task 10881 | n_gen =   1363, tg =  29.92 t/s, tg_3s =  30.37 t/s
+slot print_timing: id  0 | task 10881 | prompt eval time =   18730.99 ms / 16345 tokens (    1.15 ms per token,   872.62 tokens per second)
+slot print_timing: id  0 | task 10881 |        eval time =   48255.78 ms /  1446 tokens (   33.40 ms per token,    29.94 tokens per second)
+slot print_timing: id  0 | task 10881 |       total time =   66986.77 ms / 17791 tokens
+slot print_timing: id  0 | task 10881 |    graphs reused =      11984
+slot print_timing: id  0 | task 10881 |   graph reallocs =          0    /     0        (same size) / (changed size)
+slot      release: id  0 | task 10881 | stop processing: n_tokens = 32401, truncated = 0
+srv  update_slots: all slots are idle
+[GIN] 2026/11/24 - 19:57:26 | 200 |     1m0s |      [private-ip] | POST     "/v1/chat/completions"
+
+               всего        занят        своб      общая  буф/врем.   доступно
+Память:        121Gi        96Gi       1,0Gi       462Mi        25Gi        24Gi
+Подкачка:       15Gi       177Mi        15Gi
+RESULTS SAVED: /home/benchmark/strata-experiment/results-flash-next-ollama
+PS C:\Users\benchmark-user>

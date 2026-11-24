@@ -1,0 +1,117 @@
+WALL SECONDS:", time.monotonic() - start)
+>> print(json.dumps(result, indent=2))
+>>
+>> if result.get("eval_duration"):
+>>     print("DECODE TPS:", result["eval_count"] * 1e9 / result["eval_duration"])
+>>
+>> subprocess.run(["docker", "exec", "open-webui", "ollama", "ps"], check=True)
+>> subprocess.run(["free", "-h"], check=True)
+>> subprocess.run(["docker", "logs", "--tail", "80", "open-webui"])
+>> '@ | ssh -o ConnectTimeout=10 -o ServerAliveInterval=15 -o ServerAliveCountMax=3 benchmark@[private-ip] 'python3 -u -'
+LOADING MODEL AND GENERATING...
+WALL SECONDS: 196.01829927699873
+{
+  "model": "qwen3.8-flash-next:ud-q2_k_xl",
+  "created_at": "2026-11-24T19:33:04.673981487Z",
+  "message": {
+    "role": "assistant",
+    "content": "A **hash table** is a data structure that stores key-value pairs so they can be looked up, inserted, and deleted very quickly \u2014 usually in **average O(1)** time.\n\nIt works by converting a key into a table index using a **hash function**.\n\n---\n\n## 1. Basic Idea\n\nA hash table has:\n\n- An **array** of buckets/slots\n- A **hash function**\n- Some strategy for handling **collisions**\n\nExample:\n\n```text\nKey -> Hash function -> Index -> Bucket -> Value\n```\n\nSuppose we store:\n\n```text\n\"Alice\": \"alice@example.com\"\n\"Bob\": \"bob@example.com\"\n```\n\nThe hash table might hash `\"Alice\"` to index `2` and `\"Bob\"` to index `5`.\n\n---\n\n## 2. Hash Function\n\nA hash function takes an input key and returns an integer.\n\nFor example, with a small table of size 7:\n\n```python\nindex = hash(\"Alice\") % 7\n```\n\nAssume:\n\n```python\nhash(\"Alice\") = 27\nhash(\"Bob\") = 21\n```\n\nThen:\n\n```text\n\"Alice\" -> 27 % 7 = 6\n\"Bob\" -> 21 % 7 = 0\n```\n\nSo the table might look like:\n\n| Index | Entry |\n|---|---|\n| 0 | Bob |\n| 1 | empty |\n| 2 | empty |\n| 3 | empty |\n| 4 | empty |\n| 5 | empty |\n| 6 | Alice |\n\nTo find Bob:\n\n```text\nhash(\"Bob\") % 7 = 0\n```\n\nLook at index `0`.\n\n---\n\n## 3. What Is a Collision?\n\nA **collision** happens when two different keys produce the same table index.\n\nFor example:\n\n```text\nhash(\"Carol\") % 7 = 0\n```\n\nBut index `0` already contains Bob.\n\nSo:\n\n```text\n\"Bob\" and \"Carol\" both map to index 0.\n```\n\nThat is a collision.\n\n---\n\n## 4. Collision Handling\n\nHash tables need a way to store multiple keys that hash to the same bucket.\n\nTwo common approaches are:\n\n1. **Separate chaining**\n2. **Open addressing**\n\n---\n\n# Collision Handling Method 1: Separate Chaining\n\nIn separate chaining, each bucket holds a small list or linked list of entries.\n\nStructure:\n\n```text\nBucket 0: Bob -> Carol -> Dave\nBucket 1: empty\nBucket 2: Alice\nBucket 3: empty\n...\n```\n\nTo insert Bob:\n\n```text\nBob hashes to 0\nBucket 0 is empty\nAdd Bob to bucket 0\n```\n\nTo insert Carol:\n\n```text\nCarol hashes to 0\nBucket 0 already has Bob\nAdd Carol to the list in bucket 0\n```\n\nNow bucket 0 is:\n\n```text\nBucket 0: Bob -> Carol\n```\n\nTo look up Carol:\n\n```text\nCarol hashes to 0\nGo to bucket 0\nSearch the list for Carol\n```\n\nIf the list is short, lookup remains fast.\n\nBut if many keys collide, the list gets long, and lookup becomes slower.\n\n---\n\n# Collision Handling Method 2: Open Addressing\n\nIn open addressing, all keys are stored directly in the table array.\n\nIf a bucket is already occupied, the table searches for another empty slot according to a probing strategy.\n\nCommon probing strategies:\n\n### Linear Probing\n\nTry next bucket:\n\n```text\nindex + 1, index + 2, index + 3, ...\n```\n\nExample table size 7:\n\n```text\n0: Bob\n1: empty\n2: empty\n3: empty\n4: empty\n5: empty\n6: Alice\n```\n\nInsert Carol, which hashes to 0:\n\n```text\nIndex 0 is occupied\nTry index 1\nIndex 1 is empty\nStore Carol at index 1\n```\n\nResult:\n\n| Index | Entry |\n|---|---|\n| 0 | Bob |\n| 1 | Carol |\n| 2 | empty |\n| 3 | empty |\n| 4 | empty |\n| 5 | empty |\n| 6 | Alice |\n\nLinear probing can cause **clustering**, where occupied blocks of slots make future insertions cluster together.\n\n---\n\n### Quadratic Probing\n\nInstead of checking `index + 1`, `index + 2`, `index + 3`, it checks:\n\n```text\nindex + 1\u00b2\nindex + 2\u00b2\nindex + 3\u00b2\n...\n```\n\nFor index 0:\n\n```text\n0 + 1 = 1\n0 + 4 = 4\n0 + 9 = 2\n0 + 16 = 2\n...\n```\n\nThis reduces some clustering compared with linear probing.\n\n---\n\n### Double Hashing\n\nUse a second hash function to determine the probe step:\n\n```text\nindex,\nindex + step,\nindex + 2*step,\nindex + 3*step,\n...\n```\n\nwhere:\n\n```text\nstep = second_hash(key)\n```\n\nDouble hashing usually provides good distribution and fewer collisions.\n\n---\n\n## 5. Load Factor\n\nThe **load factor** measures how full the hash table is:\n\n```text\nload factor = number of entries / number of buckets\n```\n\nExample:\n\n```text\nentries = 5\nbuckets = 10\n\nload factor = 5 / 10 = 0.5\n```\n\nMost hash tables automatically **resize** when the load factor becomes too high, such as above `0.75`.\n\nResizing means:\n\n1. Create a larger table.\n2. Recompute all indexes.\n3. Reinsert all entries.\n\nThis keeps operations fast.\n\n---\n\n## 6. Practical Example\n\nSuppose we want to store email addresses by username.\n\nTable size: 7\n\nData:\n\n```text\nalice -> alice@example.com\nbob -> bob@example.com\ncarol -> carol@example.com\n```\n\nAssume:\n\n```python\nhash(\"alice\") % 7 = 6\nhash(\"bob\") % 7 = 0\nhash(\"carol\") % 7 = 0\n```\n\n### Insert alice\n\nHash index:\n\n```text\n6\n```\n\nBucket 6 is empty, so store:\n\n```text\nbucket 6 = alice\n```\n\nTable:\n\n| Index | Entry |\n|---|---|\n| 0 | empty |\n| 1 | empty |\n| 2 | empty |\n| 3 | empty |\n| 4 | empty |\n| 5 | empty |\n| 6 | alice |\n\n---\n\n### Insert bob\n\nHash index:\n\n```text\n0\n```\n\nBucket 0 is empty, so store:\n\n```text\nbucket 0 = bob\n```\n\nTable:\n\n| Index | Entry |\n|---|---|\n| 0 | bob |\n| 1 | empty |\n| 2 | empty |\n| 3 | empty |\n| 4 | empty |\n| 5 | empty |\n| 6 | alice |\n\n---\n\n### Insert carol\n\nHash index:\n\n```text\n0\n```\n\nBut bucket 0 is already occupied by bob.\n\nCollision!\n\n#### With separate chaining:\n\nBucket 0 becomes:\n\n```text\nbob -> carol\n```\n\nTable:\n\n| Index | Bucket |\n|---|---|\n| 0 | bob -> carol |\n| 1 | empty |\n| 2 | empty |\n| 3 | empty |\n| 4 | empty |\n| 5 | empty |\n| 6 | alice |\n\nLookup for carol:\n\n```text\nhash(\"carol\") % 7 = 0\nGo to bucket 0\nSearch list: bob, carol\nFound carol\n```\n\n#### With linear probing:\n\nBucket 0 is full, so try bucket 1.\n\nBucket 1 is empty, so store carol there.\n\nTable:\n\n| Index | Entry |\n|---|---|\n| 0 | bob |\n| 1 | carol |\n| 2 | empty |\n| 3 | empty |\n| 4 | empty |\n| 5 | empty |\n| 6 | alice |\n\nLookup for carol:\n\n```text\nhash(\"carol\") % 7 = 0\nBucket 0 has bob, not carol\nTry bucket 1\nFound carol\n```\n\n---\n\n## 7. Simple Python-Like Hash Table Example\n\nUsing separate chaining:\n\n```python\nclass HashTable:\n    def __init__(self, size=10):\n        self.size = size\n        self.table = [[] for _ in range(size)]\n\n    def _hash(self, key):\n        return hash(key) % self.size\n\n    def put(self, key, value):\n        index = self._hash(key)\n        bucket = self.table[index]\n\n        for i, (k, v) in enumerate(bucket):\n            if k == key:\n                bucket[i] = (k, value)\n                return\n\n        bucket.append((key, value))\n\n    def get(self, key):\n        index = self._hash(key)\n        bucket = self.table[index]\n\n        for k, v in bucket:\n            if k == key:\n                return v\n\n        raise KeyError(key)\n\n    def delete(self, key):\n        index = self._hash(key)\n        bucket = self.table[index]\n\n        for i, (k, v) in enumerate(bucket):\n            if k == key:\n                del bucket[i]\n                return\n\n        raise KeyError(key)\n\n\nusers = HashTable()\nusers.put(\"alice\", \"alice@example.com\")\nusers.put(\"bob\", \"bob@example.com\")\nusers.put(\"carol\", \"carol@example.com\")\n\nprint(users.get(\"carol\"))\n```\n\nOutput:\n\n```text\ncarol@example.com\n```\n\n---\n\n## 8. Summary\n\nA hash table works like this:\n\n1. Take a key.\n2. Use a hash function to compute an index.\n3. Store the value at that index.\n4. If another key maps to the same index, handle the collision.\n5. If the table becomes too full, resize and rehash.\n\nCollision handling is essential because different keys can produce the same hash.\n\nCommon collision handling methods:\n\n| Method | How It Works |\n|---|---|\n| Separate chaining | Each bucket stores a list of key-value pairs |\n| Linear probing | Search sequentially for the next empty slot |\n| Quadratic probing | Search using quadratic jumps |\n| Double hashing | Use a second hash function to choose step size |\n\nWith a good hash function and low load factor, hash tables usually provide:\n\n```text\ninsert: average O(1)\nlookup: average O(1)\ndelete: average O(1)\n```",
+    "thinking": "We need answer user: Explain how hash table works, including collision handling, with practical example. Need produce final answer. Need likely clear structured. We can include hashing, buckets, load factor, probing, chaining, rehashing, example with phonebook or user IDs. Need maybe include Python-like pseudocode. Ensure collision handling: separate chaining, open addressing (linear probing, quadratic, double hashing), dynamic resizing. Explain operations get/set/delete O(1) average, worst O(n). Also mention hash function quality. Let's craft thorough but not too long."
+  },
+  "done": true,
+  "done_reason": "stop",
+  "total_duration": 195950126786,
+  "load_duration": 55726648903,
+  "prompt_eval_count": 69,
+  "prompt_eval_cached_count": 0,
+  "prompt_eval_duration": 54400387000,
+  "eval_count": 2543,
+  "eval_duration": 85818470000
+}
+DECODE TPS: 29.63231574741428
+NAME                             ID              SIZE     PROCESSOR    CONTEXT    RUNNER      UNTIL
+qwen3.8-flash-next:ud-q2_k_xl    93574c8a7fa1    52 GB    100% GPU     262144     llamacpp    Forever
+               всего        занят        своб      общая  буф/врем.   доступно
+Память:        121Gi        88Gi       1,3Gi       462Mi        33Gi        32Gi
+Подкачка:       15Gi       188Mi        15Gi
+<think>
+
+</think>
+
+Hi there<|im_end|>
+<|im_start|>user
+How are you?<|im_end|>
+<|im_start|>assistant
+<think>
+'
+srv          init: init: chat template, thinking = 1
+srv          init: preserve_reasoning kwarg: true
+srv          init: chat template supports preserving reasoning, it is enabled by default (may use more tokens, disable via --no-reasoning-preserve)
+srv  server_run_i: model loaded
+srv  server_on_li: listening on http://127.0.0.1:35163
+srv  update_slots: all slots are idle
+time=2026-11-24T19:30:44.449Z level=INFO source=llama_server.go:1467 msg="llama-server started in 53.59 seconds"
+time=2026-11-24T19:30:44.449Z level=INFO source=images.go:431 msg="template selection" model=registry.ollama.ai/library/qwen3.8-flash-next:ud-q2_k_xl selected=gguf_chat_template renderer="" parser="" go_template=null chat_template="[tools thinking completion]" harmony=null renderer_parser=null
+time=2026-11-24T19:30:44.449Z level=INFO source=sched.go:779 msg="loaded runners" count=1
+time=2026-11-24T19:30:44.449Z level=INFO source=llama_server.go:1400 msg="waiting for llama-server to start responding"
+time=2026-11-24T19:30:44.450Z level=INFO source=llama_server.go:1467 msg="llama-server started in 53.59 seconds"
+srv  server_strea: conv_id= (empty=1)
+slot       select: id  0 | task -1 |  - skipping, slot is empty
+slot       select: id  0 | task -1 | selected slot by LRU, n_tokens = 0, t_last = -1
+srv  update_promp: updating prompt cache
+srv          load:  - looking for better prompt, base f_keep = -1.000, f_sim = 0.000
+srv        update:  - cache state: 0 prompts, 0.000 MiB (limits: 8192.000 MiB, 262144 tokens, 8589934592 est)
+srv  update_promp: prompt cache update took 0.01 ms
+slot launch_slot_: id  0 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> ?min-p -> ?xtc -> ?temp-ext -> dist
+slot launch_slot_: id  0 | task -1 | sampler params:
+        repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
+        dry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = 64
+        top_k = 20, top_p = 0.950, min_p = 0.000, xtc_probability = 0.000, xtc_threshold = 0.100, typical_p = 1.000, top_n_sigma = -1.000, temp = 1.000
+        mirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000, adaptive_target = -1.000, adaptive_decay = 0.900
+slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+slot   operator(): id  0 | task 0 | new prompt, n_ctx_slot = 262144, n_keep = 4, task.n_tokens = 69
+slot   operator(): id  0 | task 0 | cached n_tokens = 0, memory_seq_rm [0, end)
+slot print_timing: id  0 | task 0 | prompt processing, n_tokens =     42, progress = 0.61, t =  49.68 s / 0.85 tokens per second
+slot   operator(): id  0 | task 0 | cached n_tokens = 42, memory_seq_rm [42, end)
+slot create_check: id  0 | task 0 | created context checkpoint 1 of 32 (pos_min = 41, pos_max = 41, n_tokens = 42, size = 112.571 MiB)
+slot print_timing: id  0 | task 0 | prompt processing, n_tokens =     65, progress = 0.94, t =  49.85 s / 1.30 tokens per second
+slot   operator(): id  0 | task 0 | cached n_tokens = 65, memory_seq_rm [65, end)
+slot init_sampler: id  0 | task 0 | init sampler, took 0.01 ms, tokens: text = 69, total = 69
+slot create_check: id  0 | task 0 | created context checkpoint 2 of 32 (pos_min = 64, pos_max = 64, n_tokens = 65, size = 112.571 MiB)
+slot print_timing: id  0 | task 0 | n_gen =    100, tg =  12.61 t/s, tg_3s =  12.73 t/s
+slot print_timing: id  0 | task 0 | n_gen =    197, tg =  18.03 t/s, tg_3s =  32.17 t/s
+slot print_timing: id  0 | task 0 | n_gen =    294, tg =  21.10 t/s, tg_3s =  32.11 t/s
+slot print_timing: id  0 | task 0 | n_gen =    391, tg =  23.06 t/s, tg_3s =  32.08 t/s
+slot print_timing: id  0 | task 0 | n_gen =    487, tg =  24.39 t/s, tg_3s =  31.82 t/s
+slot print_timing: id  0 | task 0 | n_gen =    582, tg =  25.32 t/s, tg_3s =  31.51 t/s
+slot print_timing: id  0 | task 0 | n_gen =    677, tg =  26.04 t/s, tg_3s =  31.53 t/s
+slot print_timing: id  0 | task 0 | n_gen =    772, tg =  26.60 t/s, tg_3s =  31.39 t/s
+slot print_timing: id  0 | task 0 | n_gen =    866, tg =  27.03 t/s, tg_3s =  31.22 t/s
+slot print_timing: id  0 | task 0 | n_gen =    960, tg =  27.40 t/s, tg_3s =  31.25 t/s
+slot print_timing: id  0 | task 0 | n_gen =   1054, tg =  27.69 t/s, tg_3s =  31.08 t/s
+slot print_timing: id  0 | task 0 | n_gen =   1148, tg =  27.95 t/s, tg_3s =  31.20 t/s
+slot print_timing: id  0 | task 0 | n_gen =   1242, tg =  28.17 t/s, tg_3s =  31.11 t/s
+slot print_timing: id  0 | task 0 | n_gen =   1336, tg =  28.36 t/s, tg_3s =  31.14 t/s
+[GIN] 2026/11/24 - 19:33:04 | 200 |    3m10s |       127.0.0.1 | POST     "/api/chat"
+[GIN] 2026/11/24 - 19:33:04 | 200 | 16.704µs |       127.0.0.1 | HEAD     "/"
+[GIN] 2026/11/24 - 19:33:04 | 200 | 80.448µs |       127.0.0.1 | GET      "/api/ps"
+slot print_timing: id  0 | task 0 | n_gen =   1430, tg =  28.53 t/s, tg_3s =  31.31 t/s
+slot print_timing: id  0 | task 0 | n_gen =   1524, tg =  28.69 t/s, tg_3s =  31.23 t/s
+slot print_timing: id  0 | task 0 | n_gen =   1618, tg =  28.82 t/s, tg_3s =  31.13 t/s
+slot print_timing: id  0 | task 0 | n_gen =   1712, tg =  28.94 t/s, tg_3s =  31.19 t/s
+slot print_timing: id  0 | task 0 | n_gen =   1806, tg =  29.05 t/s, tg_3s =  31.19 t/s
+slot print_timing: id  0 | task 0 | n_gen =   1900, tg =  29.15 t/s, tg_3s =  31.17 t/s
+slot print_timing: id  0 | task 0 | n_gen =   1994, tg =  29.23 t/s, tg_3s =  31.00 t/s
+slot print_timing: id  0 | task 0 | n_gen =   2088, tg =  29.31 t/s, tg_3s =  31.19 t/s
+slot print_timing: id  0 | task 0 | n_gen =   2182, tg =  29.39 t/s, tg_3s =  31.20 t/s
+slot print_timing: id  0 | task 0 | n_gen =   2275, tg =  29.45 t/s, tg_3s =  30.98 t/s
+slot print_timing: id  0 | task 0 | n_gen =   2369, tg =  29.51 t/s, tg_3s =  31.15 t/s
+slot print_timing: id  0 | task 0 | n_gen =   2463, tg =  29.58 t/s, tg_3s =  31.24 t/s
+slot print_timing: id  0 | task 0 | prompt eval time =   54400.39 ms /    69 tokens (  788.41 ms per token,     1.27 tokens per second)
+slot print_timing: id  0 | task 0 |        eval time =   85818.47 ms /  2543 tokens (   33.76 ms per token,    29.62 tokens per second)
+slot print_timing: id  0 | task 0 |       total time =  140218.86 ms /  2612 tokens
+slot print_timing: id  0 | task 0 |    graphs reused =       2522
+slot print_timing: id  0 | task 0 |   graph reallocs =          0    /     0        (same size) / (changed size)
+slot      release: id  0 | task 0 | stop processing: n_tokens = 2611, truncated = 0
+srv  update_slots: all slots are idle
+PS C:\Users\benchmark-user>

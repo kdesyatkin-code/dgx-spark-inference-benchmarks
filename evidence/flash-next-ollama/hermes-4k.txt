@@ -1,0 +1,265 @@
+TEST: HERMES PERFORMANCE 4K", flush=True)
+>> start = time.monotonic()
+>>
+>> with (out / (name + ".log")).open("w", encoding="utf-8") as log:
+>>     process = subprocess.Popen(
+>>         [hermes, "-z", prompt],
+>>         stdout=subprocess.PIPE,
+>>         stderr=subprocess.STDOUT,
+>>         text=True,
+>>         env=env
+>>     )
+>>     for line in process.stdout:
+>>         print(line, end="", flush=True)
+>>         log.write(line)
+>>         log.flush()
+>>     code = process.wait()
+>>
+>> wall = time.monotonic() - start
+>>
+>> metrics = {
+>>     "test": "Hermes Performance 4K",
+>>     "engine": "Ollama 0.40.18",
+>>     "model": "qwen3.8-flash-next:ud-q2_k_xl",
+>>     "source_sha256": digest,
+>>     "wall_s": wall,
+>>     "exit_code": code
+>> }
+>>
+>> (out / (name + "-metrics.json")).write_text(
+>>     json.dumps(metrics, indent=2), encoding="utf-8"
+>> )
+>>
+>> logs = subprocess.check_output([
+>>     "docker", "logs", "--since", since, "open-webui"
+>> ], stderr=subprocess.STDOUT, text=True)
+>>
+>> ps = subprocess.check_output([
+>>     "docker", "exec", "open-webui", "curl", "-fsS",
+>>     "http://127.0.0.1:11434/api/ps"
+>> ], text=True)
+>>
+>> (out / (name + "-server.json")).write_text(
+>>     json.dumps({
+>>         "models": json.loads(ps),
+>>         "memory": subprocess.check_output(["free", "-h"], text=True),
+>>         "logs": logs
+>>     }, indent=2, ensure_ascii=False), encoding="utf-8"
+>> )
+>>
+>> print(json.dumps(metrics, indent=2))
+>> print(logs)
+>> subprocess.run(["free", "-h"], check=True)
+>> print("RESULTS SAVED:", out)
+>> '@ | ssh -o ConnectTimeout=10 -o ServerAliveInterval=15 -o ServerAliveCountMax=3 benchmark@[private-ip] 'python3 -u -'
+TEST: HERMES PERFORMANCE 4K
+Structure
+
+Each line is one record, self-contained, two fields:
+
+- key: `record` + 6-digit zero-padded sequence number (`record000001` … `record000211`)
+- value: the fixed literal string `alpha beta gamma delta epsilon zeta eta theta.` — 8 space-separated tokens, trailing period
+
+Field separator is `: ` (colon + space). One record per line, no nesting, no nesting of sub-fields, no header row. IDs run sequentially from 000001 with no gaps.
+
+So the schema is effectively `map[str, str]` with a dense integer key space — a flat, constant-width, lexicographically sortable key-value dump. Every record has the same shape and byte-for-byte the same value, which is what the `performance-prompt-4k-r1` case marker implies: this is a filler/token-load fixture, not data. Any "lookup" only returns the constant.
+
+How to look up by ID
+
+Since the numeric suffix is fixed-width and zero-padded, lexical sort = numeric sort, and the suffix converts directly to an index. Three practical routes:
+
+Grep for an exact ID (fastest on a file):
+
+    grep '^record000137:' dump.txt
+
+Or anchored and strict, ignoring a possible BOM/trailing whitespace:
+
+    awk -F': ' '$1 == "record000137" { $1=""; sub(/^ /,""); print }' dump.txt
+
+Direct O(1) access if the padding is trusted — the key encodes its own position, so line N holds record N:
+
+    sed -n '137p' dump.txt
+
+Load into a real index if you'll query repeatedly:
+
+    idx = {line.split(': ', 1)[0]: line.split(': ', 1)[1]
+           for line in open('dump.txt') if ': ' in line}
+    idx['record000137']
+
+Or array-based, exploiting the dense key space:
+
+    records = [line.rstrip('\n').split(': ', 1)[1] for line in open('dump.txt')]
+    records[int('record000137'[6:])] - 1
+
+Two caveats worth checking against the real file rather than trusting the paste: that no ID is duplicated or missing (a dense key space makes `sed -n Np` silently wrong if the sequence isn't continuous), and that padding width never changes. Both are one command:
+
+    grep -oE 'record[0-9]{6}' dump.txt | sort | uniq -d      # duplicates
+    grep -c '^record' dump.txt                                # total vs. max ID
+
+I read the 211-record count and the uniformity of the values directly from the message you pasted; the commands above will confirm it against the actual file.
+{
+  "test": "Hermes Performance 4K",
+  "engine": "Ollama 0.40.18",
+  "model": "qwen3.8-flash-next:ud-q2_k_xl",
+  "source_sha256": "bda0e60c2de0703899ac1bd5711d793b9b325c7f8ba6be6c967f22dd07d8dda8",
+  "wall_s": 67.16245310698287,
+  "exit_code": 0
+}
+[GIN] 2026/11/24 - 19:53:47 | 404 | 694.626µs |      [private-ip] | GET      "/api/v1/models"
+[GIN] 2026/11/24 - 19:53:47 | 404 | 18.304µs |      [private-ip] | GET      "/api/v1/models"
+[GIN] 2026/11/24 - 19:53:47 | 200 |   1.79ms |      [private-ip] | GET      "/api/tags"
+[GIN] 2026/11/24 - 19:53:47 | 200 |  58.69ms |      [private-ip] | POST     "/api/show"
+[GIN] 2026/11/24 - 19:53:47 | 404 | 14.144µs |      [private-ip] | GET      "/api/v1/models"
+srv  server_strea: conv_id= (empty=1)
+slot       select: id  0 | task -1 |  - checking sim = 0.002 (40/18662) > 0.100
+slot       select: id  0 | task -1 | selected slot by LRU, n_tokens = 174, t_last = 260704128415
+srv  update_promp: updating prompt cache
+srv   prompt_save:  - saving prompt with length 174, total state size = 117.677 MiB (draft: 0.000 MiB)
+slot  prompt_save: id  0 | task -1 | prompt cache save took 30.65 ms
+srv          load:  - looking for better prompt, base f_keep = 0.230, f_sim = 0.002
+srv          load:    - prompt with length    2611, lcp =      40, f_keep = 0.015, f_sim = 0.002
+srv          load:    - prompt with length    2809, lcp =      40, f_keep = 0.014, f_sim = 0.002
+srv          load:    - prompt with length    4673, lcp =      40, f_keep = 0.009, f_sim = 0.002
+srv          load:    - prompt with length   17633, lcp =      40, f_keep = 0.002, f_sim = 0.002
+srv          load:    - prompt with length   34234, lcp =      40, f_keep = 0.001, f_sim = 0.002
+srv          load:    - prompt with length    4157, lcp =      40, f_keep = 0.010, f_sim = 0.002
+srv          load:    - prompt with length    4148, lcp =      40, f_keep = 0.010, f_sim = 0.002
+srv          load:    - prompt with length   16454, lcp =      40, f_keep = 0.002, f_sim = 0.002
+srv          load:    - prompt with length     400, lcp =      70, f_keep = 0.175, f_sim = 0.004
+srv          load:    - prompt with length     412, lcp =      70, f_keep = 0.170, f_sim = 0.004
+srv          load:    - prompt with length     436, lcp =      70, f_keep = 0.161, f_sim = 0.004
+srv          load:    - prompt with length     141, lcp =      40, f_keep = 0.284, f_sim = 0.002
+srv          load:    - prompt with length     165, lcp =      40, f_keep = 0.242, f_sim = 0.002
+srv          load:    - prompt with length     174, lcp =      40, f_keep = 0.230, f_sim = 0.002
+srv        update:  - cache state: 14 prompts, 7998.692 MiB (limits: 8192.000 MiB, 262144 tokens, 262144 est)
+srv        update:    - prompt 0x5812af90:    2611 tokens, checkpoints:  2,   414.328 MiB
+srv        update:    - prompt 0x459f4f10:    2809 tokens, checkpoints:  2,   420.137 MiB
+srv        update:    - prompt 0x3c0735b0:    4673 tokens, checkpoints:  3,   587.403 MiB
+srv        update:    - prompt 0x351bc4e0:   17633 tokens, checkpoints:  3,   967.684 MiB
+srv        update:    - prompt 0x506ca3a0:   34234 tokens, checkpoints:  3,  1454.801 MiB
+srv        update:    - prompt 0x351b8de0:    4157 tokens, checkpoints:  3,   572.263 MiB
+srv        update:    - prompt 0x45d0f410:    4148 tokens, checkpoints:  3,   571.998 MiB
+srv        update:    - prompt 0x44826060:   16454 tokens, checkpoints:  3,   933.089 MiB
+srv        update:    - prompt 0x506cf2c0:     400 tokens, checkpoints:  2,   349.451 MiB
+srv        update:    - prompt 0x58f7d3a0:     412 tokens, checkpoints:  2,   349.803 MiB
+srv        update:    - prompt 0x4f6ade60:     436 tokens, checkpoints:  2,   350.507 MiB
+srv        update:    - prompt 0x63a5ab70:     141 tokens, checkpoints:  2,   341.851 MiB
+srv        update:    - prompt 0x446eb030:     165 tokens, checkpoints:  2,   342.556 MiB
+srv        update:    - prompt 0x4152b540:     174 tokens, checkpoints:  2,   342.820 MiB
+srv  update_promp: prompt cache update took 30.68 ms
+slot launch_slot_: id  0 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> ?min-p -> ?xtc -> ?temp-ext -> dist
+slot launch_slot_: id  0 | task -1 | sampler params:
+        repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
+        dry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = 64
+        top_k = 20, top_p = 0.950, min_p = 0.000, xtc_probability = 0.000, xtc_threshold = 0.100, typical_p = 1.000, top_n_sigma = -1.000, temp = 1.000
+        mirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000, adaptive_target = -1.000, adaptive_decay = 0.900
+slot launch_slot_: id  0 | task 9477 | processing task, is_child = 0
+slot   operator(): id  0 | task 9477 | new prompt, n_ctx_slot = 262144, n_keep = 4, task.n_tokens = 18662
+srv    operator(): checking checkpoint with [80, 80] against 40...
+srv    operator(): checking checkpoint with [41, 41] against 40...
+slot   operator(): id  0 | task 9477 | forcing full prompt re-processing due to lack of cache data (likely due to SWA or hybrid/recurrent memory, see https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)
+slot   operator(): id  0 | task 9477 | erased invalidated context checkpoint (pos_min = 41, pos_max = 41, n_tokens = 42, n_swa = 0, pos_next = 0, size = 112.571 MiB)
+slot   operator(): id  0 | task 9477 | erased invalidated context checkpoint (pos_min = 80, pos_max = 80, n_tokens = 81, n_swa = 0, pos_next = 0, size = 112.571 MiB)
+slot   operator(): id  0 | task 9477 | cached n_tokens = 0, memory_seq_rm [0, end)
+slot   operator(): id  0 | task 9477 | cached n_tokens = 512, memory_seq_rm [512, end)
+slot   operator(): id  0 | task 9477 | cached n_tokens = 1024, memory_seq_rm [1024, end)
+slot   operator(): id  0 | task 9477 | cached n_tokens = 1536, memory_seq_rm [1536, end)
+slot   operator(): id  0 | task 9477 | cached n_tokens = 2048, memory_seq_rm [2048, end)
+slot   operator(): id  0 | task 9477 | cached n_tokens = 2560, memory_seq_rm [2560, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =   3072, progress = 0.16, t =   3.46 s / 887.74 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 3072, memory_seq_rm [3072, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =   3584, progress = 0.19, t =   4.04 s / 887.47 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 3584, memory_seq_rm [3584, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =   4096, progress = 0.22, t =   4.63 s / 884.80 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 4096, memory_seq_rm [4096, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =   4608, progress = 0.25, t =   5.21 s / 885.17 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 4608, memory_seq_rm [4608, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =   5120, progress = 0.27, t =   5.79 s / 884.34 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 5120, memory_seq_rm [5120, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =   5632, progress = 0.30, t =   6.37 s / 884.55 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 5632, memory_seq_rm [5632, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =   6144, progress = 0.33, t =   6.95 s / 884.63 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 6144, memory_seq_rm [6144, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =   6656, progress = 0.36, t =   7.54 s / 882.78 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 6656, memory_seq_rm [6656, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =   7168, progress = 0.38, t =   8.13 s / 882.08 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 7168, memory_seq_rm [7168, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =   7680, progress = 0.41, t =   8.72 s / 880.43 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 7680, memory_seq_rm [7680, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =   8192, progress = 0.44, t =   9.29 s / 882.27 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 8192, memory_seq_rm [8192, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =   8704, progress = 0.47, t =   9.83 s / 885.40 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 8704, memory_seq_rm [8704, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =   9216, progress = 0.49, t =  10.39 s / 886.97 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 9216, memory_seq_rm [9216, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =   9728, progress = 0.52, t =  10.96 s / 887.60 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 9728, memory_seq_rm [9728, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =  10240, progress = 0.55, t =  11.53 s / 888.47 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 10240, memory_seq_rm [10240, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =  10752, progress = 0.58, t =  12.10 s / 888.85 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 10752, memory_seq_rm [10752, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =  11264, progress = 0.60, t =  12.68 s / 888.61 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 11264, memory_seq_rm [11264, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =  11776, progress = 0.63, t =  13.24 s / 889.42 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 11776, memory_seq_rm [11776, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =  12288, progress = 0.66, t =  13.81 s / 889.77 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 12288, memory_seq_rm [12288, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =  12800, progress = 0.69, t =  14.39 s / 889.71 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 12800, memory_seq_rm [12800, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =  13312, progress = 0.71, t =  14.98 s / 888.37 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 13312, memory_seq_rm [13312, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =  13824, progress = 0.74, t =  15.56 s / 888.30 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 13824, memory_seq_rm [13824, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =  14336, progress = 0.77, t =  16.14 s / 888.10 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 14336, memory_seq_rm [14336, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =  14611, progress = 0.78, t =  16.58 s / 881.10 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 14611, memory_seq_rm [14611, end)
+slot create_check: id  0 | task 9477 | created context checkpoint 1 of 32 (pos_min = 14610, pos_max = 14610, n_tokens = 14611, size = 112.571 MiB)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =  15123, progress = 0.81, t =  17.13 s / 883.06 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 15123, memory_seq_rm [15123, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =  15635, progress = 0.84, t =  17.66 s / 885.24 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 15635, memory_seq_rm [15635, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =  16147, progress = 0.87, t =  18.21 s / 886.77 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 16147, memory_seq_rm [16147, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =  16659, progress = 0.89, t =  18.77 s / 887.40 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 16659, memory_seq_rm [16659, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =  17171, progress = 0.92, t =  19.33 s / 888.44 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 17171, memory_seq_rm [17171, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =  17683, progress = 0.95, t =  19.89 s / 889.02 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 17683, memory_seq_rm [17683, end)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =  18150, progress = 0.97, t =  20.42 s / 888.90 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 18150, memory_seq_rm [18150, end)
+slot create_check: id  0 | task 9477 | created context checkpoint 2 of 32 (pos_min = 18149, pos_max = 18149, n_tokens = 18150, size = 112.571 MiB)
+slot print_timing: id  0 | task 9477 | prompt processing, n_tokens =  18658, progress = 1.00, t =  21.04 s / 886.76 tokens per second
+slot   operator(): id  0 | task 9477 | cached n_tokens = 18658, memory_seq_rm [18658, end)
+slot init_sampler: id  0 | task 9477 | init sampler, took 2.03 ms, tokens: text = 18662, total = 18662
+slot create_check: id  0 | task 9477 | created context checkpoint 3 of 32 (pos_min = 18657, pos_max = 18657, n_tokens = 18658, size = 112.571 MiB)
+slot print_timing: id  0 | task 9477 | n_gen =    100, tg =  30.43 t/s, tg_3s =  30.73 t/s
+slot print_timing: id  0 | task 9477 | n_gen =    192, tg =  30.51 t/s, tg_3s =  30.60 t/s
+slot print_timing: id  0 | task 9477 | n_gen =    284, tg =  30.54 t/s, tg_3s =  30.61 t/s
+slot print_timing: id  0 | task 9477 | n_gen =    376, tg =  30.57 t/s, tg_3s =  30.66 t/s
+slot print_timing: id  0 | task 9477 | n_gen =    468, tg =  30.58 t/s, tg_3s =  30.62 t/s
+slot print_timing: id  0 | task 9477 | n_gen =    560, tg =  30.56 t/s, tg_3s =  30.47 t/s
+slot print_timing: id  0 | task 9477 | n_gen =    652, tg =  30.57 t/s, tg_3s =  30.62 t/s
+slot print_timing: id  0 | task 9477 | n_gen =    744, tg =  30.54 t/s, tg_3s =  30.34 t/s
+slot print_timing: id  0 | task 9477 | n_gen =    835, tg =  30.52 t/s, tg_3s =  30.32 t/s
+slot print_timing: id  0 | task 9477 | n_gen =    928, tg =  30.55 t/s, tg_3s =  30.83 t/s
+slot print_timing: id  0 | task 9477 | n_gen =   1021, tg =  30.57 t/s, tg_3s =  30.79 t/s
+slot print_timing: id  0 | task 9477 | n_gen =   1114, tg =  30.59 t/s, tg_3s =  30.77 t/s
+slot print_timing: id  0 | task 9477 | n_gen =   1206, tg =  30.58 t/s, tg_3s =  30.46 t/s
+slot print_timing: id  0 | task 9477 | n_gen =   1297, tg =  30.55 t/s, tg_3s =  30.15 t/s
+[GIN] 2026/11/24 - 19:54:53 | 200 |     1m0s |      [private-ip] | POST     "/v1/chat/completions"
+slot print_timing: id  0 | task 9477 | prompt eval time =   21266.00 ms / 18662 tokens (    1.14 ms per token,   877.55 tokens per second)
+slot print_timing: id  0 | task 9477 |        eval time =   44719.09 ms /  1366 tokens (   32.76 ms per token,    30.52 tokens per second)
+slot print_timing: id  0 | task 9477 |       total time =   65985.09 ms / 20028 tokens
+slot print_timing: id  0 | task 9477 |    graphs reused =      10552
+slot print_timing: id  0 | task 9477 |   graph reallocs =          0    /     0        (same size) / (changed size)
+slot      release: id  0 | task 9477 | stop processing: n_tokens = 20027, truncated = 0
+srv  update_slots: all slots are idle
+[GIN] 2026/11/24 - 19:54:53 | 200 |   3.66ms |      [private-ip] | GET      "/v1/models"
+
+               всего        занят        своб      общая  буф/врем.   доступно
+Память:        121Gi        96Gi       989Mi       462Mi        25Gi        24Gi
+Подкачка:       15Gi       177Mi        15Gi
+RESULTS SAVED: /home/benchmark/strata-experiment/results-flash-next-ollama
+PS C:\Users\benchmark-user>

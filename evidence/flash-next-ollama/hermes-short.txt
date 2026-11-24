@@ -1,0 +1,161 @@
+TEST: HERMES PERFORMANCE SHORT", flush=True)
+>> start = time.monotonic()
+>>
+>> with (out / (name + ".log")).open("w", encoding="utf-8") as log:
+>>     process = subprocess.Popen(
+>>         [hermes, "-z", prompt],
+>>         stdout=subprocess.PIPE,
+>>         stderr=subprocess.STDOUT,
+>>         text=True,
+>>         env=env
+>>     )
+>>     for line in process.stdout:
+>>         print(line, end="", flush=True)
+>>         log.write(line)
+>>         log.flush()
+>>     code = process.wait()
+>>
+>> wall = time.monotonic() - start
+>>
+>> metrics = {
+>>     "test": "Hermes Performance Short",
+>>     "engine": "Ollama 0.40.18",
+>>     "model": "qwen3.8-flash-next:ud-q2_k_xl",
+>>     "source_sha256": digest,
+>>     "wall_s": wall,
+>>     "exit_code": code
+>> }
+>>
+>> (out / (name + "-metrics.json")).write_text(
+>>     json.dumps(metrics, indent=2), encoding="utf-8"
+>> )
+>>
+>> logs = subprocess.check_output([
+>>     "docker", "logs", "--since", since, "open-webui"
+>> ], stderr=subprocess.STDOUT, text=True)
+>>
+>> ps = subprocess.check_output([
+>>     "docker", "exec", "open-webui", "curl", "-fsS",
+>>     "http://127.0.0.1:11434/api/ps"
+>> ], text=True)
+>>
+>> (out / (name + "-server.json")).write_text(
+>>     json.dumps({
+>>         "models": json.loads(ps),
+>>         "memory": subprocess.check_output(["free", "-h"], text=True),
+>>         "logs": logs
+>>     }, indent=2, ensure_ascii=False), encoding="utf-8"
+>> )
+>>
+>> print(json.dumps(metrics, indent=2))
+>> print(logs)
+>> subprocess.run(["free", "-h"], check=True)
+>> print("RESULTS SAVED:", out)
+>> '@ | ssh -o ConnectTimeout=10 -o ServerAliveInterval=15 -o ServerAliveCountMax=3 benchmark@[private-ip] 'python3 -u -'
+TEST: HERMES PERFORMANCE SHORT
+Хеш-таблица находит значение за два шага: хеширование и прямой доступ по индексу.
+
+1. Ключ пропускается через хеш-функцию — получается число (хеш).
+2. Хеш берётся по модулю от размера массива bucket'ов — это индекс ячейки.
+3. В ячейке сравнивается ключ: совпал — возвращаем значение. Среднее время O(1), потому что второй шаг сразу указывает куда смотреть.
+
+Коллизии: разным ключам может соответствовать один хеш (или один индекс). Таблица не теряет данные — варианты разрешения:
+
+- Цепочки (chaining): в bucket'е хранится список пар (ключ, значение), при коллизии добавляем в конец.
+- Открытая адресация: если ячейка занята, пробуем следующую по правилу (linear probing, double hashing).
+
+Пример, массив из 5 bucket'ов, хеш = длина ключа mod 5:
+
+  "apple"  -> 5 mod 5 = 0  -> bucket[0]: (apple, 1)
+  "mango"  -> 5 mod 5 = 0  -> коллизия -> цепочка bucket[0]: (apple,1) -> (mango,2)
+  "fig"    -> 3 mod 5 = 3  -> bucket[3]: (fig, 3)
+
+Поиск "mango": хеш = 0, идём в bucket[0], сравниваем ключ "apple" — не тот, следующий в цепочке "mango" — совпал, вернули 2.
+
+Ключевой момент: при низкой загрузке (количество элементов много меньше bucket'ов) цепочки остаются короткими, поэтому поиск остаётся близким к O(1); при высокой загрузке таблица расширяется (rehashing) и все ключи перекладываются в новый массив.
+{
+  "test": "Hermes Performance Short",
+  "engine": "Ollama 0.40.18",
+  "model": "qwen3.8-flash-next:ud-q2_k_xl",
+  "source_sha256": "483b4f18fcc64ca802fde3377c59bf7b114ec5a5c96fe781bd2be4665ef7b898",
+  "wall_s": 22.158230563014513,
+  "exit_code": 0
+}
+[GIN] 2026/11/24 - 19:58:09 | 404 | 17.504µs |      [private-ip] | GET      "/api/v1/models"
+[GIN] 2026/11/24 - 19:58:09 | 404 |  16.88µs |      [private-ip] | GET      "/api/v1/models"
+srv  server_strea: conv_id= (empty=1)
+slot       select: id  0 | task -1 |  - checking sim = 0.998 (14617/14646) > 0.100
+slot       select: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.998 (> 0.100 thold), f_keep = 0.451
+srv  update_promp: updating prompt cache
+srv   prompt_save:  - saving prompt with length 32401, total state size = 1063.303 MiB (draft: 0.000 MiB)
+srv         alloc:  - making room for prompt cache entry, removing oldest entry (size = 414.328 MiB)
+srv         alloc:  - making room for prompt cache entry, removing oldest entry (size = 420.137 MiB)
+srv         alloc:  - making room for prompt cache entry, removing oldest entry (size = 587.403 MiB)
+slot  prompt_save: id  0 | task -1 | prompt cache save took 437.45 ms
+srv          load:  - looking for better prompt, base f_keep = 0.451, f_sim = 0.998
+srv          load:    - prompt with length   17633, lcp =      40, f_keep = 0.002, f_sim = 0.003
+srv          load:    - prompt with length   34234, lcp =      40, f_keep = 0.001, f_sim = 0.003
+srv          load:    - prompt with length    4157, lcp =      40, f_keep = 0.010, f_sim = 0.003
+srv          load:    - prompt with length    4148, lcp =      40, f_keep = 0.010, f_sim = 0.003
+srv          load:    - prompt with length   16454, lcp =      40, f_keep = 0.002, f_sim = 0.003
+srv          load:    - prompt with length     400, lcp =      70, f_keep = 0.175, f_sim = 0.005
+srv          load:    - prompt with length     412, lcp =      70, f_keep = 0.170, f_sim = 0.005
+srv          load:    - prompt with length     436, lcp =      70, f_keep = 0.161, f_sim = 0.005
+srv          load:    - prompt with length     141, lcp =      40, f_keep = 0.284, f_sim = 0.003
+srv          load:    - prompt with length     165, lcp =      40, f_keep = 0.242, f_sim = 0.003
+srv          load:    - prompt with length     174, lcp =      40, f_keep = 0.230, f_sim = 0.003
+srv          load:    - prompt with length   32401, lcp =   14617, f_keep = 0.451, f_sim = 0.998
+srv        update:  - cache state: 12 prompts, 7977.840 MiB (limits: 8192.000 MiB, 262144 tokens, 262144 est)
+srv        update:    - prompt 0x351bc4e0:   17633 tokens, checkpoints:  3,   967.684 MiB
+srv        update:    - prompt 0x506ca3a0:   34234 tokens, checkpoints:  3,  1454.801 MiB
+srv        update:    - prompt 0x351b8de0:    4157 tokens, checkpoints:  3,   572.263 MiB
+srv        update:    - prompt 0x45d0f410:    4148 tokens, checkpoints:  3,   571.998 MiB
+srv        update:    - prompt 0x44826060:   16454 tokens, checkpoints:  3,   933.089 MiB
+srv        update:    - prompt 0x506cf2c0:     400 tokens, checkpoints:  2,   349.451 MiB
+srv        update:    - prompt 0x58f7d3a0:     412 tokens, checkpoints:  2,   349.803 MiB
+srv        update:    - prompt 0x4f6ade60:     436 tokens, checkpoints:  2,   350.507 MiB
+srv        update:    - prompt 0x63a5ab70:     141 tokens, checkpoints:  2,   341.851 MiB
+srv        update:    - prompt 0x446eb030:     165 tokens, checkpoints:  2,   342.556 MiB
+srv        update:    - prompt 0x4152b540:     174 tokens, checkpoints:  2,   342.820 MiB
+srv        update:    - prompt 0x351912e0:   32401 tokens, checkpoints:  3,  1401.016 MiB
+srv  update_promp: prompt cache update took 437.48 ms
+slot launch_slot_: id  0 | task -1 | sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> ?min-p -> ?xtc -> ?temp-ext -> dist
+slot launch_slot_: id  0 | task -1 | sampler params:
+        repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
+        dry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = 64
+        top_k = 20, top_p = 0.950, min_p = 0.000, xtc_probability = 0.000, xtc_threshold = 0.100, typical_p = 1.000, top_n_sigma = -1.000, temp = 1.000
+        mirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000, adaptive_target = -1.000, adaptive_decay = 0.900
+slot launch_slot_: id  0 | task 12360 | processing task, is_child = 0
+slot   operator(): id  0 | task 12360 | new prompt, n_ctx_slot = 262144, n_keep = 4, task.n_tokens = 14646
+srv    operator(): checking checkpoint with [30951, 30951] against 14617...
+srv    operator(): checking checkpoint with [30443, 30443] against 14617...
+srv    operator(): checking checkpoint with [14610, 14610] against 14617...
+slot   operator(): id  0 | task 12360 | restored context checkpoint (pos_min = 14610, pos_max = 14610, n_tokens = 14611, n_past = 14611, size = 112.571 MiB)
+slot   operator(): id  0 | task 12360 | erased invalidated context checkpoint (pos_min = 30443, pos_max = 30443, n_tokens = 30444, n_swa = 0, pos_next = 14611, size = 112.571 MiB)
+slot   operator(): id  0 | task 12360 | erased invalidated context checkpoint (pos_min = 30951, pos_max = 30951, n_tokens = 30952, n_swa = 0, pos_next = 14611, size = 112.571 MiB)
+slot   operator(): id  0 | task 12360 | cached n_tokens = 14611, memory_seq_rm [14611, end)
+slot create_check: id  0 | task 12360 | superseding context checkpoint at n_tokens = 14611
+slot create_check: id  0 | task 12360 | created context checkpoint 1 of 32 (pos_min = 14610, pos_max = 14610, n_tokens = 14611, size = 112.571 MiB)
+slot   operator(): id  0 | task 12360 | cached n_tokens = 14642, memory_seq_rm [14642, end)
+slot init_sampler: id  0 | task 12360 | init sampler, took 1.54 ms, tokens: text = 14646, total = 14646
+slot create_check: id  0 | task 12360 | created context checkpoint 2 of 32 (pos_min = 14641, pos_max = 14641, n_tokens = 14642, size = 112.571 MiB)
+slot print_timing: id  0 | task 12360 | n_gen =    100, tg =  30.63 t/s, tg_3s =  30.93 t/s
+slot print_timing: id  0 | task 12360 | n_gen =    194, tg =  30.85 t/s, tg_3s =  31.08 t/s
+slot print_timing: id  0 | task 12360 | n_gen =    288, tg =  30.91 t/s, tg_3s =  31.05 t/s
+slot print_timing: id  0 | task 12360 | n_gen =    382, tg =  30.94 t/s, tg_3s =  31.03 t/s
+slot print_timing: id  0 | task 12360 | n_gen =    476, tg =  30.95 t/s, tg_3s =  31.00 t/s
+slot print_timing: id  0 | task 12360 | n_gen =    569, tg =  30.96 t/s, tg_3s =  30.99 t/s
+[GIN] 2026/11/24 - 19:58:30 | 200 |   21.28s |      [private-ip] | POST     "/v1/chat/completions"
+slot print_timing: id  0 | task 12360 | prompt eval time =     238.19 ms /    35 tokens (    6.81 ms per token,   146.94 tokens per second)
+slot print_timing: id  0 | task 12360 |        eval time =   20532.32 ms /   637 tokens (   32.28 ms per token,    30.98 tokens per second)
+slot print_timing: id  0 | task 12360 |       total time =   20770.51 ms /   672 tokens
+slot print_timing: id  0 | task 12360 |    graphs reused =      12615
+slot print_timing: id  0 | task 12360 |   graph reallocs =          0    /     0        (same size) / (changed size)
+slot      release: id  0 | task 12360 | stop processing: n_tokens = 15282, truncated = 0
+srv  update_slots: all slots are idle
+
+               всего        занят        своб      общая  буф/врем.   доступно
+Память:        121Gi        96Gi       996Mi       462Mi        25Gi        24Gi
+Подкачка:       15Gi       177Mi        15Gi
+RESULTS SAVED: /home/benchmark/strata-experiment/results-flash-next-ollama
+PS C:\Users\benchmark-user>
