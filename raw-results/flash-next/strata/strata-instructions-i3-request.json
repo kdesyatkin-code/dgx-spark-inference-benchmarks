@@ -1,0 +1,13 @@
+{
+  "model": "qwen3.8-flash-next-unsloth-ud-q2_k_xl",
+  "messages": [
+    {
+      "role": "user",
+      "content": "[case instructions-i3]\nProject: Orion. Build: 17. Return only a JSON object with keys project (string) and build (integer)."
+    }
+  ],
+  "stream": false,
+  "chat_template_kwargs": {
+    "enable_thinking": true
+  }
+}

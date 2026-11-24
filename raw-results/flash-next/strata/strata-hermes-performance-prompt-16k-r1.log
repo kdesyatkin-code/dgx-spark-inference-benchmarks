@@ -1,0 +1,39 @@
+Structure
+
+Each record is a single flat line with exactly two parts:
+
+  record000473: alpha beta gamma delta epsilon zeta eta theta.
+  └─ key ─────┘ └──────── payload ──────────────────────────┘
+
+- Key: literal prefix "record" + a 6-digit, zero-padded, sequential number (record000001 … record000858 in your paste), followed by ": ".
+- Payload: 8 fixed lowercase tokens — alpha beta gamma delta epsilon zeta eta theta — space-separated, terminated by a period. The payload is identical in every record; only the ID varies.
+- There is no nesting, no field separators inside the payload, no metadata (no dates, no types). It's a pure key→constant-payload sequence.
+- The numbering is dense: 1 to 858 inclusive, no gaps, no duplicates (858 lines).
+
+Two consequences of that shape worth knowing:
+1. Zero-padding to 6 digits makes plain lexicographic sort identical to numeric sort, so `sort` never needs a numeric flag.
+2. Because IDs are dense integers, the ID *is* the position — record000473 is the 473rd line. No search index is required.
+
+Looking up a record by ID
+
+Cheapest, when the file is line-ordered and dense (O(1) arithmetic, no scanning):
+
+  python:  line = lines[int(rid[6:]) - 1]          # rid = "record000473"
+  shell:   sed -n '473p' file.txt                  # ID number == line number
+  shell:   awk 'NR==473' file.txt
+
+Guard the range (1 ≤ n ≤ 858) or you'll read an unrelated line or nothing — a lookup for record000999 must report "not found", not a wrong line.
+
+If ordering can't be trusted, or you look up many IDs (build once, then O(1) each):
+
+  python:  index = {line.split(':')[0]: line.rstrip('\n')
+                    for line in open(path)}
+           record = index.get("record000473")
+
+  shell:   grep -m1 '^record000473:' file.txt      # the ':' and ^ anchor matter
+
+Anchoring with ^ and matching the full key prevents a false hit on something like record0000473 or a payload that happens to contain the digits.
+
+To recover the value itself once you have the line: split on ": " (max 1 split) and strip the trailing period — or split the payload on spaces to get the 8 tokens.
+
+Caveat on the count: 1–858 is what the block you pasted contains as shown; if the real file is longer, rerun `wc -l` on it rather than trusting the tail of the paste.

@@ -1,0 +1,41 @@
+{
+  "id": "chatcmpl-0fe010bd6fed4b3b90c6f3be",
+  "object": "chat.completion",
+  "created": 1795545827,
+  "model": "qwen3.8-flash-next-unsloth-ud-q2_k_xl",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\"project\":\"Orion\",\"build\":17}",
+        "reasoning_content": "We need answer user's request: \"[case instructions-i3]\nProject: Orion. Build: 17. Return only a JSON object with keys project (string) and build (integer).\"\nNeed produce only JSON object. Need ensure final only {\"project\":\"Orion\",\"build\":17}.\n"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 85,
+    "completion_tokens": 77,
+    "total_tokens": 162,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 64
+    }
+  },
+  "timings": {
+    "cache_n": 0,
+    "prompt_n": 85,
+    "prompt_ms": 442.7,
+    "prompt_per_token_ms": 5.208,
+    "prompt_per_second": 192.0,
+    "predicted_n": 77,
+    "predicted_ms": 1074.6,
+    "predicted_per_token_ms": 13.956,
+    "predicted_per_second": 71.7,
+    "draft_n": 79,
+    "draft_n_accepted": 55
+  }
+}
