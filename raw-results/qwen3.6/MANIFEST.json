@@ -1,0 +1,751 @@
+[
+  {
+    "file": "results/ollama-dgx-16k-r1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-dgx-16k-r1-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-dgx-16k-r1-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-dgx-32k-r1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-dgx-32k-r1-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-dgx-32k-r1-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-dgx-32k-r1-server.log",
+    "anonymized": true
+  },
+  {
+    "file": "results/ollama-dgx-4k-r1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-dgx-4k-r1-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-dgx-4k-r1-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-hermes-4k-r1-direct.log",
+    "anonymized": true
+  },
+  {
+    "file": "results/ollama-hermes-4k-r1.log",
+    "anonymized": true
+  },
+  {
+    "file": "results/ollama-hermes-performance-prompt-16k-r1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-hermes-performance-prompt-16k-r1-server.log",
+    "anonymized": true
+  },
+  {
+    "file": "results/ollama-hermes-performance-prompt-16k-r1.log",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-hermes-performance-short-r1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-hermes-performance-short-r1-server.log",
+    "anonymized": true
+  },
+  {
+    "file": "results/ollama-hermes-performance-short-r1.log",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-instructions-i1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-instructions-i1-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-instructions-i1-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-instructions-i1-server.log",
+    "anonymized": true
+  },
+  {
+    "file": "results/ollama-instructions-i2-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-instructions-i2-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-instructions-i2-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-instructions-i2-server.log",
+    "anonymized": true
+  },
+  {
+    "file": "results/ollama-instructions-i3-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-instructions-i3-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-instructions-i3-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-instructions-i3-server.log",
+    "anonymized": true
+  },
+  {
+    "file": "results/ollama-retrieval-r1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-retrieval-r1-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-retrieval-r1-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-retrieval-r1-server.log",
+    "anonymized": true
+  },
+  {
+    "file": "results/ollama-retrieval-r2-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-retrieval-r2-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-retrieval-r2-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-retrieval-r2-server.log",
+    "anonymized": true
+  },
+  {
+    "file": "results/ollama-retrieval-r3-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-retrieval-r3-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-retrieval-r3-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-retrieval-r3-server.log",
+    "anonymized": true
+  },
+  {
+    "file": "results/ollama-server.log",
+    "anonymized": true
+  },
+  {
+    "file": "results/ollama-tool-t1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-tool-t1-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-tool-t1-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-tool-t1-server.log",
+    "anonymized": true
+  },
+  {
+    "file": "results/ollama-tool-t2-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-tool-t2-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-tool-t2-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-tool-t2-server.log",
+    "anonymized": true
+  },
+  {
+    "file": "results/ollama-tool-t3-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-tool-t3-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-tool-t3-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/ollama-tool-t3-server.log",
+    "anonymized": true
+  },
+  {
+    "file": "results/strata-dgx-16k-r1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-dgx-16k-r1-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-dgx-16k-r1-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-dgx-16k-r1-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-dgx-32k-r1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-dgx-32k-r1-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-dgx-32k-r1-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-dgx-32k-r1-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-dgx-4k-r1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-dgx-4k-r1-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-dgx-4k-r1-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-dgx-4k-r1-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-final-engine.log",
+    "anonymized": true
+  },
+  {
+    "file": "results/strata-final-status.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-hermes-4k-r1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-hermes-4k-r1.log",
+    "anonymized": true
+  },
+  {
+    "file": "results/strata-hermes-performance-prompt-16k-r1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-hermes-performance-prompt-16k-r1-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-hermes-performance-prompt-16k-r1.log",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-hermes-performance-short-r1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-hermes-performance-short-r1-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-hermes-performance-short-r1.log",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-instructions-i1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-instructions-i1-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-instructions-i1-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-instructions-i1-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-instructions-i2-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-instructions-i2-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-instructions-i2-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-instructions-i2-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-instructions-i3-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-instructions-i3-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-instructions-i3-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-instructions-i3-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-retrieval-r1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-retrieval-r1-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-retrieval-r1-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-retrieval-r1-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-retrieval-r2-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-retrieval-r2-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-retrieval-r2-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-retrieval-r2-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-retrieval-r3-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-retrieval-r3-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-retrieval-r3-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-retrieval-r3-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-tool-t1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-tool-t1-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-tool-t1-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-tool-t1-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-tool-t2-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-tool-t2-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-tool-t2-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-tool-t2-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-tool-t3-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-tool-t3-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-tool-t3-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results/strata-tool-t3-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/engine-log.txt",
+    "anonymized": true
+  },
+  {
+    "file": "results-v2/memory.txt",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/running-containers.txt",
+    "anonymized": true,
+    "public_review": "Replaced private container inventory with count."
+  },
+  {
+    "file": "results-v2/strata-dgx-16k-r1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-dgx-16k-r1-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-dgx-16k-r1-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-dgx-16k-r1-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-dgx-32k-r1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-dgx-32k-r1-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-dgx-32k-r1-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-dgx-32k-r1-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-dgx-4k-r1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-dgx-4k-r1-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-dgx-4k-r1-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-dgx-4k-r1-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-hermes-performance-prompt-16k-r1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-hermes-performance-prompt-16k-r1-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-hermes-performance-prompt-16k-r1.log",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-hermes-performance-prompt-4k-r1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-hermes-performance-prompt-4k-r1-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-hermes-performance-prompt-4k-r1.log",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-hermes-performance-short-r1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-hermes-performance-short-r1-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-hermes-performance-short-r1.log",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-instructions-i1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-instructions-i1-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-instructions-i1-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-instructions-i1-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-instructions-i2-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-instructions-i2-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-instructions-i2-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-instructions-i2-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-instructions-i3-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-instructions-i3-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-instructions-i3-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-instructions-i3-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-retrieval-r1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-retrieval-r1-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-retrieval-r1-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-retrieval-r1-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-retrieval-r2-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-retrieval-r2-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-retrieval-r2-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-retrieval-r2-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-retrieval-r3-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-retrieval-r3-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-retrieval-r3-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-retrieval-r3-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-status.txt",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-tool-t1-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-tool-t1-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-tool-t1-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-tool-t1-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-tool-t2-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-tool-t2-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-tool-t2-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-tool-t2-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-tool-t3-metrics.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-tool-t3-request.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-tool-t3-response.json",
+    "anonymized": false
+  },
+  {
+    "file": "results-v2/strata-tool-t3-server.json",
+    "anonymized": false
+  },
+  {
+    "file": "dgx-32k-r1.json",
+    "anonymized": false
+  },
+  {
+    "file": "instructions-i1.json",
+    "anonymized": false
+  },
+  {
+    "file": "instructions-i2.json",
+    "anonymized": false
+  },
+  {
+    "file": "instructions-i3.json",
+    "anonymized": false
+  },
+  {
+    "file": "performance-prompt-16k-r1.json",
+    "anonymized": false
+  },
+  {
+    "file": "performance-prompt-4k-r1.json",
+    "anonymized": false
+  },
+  {
+    "file": "performance-short-r1.json",
+    "anonymized": false
+  },
+  {
+    "file": "retrieval-r1.json",
+    "anonymized": false
+  },
+  {
+    "file": "retrieval-r2.json",
+    "anonymized": false
+  },
+  {
+    "file": "retrieval-r3.json",
+    "anonymized": false
+  },
+  {
+    "file": "tool-t1.json",
+    "anonymized": false
+  },
+  {
+    "file": "tool-t2.json",
+    "anonymized": false
+  },
+  {
+    "file": "tool-t3.json",
+    "anonymized": false
+  }
+]

@@ -1,0 +1,3 @@
+Original benchmark files remain unchanged.
+Personal identifiers and common credential patterns were redacted.
+Review archive before public release.
